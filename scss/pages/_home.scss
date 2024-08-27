@@ -16,7 +16,7 @@
   //   text-align: center;
   // }
   #video-box {
-    height: 230px;
+    // height: 230px;
     width: 100%;
     // opacity: .60;
 
@@ -45,10 +45,12 @@
     position: absolute;
     // background-color: azure;
     // width: 600px;
-    height: 200px;
+    // height: 200px;
     z-index: 100;
     // border: 3px solid darkslategray;
     // border: 5px solid yellow;
+    top: 50%;
+    transform: translateY(-50%);
 
     display: flex;
     flex-direction: column;
