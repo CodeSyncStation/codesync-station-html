@@ -18,15 +18,17 @@ export default function Home() {
           <div className="row">
             <div className="col-lg-6 align-content-center mb-3">
               <div className="content">
-                <h3 className="subtitle">Designing for the future</h3>
+                <h3 className="subtitle">
+                  Transforming Ideas into Digital Masterpieces
+                </h3>
                 <h2 className="title">
-                  Revolutionize Your{" "}
-                  <span className="text-primary">Workflow</span> With SaaS
+                  Your Vision, Our Code Creating Future-Ready
+                  <span className="text-primary">Websites</span> That Inspire
                 </h2>
                 <p className="desc">
-                  And In Order To Make A Business, Brand Advertising And
-                  Marketing Plays An Important Role. Similarly, In Making
-                  Cultivation Business Are Necessary.
+                  Crafting innovative, brand-aligned websites that drive your
+                  success. Let’s bring your ideas to life and elevate your
+                  online presence.
                 </p>
                 <div className="btn-wrapper">
                   <button className="animated-btn">Order Now</button>

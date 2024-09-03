@@ -36,7 +36,7 @@
       font-weight: 700;
       color: $heading-color;
       @include breakpoint(tab992) {
-        font-size: 60px;
+        font-size: 50px;
       }
     }
     .desc {
