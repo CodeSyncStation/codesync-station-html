@@ -22,6 +22,7 @@
   color: $heading-color;
   justify-content: center;
   align-items: center;
+  background-color: transparent;
   &:hover{
     color: #fff;
   }
@@ -33,7 +34,7 @@
     background: $primary;
     position: absolute;
     transition: all 0.3s ease-in;
-    z-index: -1;
+    z-index: -1;  
     height: 100%;
     left: -35%;
     top: 0;
