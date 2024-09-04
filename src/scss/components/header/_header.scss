@@ -37,13 +37,13 @@ header {
     // background-color: $primary;
     width: min(70vw, 400px);
     height: 100vh;
-
     .nav-link {
       // color: #fff !important;
       transition: 0.3s;
       margin: 0px 10px;
       padding: 5px 0;
       position: relative;
+      font-weight: 600;
       @include breakpoint(desktop1200) {
         color: #111;
       }

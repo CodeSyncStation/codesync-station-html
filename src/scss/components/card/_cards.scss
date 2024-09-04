@@ -1,150 +1,99 @@
 @use "../../global" as *;
 @use "../../partials" as *;
 
-.whycard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.service-item {
+  background: #fff;
+  padding: 40px 35px;
+  margin-bottom: 30px;
+  border-radius: 24px;
+  transition: 0.5s;
+  box-shadow: 0 4px 20px rgba(19, 16, 34, 0.06);
   text-align: center;
-  gap: size(10);
-  padding: 0 30px;
-  @include transitionsall;
-  &:hover {
-    transform: translateY(-8px);
-  }
-  .icon-wrapper {
+
+  .circle {
+    border: 2px solid $primary;
+    height: 110px;
+    border-radius: 50%;
+    width: 110px;
     position: relative;
-    .icon {
-      border: 1px solid #e2e6e7;
-      @include square(120);
-      @include flex-center;
-      @include circle;
-      .fa {
-        font-size: 60px;
-      }
+    transition: transform 2s linear;
+    animation: loop infinite 3s linear;
+    animation-play-state: paused;
+   
+
+    .dot2 {
+      left: 93%;
     }
-    .line {
-      height: 50px;
-      width: 1px;
-      background-color: #e2e6e7;
-      position: absolute;
-      left: 50px;
-    }
-    .ball {
-      height: 20px;
+    .common {
+      content: "";
+      display: inline-block;
       width: 20px;
-      border: 1px solid #e2e6e7;
+      height: 20px;
+      background-color: $primary;
       border-radius: 50%;
       position: absolute;
-      left: 50px;
-      transform: translateX(-50%);
-      bottom: -70px;
+      top: 39%;
+      transition: animation 2s;
     }
-  }
-  .title {
-    margin-top: 80px;
-    font-size: 18px;
-    line-height: 28px;
-    position: relative;
-    margin-bottom: 30px;
     &::after {
-      height: 3px;
-      width: 70px;
-      background-color: #ffbc13;
-      position: absolute;
-      bottom: -10px;
       content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-color: $primary;
+      border-radius: 50%;
+      position: absolute;
+      top: 39%;
+      transition: animation 2s;
+      left: -9%;
+    }
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-color: $primary;
+      border-radius: 50%;
+      position: absolute;
+      top: 39%;
+      transition: animation 2s;
+      right: -9%;
+    }
+  }
+  &:hover {
+    .circle {
+      animation: loop infinite 3s linear;
+    }
+  }
+
+  .service-icon {
+    position: relative;
+    width: 112px;
+    .service-img {
+      position: absolute;
+      top: 30%;
       left: 50%;
-      transform: translateX(-50%);
+      width: 50%;
+      transform: translate(-50%);
+      fill: $primary;
     }
-  }
-}
-
-.single-testimonial {
-  background: #fff;
-  padding: size(28) size(36);
-  @include radius(5);
-  box-shadow: 0px 33px 251px 0px rgba(0, 0, 0, 0.09),
-    0px 15.257px 116.045px 0px rgba(0, 0, 0, 0.07),
-    0px 8.73px 66.398px 0px rgba(0, 0, 0, 0.06),
-    0px 5.299px 40.303px 0px rgba(0, 0, 0, 0.05),
-    0px 3.193px 24.284px 0px rgba(0, 0, 0, 0.04),
-    0px 1.778px 13.523px 0px rgba(0, 0, 0, 0.03),
-    0px 0.765px 5.816px 0px rgba(0, 0, 0, 0.02);
-  position: relative;
-  @include flex-column;
-  gap: size(10);
-  padding-top: 50px;
-  @include breakpoint(tab992) {
-    max-width: size(326);
   }
 
-  .testimonial-thumb {
-    @include square(63);
-    display: block;
-    @include circle;
-    position: absolute;
-    top: (-30px);
-    background-color: #fff;
-    padding: 2px;
-    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.04);
-    border: 1px solid gray;
+  @keyframes loop {
+    to {
+      transform: rotate(360deg);
+    }
   }
-  .quote {
-    @include square(50);
-    background-color: #274e75;
-    @include circle;
-    position: absolute;
-    left: -30px;
-    top: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-  }
-  .des {
-    color: #000;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 174%; /* 24.36px */
-    letter-spacing: 0.28px;
-    text-transform: capitalize;
-  }
-  .name {
-    color: #000;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 174%; /* 31.32px */
-    letter-spacing: 0.36px;
-    text-transform: capitalize;
-  }
-  .testimonial-text {
-    color: #595959;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 174%; /* 22.62px */
-    letter-spacing: 0.26px;
-    text-transform: capitalize;
-  }
-}
-.single-testimonial:last-child {
-  @include breakpoint(tab992) {
-    position: absolute;
-    top: 54%;
-    left: 31rem;
-    transform: translateY(-50%);
 
-    @include breakpoint(desktop1400) {
-      left: 33rem;
-    }
-    @include breakpoint(desktop1600) {
-      left: 40rem;
-    }
-    @include breakpoint(desktop1800) {
-      left: 47rem;
-    }
+  .service-body h2 {
+    color: $heading-color;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 20px;
+    position: relative;
+    transition: 0.4s;
+  }
+  .service-body p {
+    margin-bottom: 28px;
   }
 }

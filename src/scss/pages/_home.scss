@@ -9,15 +9,14 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  
-  @include breakpoint(mobile480){
+
+  @include breakpoint(mobile480) {
     min-height: 140vh;
   }
-  @include breakpoint(tab992){
+  @include breakpoint(tab992) {
     min-height: 90vh;
   }
   .content {
-    
     .subtitle {
       border-radius: 30px;
       box-shadow: 0 4.4px 30px rgba(19, 16, 34, 0.05);
@@ -120,6 +119,65 @@
       100% {
         transform: translateY(-8px);
       }
+    }
+  }
+}
+
+// about section
+.about-area {
+  padding: 120px 0px;
+  .section-title {
+    position: relative;
+    .sub-title {
+     @include subTitle;
+    }
+    .title {
+      margin-bottom: 0;
+      margin-top: 0;
+      color: $heading-color;
+      font-weight: 600;
+    }
+    .content {
+      margin-top: 17px;
+      margin-bottom: 0;
+      color: $para-color;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+    }
+    .single-list-inner {
+      margin: 0;
+      padding: 0;
+      li {
+        color: $heading-color;
+        font-weight: 600;
+        list-style: none;
+        margin-bottom: 12px;
+        display: flex;
+        svg {
+          margin-right: 10px;
+          color: $primary;
+          font-size: 18px;
+          vertical-align: middle;
+          width: 18px;
+        }
+      }
+    }
+  }
+}
+
+// service section`
+.services-section{
+ 
+  .section-title{
+    text-align: center;
+    margin-bottom: 50px;
+    .sub-title{
+      @include subTitle;
+    }
+    .title{
+      color: $heading-color;
+      font-weight: 600;
+      margin-bottom: 20px;
     }
   }
 }

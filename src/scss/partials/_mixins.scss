@@ -227,3 +227,9 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@mixin subTitle{
+  color: $primary;
+  text-transform: uppercase;
+  font-weight: 600;
+}
