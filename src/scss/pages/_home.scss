@@ -10,10 +10,9 @@
   background-position: center;
   background-size: cover;
 
-  @include breakpoint(mobile480) {
-    min-height: 140vh;
-  }
+  padding-top: 100px;
   @include breakpoint(tab992) {
+    padding-top: 0px;
     min-height: 90vh;
   }
   .content {
@@ -129,7 +128,7 @@
   .section-title {
     position: relative;
     .sub-title {
-     @include subTitle;
+      @include subTitle;
     }
     .title {
       margin-bottom: 0;
@@ -166,15 +165,15 @@
 }
 
 // service section`
-.services-section{
- 
-  .section-title{
+.services-section {
+  padding: 100px 0;
+  .section-title {
     text-align: center;
     margin-bottom: 50px;
-    .sub-title{
+    .sub-title {
       @include subTitle;
     }
-    .title{
+    .title {
       color: $heading-color;
       font-weight: 600;
       margin-bottom: 20px;

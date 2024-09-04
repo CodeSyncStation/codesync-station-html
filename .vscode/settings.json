@@ -1,4 +1,14 @@
 {
-    "files.autoSave": "afterDelay",
-    "liveServer.settings.port": 5501
+    "liveSassCompile.settings.formats": [
+    {
+      "format": "compressed",
+      "extensionName": ".min.css",
+      // "extensionName": ".css",
+      // "savePath": "/public/assets/css"
+    //   "savePath": "/assets/css"
+      // "savePath": "/css"
+      "savePath": "/src/assets/css"
+      // "savePath": "src/css"
+    }
+  ],
 }

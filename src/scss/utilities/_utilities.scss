@@ -31,3 +31,8 @@
 .text-justify {
   text-align: justify;
 }
+@include breakpoint(desktop1024){
+  .w-lg-75{
+    width: 75%;
+  }
+}

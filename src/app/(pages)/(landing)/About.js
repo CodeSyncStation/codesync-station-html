@@ -1,19 +1,20 @@
-import aboutImg10 from "@/assets/images/about/10.png";
-import Image from "next/image";
+import AboutLottie from "@/Components/lottie/AboutLottie";
 
 export default function About() {
   return (
     <div className="about-area pd-top-120 pd-bottom-120">
       <div className="container">
         <div className="row">
-          <div
-            className="col-lg-6 mb-4 mb-lg-0 "
-            data-aos="fade-right"
-            data-aos-delay="100"
-            data-aos-duration="1500"
-          >
-            <div className="about-thumb-inner">
-              <Image className="main-img" src={aboutImg10} alt="img" />
+          <div className="col-lg-6 mb-4 mb-lg-0 ">
+            <div className="flip-container">
+              <div className="flip-front-part">
+                <AboutLottie />
+              </div>
+              {/* <div className="flip-back-part">
+                <div className="about-thumb-inner">
+                  <Image className="main-img" src={aboutImg10} alt="img" />
+                </div>
+              </div> */}
             </div>
           </div>
           <div className="col-lg-6 ">

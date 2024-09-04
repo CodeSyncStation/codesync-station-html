@@ -1,10 +1,7 @@
-import bannerImg1 from "@/assets/images/hero/1.png";
-import bannerImg2 from "@/assets/images/hero/2.png";
 import bannerImg3 from "@/assets/images/hero/3.png";
-import bannerImg4 from "@/assets/images/hero/4.png";
-import bannerImg5 from "@/assets/images/hero/5.png";
 import heroBg from "@/assets/images/hero/8.png";
 import videoIcon from "@/assets/images/icons/video.svg";
+import WebLottie from "@/Components/lottie/WebLottie";
 import Image from "next/image";
 
 export default function Hero() {
@@ -46,7 +43,7 @@ export default function Hero() {
                 alt="img"
               />
               <div className="main-img-wrap">
-                <Image
+                {/* <Image
                   className="banner-animate-img banner-animate-img-1 left_image_bounce"
                   src={bannerImg4}
                   alt="img"
@@ -61,7 +58,8 @@ export default function Hero() {
                   src={bannerImg2}
                   alt="img"
                 />
-                <Image className="main-img" src={bannerImg1} alt="img" />
+                <Image className="main-img" src={bannerImg1} alt="img" /> */}
+                <WebLottie />
               </div>
             </div>
           </div>
