@@ -180,3 +180,70 @@
     }
   }
 }
+
+// portfolio
+.portfolio-section {
+  padding: 100px 0;
+  .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    .sub-title {
+      @include subTitle;
+    }
+    .title {
+      color: $heading-color;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+// styles/globals.scss
+
+.why-choose-us {
+  background-color: #f9f9f9;
+  .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    .sub-title {
+      @include subTitle;
+    }
+    .title {
+      color: $heading-color;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+  }
+
+  .choose-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .choose-number {
+      font-size: 2.5rem;
+      color: $primary;
+      background-color: $primary-09;
+      // border: 2px solid black;
+      width: 60px;
+      aspect-ratio: 1;
+      // padding: 2px 16px 1px 16px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0px auto 20px auto;
+
+    }
+
+    p {
+      font-size: 1rem;
+      color: $para-color;
+    }
+  }
+}

@@ -1,6 +1,8 @@
 import About from "./About";
 import Hero from "./Hero";
+import Portfolio from "./Portfolio";
 import Services from "./Services";
+import WhyChooseUs from "./WhyChooseUs";
 
 export default function Home() {
   return (
@@ -8,6 +10,9 @@ export default function Home() {
       <Hero />
       <About />
       <Services />
+      {/* <IndustriesSection /> */}
+      <WhyChooseUs />
+      <Portfolio />
     </>
   );
 }
