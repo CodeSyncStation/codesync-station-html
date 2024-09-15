@@ -35,20 +35,21 @@ export default function Portfolio() {
   ]
 
   return (
-    <div className="portfolio-section">
+    <section id="portfolio" className="portfolio-section">
       <div className="container">
         <div className="section-title">
-          {/* <h6 className="sub-title">Portfolio</h6> */}
+          <h6 className="sub-title">Portfolio</h6>
           <h2 className="title">
             Completed {" "}
-            <span className="text-primary"> Projects</span>
+            Projects
           </h2>
         </div>
 
         <div className="section-body">
           <Swiper
             modules={[Pagination]}
-            pagination={true}
+            className="project-swiper"
+            pagination={{clickable: true}}
             spaceBetween={30}
             slidesPerView={1}
             breakpoints={{
@@ -72,8 +73,8 @@ export default function Portfolio() {
                       <h3>{project.title}</h3>
                       <div className="view-btn">
                         <a href="#">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                            <path fillRule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
                           </svg>
                         </a>
 
@@ -87,6 +88,6 @@ export default function Portfolio() {
 
         </div>
       </div>
-    </div>
+    </section>
   )
 }

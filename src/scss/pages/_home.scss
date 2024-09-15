@@ -13,7 +13,7 @@
   padding-top: 100px;
   @include breakpoint(tab992) {
     padding-top: 0px;
-    min-height: 90vh;
+    min-height: 100vh;
   }
   .content {
     .subtitle {
@@ -164,7 +164,7 @@
   }
 }
 
-// service section`
+// service section
 .services-section {
   padding: 100px 0;
   .section-title {
@@ -183,6 +183,7 @@
 
 // portfolio
 .portfolio-section {
+  background-color: $bg-light-gray;
   padding: 100px 0;
   .section-title {
     text-align: center;
@@ -198,10 +199,10 @@
   }
 }
 
-// styles/globals.scss
+// why choose us
 
 .why-choose-us {
-  background-color: #f9f9f9;
+  // background-color: $bg-light-gray;
   .section-title {
     text-align: center;
     margin-bottom: 50px;
@@ -238,12 +239,295 @@
       justify-content: center;
       align-items: center;
       margin: 0px auto 20px auto;
-
     }
 
     p {
       font-size: 1rem;
       color: $para-color;
+    }
+  }
+}
+
+// Industry section
+.industries-covered {
+  background-color: $bg-light-gray;
+  padding: 40px 0;
+  .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    .sub-title {
+      @include subTitle;
+    }
+    .title {
+      color: $heading-color;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #0f223d;
+  }
+
+  .text-muted {
+    font-size: 1rem;
+    color: #66a1e1;
+  }
+
+  .industry-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    .industry-icon {
+      font-size: 3rem;
+      color: #66a1e1;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #333;
+    }
+  }
+
+  .view-more-link {
+    font-size: 1rem;
+    color: #66a1e1;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// testimonials
+.testimonial-section {
+  // color: #fff;
+  padding: 60px 0;
+  background-color: $bg-light-gray;
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    .sub-title {
+      @include subTitle;
+    }
+    .title {
+      color: $heading-color;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+  }
+  .testimonial-slider {
+    padding-top: 3rem;
+    .swiper-slide-active {
+      .testimonial-card {
+        background-color: #333;
+        transform: translateY(-2rem);
+      }
+    }
+  }
+
+  .testimonial-card {
+    background-color: #1a1a1a;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    transition: transform 0.3 ease;
+    margin: 0 auto;
+
+    .testimonial-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+
+      .platform {
+        font-size: 1.2rem;
+        color: #66a1e1;
+        font-weight: bold;
+      }
+
+      .stars {
+        color: #66a1e1;
+      }
+    }
+
+    .testimonial-text {
+      font-size: 1.1rem;
+      color: #ddd;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .author-info {
+        display: flex;
+        align-items: center;
+
+        .avatar {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          margin-right: 1rem;
+        }
+
+        strong {
+          font-size: 1.1rem;
+          color: #fff;
+        }
+
+        p {
+          font-size: 0.9rem;
+          color: #66a1e1;
+        }
+      }
+
+      .testimonial-date {
+        text-align: right;
+        font-size: 0.9rem;
+        color: #aaa;
+      }
+    }
+  }
+}
+
+// Team section
+.team-section {
+  text-align: center;
+  padding: 50px 0;
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    .sub-title {
+      @include subTitle;
+    }
+    .title {
+      color: $heading-color;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+  }
+
+  .card {
+    border: none;
+    background-color: $bg-light-gray;
+    border-radius: 10px;
+
+    img {
+      border-radius: 10px;
+      object-fit: cover;
+      // width: 322px;
+      height: 390px;
+    }
+
+    .card-body {
+      h5 {
+        font-size: 1.25rem;
+        margin-top: 15px;
+        color: $heading-color;
+      }
+
+      p {
+        font-size: 0.875rem;
+        color: $para-color;
+      }
+    }
+  }
+}
+
+// contact section
+.contactus {
+  padding-top: 10rem;
+  padding-bottom: 6rem;
+  .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    .sub-title {
+      @include subTitle;
+    }
+    .title {
+      color: $heading-color;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+  }
+  .left-info {
+    .title {
+      color: $heading-color;
+      line-height: 1.5;
+      margin: 0 0 12px;
+      font-weight: 500;
+      text-rendering: optimizeLegibility;
+      font-size: 20px;
+    }
+    .des {
+      color: $para-color;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .locations {
+      @include list-vertical;
+      gap: size(10);
+      margin-top: 40px;
+      li {
+        display: flex;
+        align-items: center;
+        gap: size(10);
+        span {
+          color: rgb(119, 119, 119);
+        }
+      }
+      .icon {
+        @include square(30);
+        background-color: #f8f8f8;
+        @include flex-center;
+        padding: size(5);
+        flex-shrink: 0;
+        
+      }
+    }
+  }
+  .contact-form {
+    .form-title {
+      color: $heading-color;
+      line-height: 1.5;
+      margin: 0 0 12px;
+      font-weight: 500;
+      text-rendering: optimizeLegibility;
+      font-size: 20px;
+    }
+    input,
+    textarea {
+      border: 1px solid #eaeaea;
+      @include w100;
+      padding: 10px;
+      @include transitionsall;
+      &:focus {
+        border-color: gray;
+      }
+    }
+    svg{
+      width: 20px;
     }
   }
 }

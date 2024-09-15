@@ -1,8 +1,39 @@
 "use client"
 import logo from "@/assets/images/CodeSync_Station.png"
 import Image from "next/image"
+import Link from "next/link"
+import { useEffect } from "react"
 
 export default function Navbar() {
+  useEffect(() => {
+    // Get all the sections and the nav links
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    window.addEventListener("scroll", () => {
+      let current = null;
+
+      // Loop through sections to get current section in view
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop - sectionHeight / 3) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      // Remove 'active' class from all links and add to the one in view
+      navLinks.forEach(link => {
+        link.classList.remove("active_nav_link");
+        if (link.getAttribute("href").includes(current)) {
+          link.classList.add("active_nav_link");
+        } else {
+          link.classList.remove("active_nav_link");
+        }
+      });
+    });
+
+  }, [])
 
   return (
     <header id="header">
@@ -73,28 +104,33 @@ export default function Navbar() {
               <div className="d-flex justify-content-between w-100">
                 <ul className="navbar-nav mx-auto mb-2 mt-lg-2">
                   <li className="nav-item">
-                    <a className="nav-link" aria-current="page" href="#hero"
-                    >Home</a
+                    <Link className="nav-link" aria-current="page" href="/#hero"
                     >
+                      Home
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a className="nav-link" href="#about">Service</a>
+                    <Link className="nav-link" href="/#about">About</Link>
                   </li>
-
                   <li className="nav-item">
-                    <a className="nav-link" href="#portfolio">About us </a>
-                  </li>
-
-                  <li className="nav-item">
-                    <a className="nav-link" href="#services">Contact</a>
+                    <Link className="nav-link" href="/#services">Services</Link>
                   </li>
 
                   <li className="nav-item">
-                    <a className="nav-link" href="#inverstor">Career</a>
+                    <Link className="nav-link" href="/#portfolio">Portfolio </Link>
+                  </li>
+
+
+
+                  <li className="nav-item">
+                    <Link className="nav-link" href="/#inverstor">Career</Link>
                   </li>
 
                   <li className="nav-item">
-                    <a className="nav-link" href="#testimonials">FAQ</a>
+                    <Link className="nav-link" href="/#testimonials">FAQ</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" href="/#contact">Contact</Link>
                   </li>
                 </ul>
 

@@ -6,7 +6,8 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <div
+    <section
+      id="hero"
       className="hero-section"
       style={{ backgroundImage: `url("${heroBg.src}")` }}
     >
@@ -65,6 +66,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

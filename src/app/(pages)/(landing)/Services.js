@@ -3,21 +3,41 @@ import mobileAppDev from "@/assets/images/icons/mobile-app-dev-icon.svg";
 import penIcon from "@/assets/images/icons/pen-tool-icon.svg";
 import apiDesign from "@/assets/images/icons/rest-api-icon.svg";
 
+function getDelay(index) {
+  let fade = "fade-right";
+  switch (index + 1) {
+    case 2:
+      fade = "fade-down";
+      break;
+
+    case 3:
+      fade = "fade-left";
+      break;
+
+    case 5:
+      fade = "fade-up";
+      break;
+
+    case 6:
+      fade = "fade-left";
+      break;
+  }
+  return fade;
+}
+
 function Service(props) {
   const { service } = props || {};
   const { title, description, icon } = service || {};
   return (
-    <div className="col-12 col-md-6 col-xl-4">
-      <div className="service-item">
-        <div className="service-icon m-auto">
-          <div className="circle"></div>
-          <div className="service-img">{icon}</div>
-        </div>
-        <div className="service-body">
-          <h2 className="my-3 text-capitalize">{title}</h2>
-          <p>{description}</p>
-          <button className="animated-btn m-auto">Touch more</button>
-        </div>
+    <div className="service-item">
+      <div className="service-icon m-auto">
+        <div className="circle"></div>
+        <div className="service-img">{icon}</div>
+      </div>
+      <div className="service-body">
+        <h2 className="my-3 text-capitalize">{title}</h2>
+        <p>{description}</p>
+        <button className="animated-btn m-auto">Touch more</button>
       </div>
     </div>
   );
@@ -90,7 +110,7 @@ export default function Services() {
   ];
 
   return (
-    <div className="services-section">
+    <section id="services" className="services-section">
       <div className="container">
         <div className="section-title">
           <h6 className="sub-title">Our Services</h6>
@@ -101,10 +121,18 @@ export default function Services() {
         </div>
         <div className="row">
           {services.map((service, index) => (
-            <Service key={index} service={service} />
+            <div
+              key={index}
+              data-aos={getDelay(index)}
+              className="col-12 col-md-6 col-xl-4"
+              // data-aos-delay={index + "00"}
+              data-aos-duration="1000"
+            >
+              <Service service={service} />
+            </div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

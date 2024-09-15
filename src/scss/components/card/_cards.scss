@@ -103,6 +103,8 @@
   transition: 0.5s;
   overflow: hidden;
   height: 500px;
+  transition: transform .3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,.1);
   .success-img {
     border-radius: 5px;
   }
@@ -170,7 +172,9 @@
       }
     }
   }
-
+  &:hover{
+    transform: translateY(-5px);
+  }
   &:hover .success-content svg {
     transform: rotate(0deg) !important;
   }

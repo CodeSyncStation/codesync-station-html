@@ -1,6 +1,44 @@
-@use '../../global' as *;
-@use '../../partials' as *;
+@use "../../global" as *;
+@use "../../partials" as *;
 
-.swiper-pagination-bullet{
-  background: red !important;
+.project-swiper {
+  height: 36rem !important;
+}
+
+.swiper-pagination {
+  padding-top: 2rem !important;
+}
+.swiper-pagination-bullet {
+  background: transparent !important;
+  border: 2px solid $primary;
+  padding: 5px;
+  display: inline-block;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.swiper-pagination-bullet-active {
+  // background: $primary !important;
+  border: 2px solid $primary;
+  position: relative;
+
+  &::after {
+    content: "";
+    width: 70%;
+    height: 70%;
+    background-color: $primary;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    // transform: translateY(-50%);
+    transform: translate(-50%);
+    z-index: -1;
+    // border: 2px solid transparent;
+
+    border-radius: 10px;
+  }
+}
+
+.testimonial-slider{
+  height: 22rem;
 }

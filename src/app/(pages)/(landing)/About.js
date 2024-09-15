@@ -2,32 +2,31 @@ import AboutLottie from "@/Components/lottie/AboutLottie";
 
 export default function About() {
   return (
-    <div className="about-area pd-top-120 pd-bottom-120">
+    <section id="about" className="about-area pd-top-120 pd-bottom-120">
       <div className="container">
         <div className="row">
-          <div className="col-lg-6 mb-4 mb-lg-0 ">
+          <div className="col-lg-6 mb-4 mb-lg-0">
             <div className="flip-container">
               <div className="flip-front-part">
                 <AboutLottie />
               </div>
-              {/* <div className="flip-back-part">
-                <div className="about-thumb-inner">
-                  <Image className="main-img" src={aboutImg10} alt="img" />
-                </div>
-              </div> */}
             </div>
           </div>
-          <div className="col-lg-6 ">
+          <div className="col-lg-6">
             <div className="section-title mb-0">
               <h6 className="sub-title">ABOUT US</h6>
-              <h2 className="title">
+              <h2 className="title" data-aos="fade-left" data-aos-delay="100">
                 Empowering businesses with SaaS technology
               </h2>
-              <p className="content mb-4">
+              <p
+                className="content mb-4"
+                data-aos="fade-left"
+                data-aos-delay="200"
+              >
                 You can access SaaS applications through a web browser or mobile
                 app, as long as you have an internet connection.
               </p>
-              <div className="row">
+              <div className="row" data-aos="fade-left" data-aos-delay="300">
                 <div className="col-md-6">
                   <ul className="single-list-inner mb-3">
                     <li>
@@ -93,19 +92,25 @@ export default function About() {
                   </ul>
                 </div>
               </div>
-              <p className="content">
+              <p className="content" data-aos="fade-left" data-aos-delay="400">
                 SaaS providers typically invest heavily in security measures to
                 protect customer data, such as encryption and multi-factor
                 authentication. However, it is important to research and choose
                 a reputable provider and also to ensure that
               </p>
               <div className="mt-4">
-                <button className="animated-btn">Discover More </button>
+                <button
+                  className="animated-btn"
+                  data-aos="fade-left"
+                  data-aos-delay="500"
+                >
+                  Discover More{" "}
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

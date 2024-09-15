@@ -1,0 +1,43 @@
+@use "../global" as *;
+@use "../partials" as *;
+
+// Mixin for headings
+@mixin heading-style($size) {
+  font-size: $size;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+
+// Terms and Conditions Page Styles
+.terms-container {
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 100px auto;
+
+  // Nesting
+  .terms-title {
+    @include heading-style(2rem);
+  }
+
+  .terms-subtitle {
+    font-size: 1.2rem;
+    color: $para-color;
+    margin-bottom: 30px;
+  }
+
+  .terms-content {
+    h4 {
+      @include heading-style(1.5rem);
+      margin-top: 20px;
+    }
+
+    p {
+      line-height: 1.6;
+      color: darken($para-color, 10%);
+    }
+  }
+}
+
