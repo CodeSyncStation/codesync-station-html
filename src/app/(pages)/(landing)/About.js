@@ -5,28 +5,24 @@ export default function About() {
     <section id="about" className="about-area pd-top-120 pd-bottom-120">
       <div className="container">
         <div className="row">
-          <div className="col-lg-6 mb-4 mb-lg-0">
+          <div className="col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
             <div className="flip-container">
               <div className="flip-front-part">
                 <AboutLottie />
               </div>
             </div>
           </div>
-          <div className="col-lg-6">
+          <div className="col-lg-6" data-aos="fade-up">
             <div className="section-title mb-0">
               <h6 className="sub-title">ABOUT US</h6>
-              <h2 className="title" data-aos="fade-left" data-aos-delay="100">
+              <h2 className="title">
                 Empowering businesses with SaaS technology
               </h2>
-              <p
-                className="content mb-4"
-                data-aos="fade-left"
-                data-aos-delay="200"
-              >
+              <p className="content mb-4">
                 You can access SaaS applications through a web browser or mobile
                 app, as long as you have an internet connection.
               </p>
-              <div className="row" data-aos="fade-left" data-aos-delay="300">
+              <div className="row">
                 <div className="col-md-6">
                   <ul className="single-list-inner mb-3">
                     <li>
@@ -92,20 +88,14 @@ export default function About() {
                   </ul>
                 </div>
               </div>
-              <p className="content" data-aos="fade-left" data-aos-delay="400">
+              <p className="content">
                 SaaS providers typically invest heavily in security measures to
                 protect customer data, such as encryption and multi-factor
                 authentication. However, it is important to research and choose
                 a reputable provider and also to ensure that
               </p>
               <div className="mt-4">
-                <button
-                  className="animated-btn"
-                  data-aos="fade-left"
-                  data-aos-delay="500"
-                >
-                  Discover More{" "}
-                </button>
+                <button className="animated-btn">Discover More </button>
               </div>
             </div>
           </div>

@@ -31,7 +31,7 @@ const IndustriesCovered = () => {
       
         <Row className="text-center">
           {industries.map((industry, index) => (
-            <Col key={index} xs={6} md={4} lg={3} className="mb-4">
+            <Col key={index} xs={6} md={4} lg={3} className="mb-4" data-aos="fade-left" data-aos-delay={index + "00"}>
               <div className="industry-card">
                 <div className="industry-icon">{industry.icon}</div>
                 <p>{industry.name}</p>

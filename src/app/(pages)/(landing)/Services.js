@@ -3,26 +3,15 @@ import mobileAppDev from "@/assets/images/icons/mobile-app-dev-icon.svg";
 import penIcon from "@/assets/images/icons/pen-tool-icon.svg";
 import apiDesign from "@/assets/images/icons/rest-api-icon.svg";
 
-function getDelay(index) {
-  let fade = "fade-right";
-  switch (index + 1) {
-    case 2:
-      fade = "fade-down";
-      break;
+function getAnimation(index) {
+  const animations = {
+    2: "fade-down",
+    3: "fade-left",
+    5: "fade-up",
+    6: "fade-left",
+  };
 
-    case 3:
-      fade = "fade-left";
-      break;
-
-    case 5:
-      fade = "fade-up";
-      break;
-
-    case 6:
-      fade = "fade-left";
-      break;
-  }
-  return fade;
+  return animations[index + 1] || "fade-right";
 }
 
 function Service(props) {
@@ -123,7 +112,7 @@ export default function Services() {
           {services.map((service, index) => (
             <div
               key={index}
-              data-aos={getDelay(index)}
+              data-aos={getAnimation(index)}
               className="col-12 col-md-6 col-xl-4"
               // data-aos-delay={index + "00"}
               data-aos-duration="1000"

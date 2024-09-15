@@ -54,7 +54,7 @@ export default function Portfolio() {
             slidesPerView={1}
             breakpoints={{
               1200: {
-                slidesPerView: 2,
+                slidesPerView: 3,
               },
             }}
           >
