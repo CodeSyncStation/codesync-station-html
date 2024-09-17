@@ -6,13 +6,12 @@ import { useEffect } from "react";
 import "../assets/css/style.min.css";
 
 const inter = Plus_Jakarta_Sans({ subsets: ["latin"] });
-
 export default function RootLayout({ children }) {
   useEffect(() => {
     Aos.init({
       duration: 1000,
       mirror: true,
-      once: false,
+      once: process.env.NODE_ENV === "production",
     });
   }, []);
 

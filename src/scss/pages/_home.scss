@@ -432,12 +432,13 @@
     border: none;
     background-color: $bg-light-gray;
     border-radius: 10px;
-
+    padding: 10px;
     img {
       border-radius: 10px;
       object-fit: cover;
-      // width: 322px;
+      width: 332px;
       height: 390px;
+      margin: auto;
     }
 
     .card-body {
@@ -503,7 +504,6 @@
         @include flex-center;
         padding: size(5);
         flex-shrink: 0;
-        
       }
     }
   }
@@ -526,7 +526,7 @@
         border-color: gray;
       }
     }
-    svg{
+    svg {
       width: 20px;
     }
   }

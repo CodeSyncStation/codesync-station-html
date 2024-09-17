@@ -2,17 +2,7 @@ import bugFixing from "@/assets/images/icons/bugFixing.svg";
 import mobileAppDev from "@/assets/images/icons/mobile-app-dev-icon.svg";
 import penIcon from "@/assets/images/icons/pen-tool-icon.svg";
 import apiDesign from "@/assets/images/icons/rest-api-icon.svg";
-
-function getAnimation(index) {
-  const animations = {
-    2: "fade-down",
-    3: "fade-left",
-    5: "fade-up",
-    6: "fade-left",
-  };
-
-  return animations[index + 1] || "fade-right";
-}
+import getAnimation from "@/utilities/func/getAnimation";
 
 function Service(props) {
   const { service } = props || {};

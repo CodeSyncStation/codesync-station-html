@@ -1,10 +1,14 @@
 "use client"
-import portfolio5 from "@/assets/images/portfolio/Home-Click-Jobs.png";
+import portfolio3 from "@/assets/images/portfolio/Cooking-Station-On-Demand-Home-Cooked-Food-Delivery.png";
+import { default as portfolio2, default as portfolio4, default as portfolio5 } from "@/assets/images/portfolio/Home-Click-Jobs.png";
+import portfolio1 from "@/assets/images/portfolio/ZARAS-PROPERTY-Quality-Homes-for-Future-Generations-.png";
 import Image from "next/image";
-import { Pagination } from "swiper/modules";
+import { HiOutlineArrowRight } from "react-icons/hi";
+import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
+import getAnimation from "@/utilities/func/getAnimation";
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -14,24 +18,38 @@ export default function Portfolio() {
     {
       id: 1,
       title: "Home Click Jobs",
-      image: portfolio5,
+      image: portfolio1,
       link: "project-details.html",
       category: "Web development"
     },
     {
       id: 2,
       title: "Eco-Friendly Cleaning Solutions",
-      image: portfolio5,
+      image: portfolio2,
       link: "project-details.html",
       category: "Cleaning"
     },
     {
       id: 3,
       title: "Green Energy Solutions",
+      image: portfolio3,
+      link: "project-details.html",
+      category: "Energy"
+    },
+    {
+      id: 4,
+      title: "Green Energy Solutions",
+      image: portfolio4,
+      link: "project-details.html",
+      category: "Energy"
+    },
+    {
+      id: 5,
+      title: "Green Energy Solutions",
       image: portfolio5,
       link: "project-details.html",
       category: "Energy"
-    }
+    },
   ]
 
   return (
@@ -47,12 +65,17 @@ export default function Portfolio() {
 
         <div className="section-body">
           <Swiper
-            modules={[Pagination]}
+            modules={[Pagination, Autoplay]}
             className="project-swiper"
-            pagination={{clickable: true}}
+            pagination={{ clickable: true }}
             spaceBetween={30}
             slidesPerView={1}
+            autoplay={true}
+            loop={true}
             breakpoints={{
+              768: {
+                slidesPerView: 2,
+              },
               1200: {
                 slidesPerView: 3,
               },
@@ -60,9 +83,9 @@ export default function Portfolio() {
           >
 
             {
-              projects.map(project => (
-                <SwiperSlide key={project.id}>
-                  <div className="success-storie-card" >
+              projects.map((project, i) => (
+                <SwiperSlide key={project.id} >
+                  <div className="portfolio-card" data-aos={getAnimation(i)}>
                     <div className="success-img">
                       <div className="magnetic-wrap">
                         <Image className="img-fluid magnetic-item" src={portfolio5} alt="" style="" />
@@ -73,9 +96,7 @@ export default function Portfolio() {
                       <h3>{project.title}</h3>
                       <div className="view-btn">
                         <a href="#">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" className="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                            <path fillRule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
-                          </svg>
+                          <HiOutlineArrowRight />
                         </a>
 
                       </div>

@@ -97,17 +97,20 @@
     color: $para-color;
   }
 }
-.success-storie-card {
+.portfolio-card {
+  --border-size: 4px;
   position: relative;
   border-radius: 5px;
   transition: 0.5s;
   overflow: hidden;
-  height: 500px;
+  height: 300px;
   transition: transform .3s ease;
   box-shadow: 0 4px 10px rgba(0,0,0,.1);
   .success-img {
     border-radius: 5px;
   }
+  border-top: var(--border-size) solid $primary;
+  border-bottom: var(--border-size) solid $primary;
 
   .success-content {
     position: absolute;
@@ -115,21 +118,23 @@
     left: 25px;
     right: 25px;
     bottom: 25px;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 35px 25px;
+    background: $bg-light-gray;
+    background: #d6d5d5;
+    padding: 15px;
     border-radius: 5px;
+   
     span {
       font-weight: 500;
       font-size: 15px;
       letter-spacing: 0.05em;
       text-transform: capitalize;
-      color: #b5b5b5;
+      // color: #d6d5d5;
       display: inline-block;
       position: relative;
       margin-bottom: 15px;
       &::after {
         content: "";
-        height: 1px;
+        height: 2px;
         width: 100%;
         background: $primary;
         border-radius: 5px;
@@ -143,10 +148,12 @@
       font-weight: 500;
       letter-spacing: 0.05em;
       text-transform: capitalize;
-      color: #b5b5b5;
-      display: block;
-      position: relative;
+      // color: #d6d5d5;
       margin-bottom: 15px;
+      font-size: 20px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     .view-btn {
@@ -154,20 +161,21 @@
       right: -18px;
       top: 50%;
       transform: translateY(-50%);
-
+      border-radius: 50%;
+      background-color: $primary;
       a {
         height: 44px;
         width: 44px;
-        border-radius: 50%;
-        background-color: $primary;
         display: flex;
         align-items: center;
         justify-content: center;
 
         svg {
-          stroke: #1b1f23;
+          stroke: #fff;
           transform: rotate(45deg);
           transition: 0.5s;
+          width: 50% !important;
+          height: 50%!important;
         }
       }
     }
