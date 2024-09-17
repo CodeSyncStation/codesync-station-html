@@ -4,6 +4,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
+import Image from 'next/image';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // import 'swiper/swiper-bundle.min.css';
@@ -83,8 +84,8 @@ const TestimonialSlider = () => {
                 </div>
                 <p className="testimonial-text">{testimonial.text}</p>
                 <div className="testimonial-footer">
-                  <div className="author-info">
-                    <img src={testimonial.avatar} alt={testimonial.name} className="avatar" />
+                  <div className="author-info position-relative">
+                    <Image src={testimonial.avatar} alt={testimonial.name} className="avatar"  fill/>
                     <div>
                       <strong>{testimonial.name}</strong>
                       <p>{testimonial.position}</p>
