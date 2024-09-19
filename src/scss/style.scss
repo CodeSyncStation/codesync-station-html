@@ -1,14 +1,9 @@
 /*============================== 
 	- Template Name: CodeSync Next.js TEMPLATE
 ================================= */
-@forward '~bootstrap/scss/bootstrap';
-@forward "./reset";
-@forward "./components";
-@forward "./pages";
-@forward "./utilities";
-@forward "./animations";
-
-
-
-
-
+@import "~bootstrap/scss/bootstrap";
+@import "./reset";
+@import "./components";
+@import "./pages";
+@import "./utilities";
+@import "./animations";

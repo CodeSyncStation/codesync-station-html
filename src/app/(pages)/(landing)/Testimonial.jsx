@@ -1,9 +1,10 @@
 // components/TestimonialSlider.js
 "use client"
-import { Navigation, Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
+import getAnimation from '@/utilities/func/getAnimation';
 import Image from 'next/image';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -57,27 +58,37 @@ const TestimonialSlider = () => {
   return (
     <section id='review' className="testimonial-section">
       <div className="container">
-      <div className="section-title">
-        <h6 className="sub-title">Feedback</h6>
-        <h2 className="title">
-          What Our Clients Say
-        </h2>
-      </div>
-    
+        <div className="section-title">
+          <h6 className="sub-title">Feedback</h6>
+          <h2 className="title">
+            What Our Clients Say
+          </h2>
+        </div>
+
         <Swiper
-          modules={[Navigation, Pagination]}
+          modules={[Pagination, Autoplay]}
           navigation
           pagination={{ clickable: true }}
           loop={true}
           spaceBetween={50}
-          slidesPerView={3}
-          centeredSlides={true}
+          slidesPerView={1}
+          // centeredSlides={true}
           autoplay
           className="testimonial-slider"
+          breakpoints={{
+            992: {
+              slidesPerView: 2,
+              spaceBetween: 40,
+            },
+            1200: {
+              slidesPerView: 3,
+              spaceBetween: 50,
+            },
+          }}
         >
           {testimonials.map((testimonial, index) => (
-            <SwiperSlide key={index}>
-              <div className="testimonial-card">
+            <SwiperSlide key={index} >
+              <div className="testimonial-card" data-aos={getAnimation(index)}>
                 <div className="testimonial-header">
                   <span className="platform">{testimonial.platform}</span>
                   <div className="stars">{'⭐'.repeat(testimonial.stars)}</div>
@@ -85,7 +96,7 @@ const TestimonialSlider = () => {
                 <p className="testimonial-text">{testimonial.text}</p>
                 <div className="testimonial-footer">
                   <div className="author-info position-relative">
-                    <Image src={testimonial.avatar} alt={testimonial.name} className="avatar"  fill/>
+                    <Image src={testimonial.avatar} alt={testimonial.name} className="avatar" fill />
                     <div>
                       <strong>{testimonial.name}</strong>
                       <p>{testimonial.position}</p>

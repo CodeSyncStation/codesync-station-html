@@ -17,7 +17,7 @@ const TeamSection = () => {
 
 
         <div className="row justify-content-center">
-          <div className="col-lg-4 col-md-6 mb-4">
+          <div className="col-lg-4 col-md-6 mb-4" data-aos="zoom-in-right">
             <div className="card">
               <Image
                 src={m1}
@@ -33,7 +33,7 @@ const TeamSection = () => {
             </div>
           </div>
 
-          <div className="col-lg-4 col-md-6 mb-4">
+          <div className="col-lg-4 col-md-6 mb-4" data-aos="zoom-in-up">
             <div className="card">
               <Image src={m2} className="card-img-top" alt="Courtney Henry" width={322}
                 height={390}/>
@@ -44,7 +44,7 @@ const TeamSection = () => {
             </div>
           </div>
 
-          <div className="col-lg-4 col-md-6 mb-4">
+          <div className="col-lg-4 col-md-6 mb-4" data-aos="zoom-in-left">
             <div className="card">
               <Image src={m3} className="card-img-top" alt="Kathryn Murphy" width={322}
                 height={390} />

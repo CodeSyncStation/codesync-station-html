@@ -200,7 +200,6 @@
 }
 
 // why choose us
-
 .why-choose-us {
   // background-color: $bg-light-gray;
   .section-title {
@@ -334,16 +333,18 @@
   }
   .testimonial-slider {
     padding-top: 3rem;
-    .swiper-slide-active {
+    height: 25rem;
+
+    .swiper-slide:nth-child(even) {
+      // background-color: black;
       .testimonial-card {
-        background-color: #333;
         transform: translateY(-2rem);
       }
     }
   }
 
   .testimonial-card {
-    background-color: #1a1a1a;
+    background-color: $bg-light-gray;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -369,7 +370,7 @@
 
     .testimonial-text {
       font-size: 1.1rem;
-      color: #ddd;
+      color: $para-color;
       margin-bottom: 1.5rem;
       font-style: italic;
     }
