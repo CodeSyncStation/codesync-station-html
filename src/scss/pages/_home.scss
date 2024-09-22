@@ -532,3 +532,86 @@
     }
   }
 }
+
+
+.faq-section {
+  padding: 50px 0;
+  background-color: $bg-light-gray;
+  .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    .sub-title {
+      @include subTitle;
+    }
+    .title {
+      color: $heading-color;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+  }
+  .faq-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .faq-column {
+      width: 46%;
+      margin-bottom: 30px;
+      position: relative;
+      .focus {
+        position: absolute;
+        top: 20px;
+        left: -45px;
+        height: 100%;
+        border-radius: 50%;
+        font-size: 12px;
+      }
+      .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        svg {
+          fill: $primary;
+          width: 30px;
+          height: 30px;
+        }
+        .divider {
+          width: 3px !important;
+          height: 90px;
+          background-color: $primary;
+          margin: auto;
+        }
+      }
+      h4 {
+        color: $secondary-color;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      p {
+        color: $secondary-color;
+        font-size: 1rem;
+        margin-top: 10px;
+      }
+
+      .faq-item {
+        // display: flex;
+        // align-items: flex-start;
+
+        margin-bottom: 30px;
+        padding-left: 20px;
+        position: relative;
+        // height: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .faq-row {
+      flex-direction: column;
+      .faq-column {
+        width: 100%;
+      }
+    }
+  }
+}

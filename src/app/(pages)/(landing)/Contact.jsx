@@ -17,7 +17,7 @@ export default function Contact() {
         </div>
 
         <div className="row g-4">
-          <div className="col-lg-4">
+          <div className="col-lg-4" data-aos="fade-right">
             <div className="left-info">
               <h4 className="title">CALL US</h4>
               <p className="des">
@@ -53,7 +53,7 @@ export default function Contact() {
               </ul>
             </div>
           </div>
-          <div className="col-lg-8">
+          <div className="col-lg-8" data-aos="fade-left">
             <div className="contact-form">
               <h3 className="form-title">GET IN TOUCH WITH US</h3>
               <div className="row g-4">

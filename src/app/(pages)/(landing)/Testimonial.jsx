@@ -88,7 +88,7 @@ const TestimonialSlider = () => {
         >
           {testimonials.map((testimonial, index) => (
             <SwiperSlide key={index} >
-              <div className="testimonial-card" data-aos={getAnimation(index)}>
+              <div className="testimonial-card" data-aos={getAnimation(index)} data-aos-delay={index + "00"}>
                 <div className="testimonial-header">
                   <span className="platform">{testimonial.platform}</span>
                   <div className="stars">{'⭐'.repeat(testimonial.stars)}</div>

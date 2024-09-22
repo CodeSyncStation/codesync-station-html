@@ -1,5 +1,6 @@
 import About from "./About";
 import Contact from "./Contact";
+import FAQ from "./FAQ";
 import Hero from "./Hero";
 import IndustriesCovered from "./IndustriesCovered";
 import Portfolio from "./Portfolio";
@@ -20,6 +21,7 @@ export default function Home() {
       <TeamSection />
       <TestimonialSlider />
       <Contact />
+      <FAQ />
     </>
   );
 }
