@@ -5,33 +5,36 @@ import Link from "next/link"
 import { useEffect } from "react"
 
 export default function Navbar() {
-  useEffect(() => {
+
+  const activeNavbar = () => {
     // Get all the sections and the nav links
     const sections = document.querySelectorAll("section");
     const navLinks = document.querySelectorAll(".nav-link");
+    let current = null;
 
-    window.addEventListener("scroll", () => {
-      let current = null;
-
-      // Loop through sections to get current section in view
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop - sectionHeight / 3) {
-          current = section.getAttribute("id");
-        }
-      });
-
-      // Remove 'active' class from all links and add to the one in view
-      navLinks.forEach(link => {
-        link.classList.remove("active_nav_link");
-        if (link.getAttribute("href").includes(current)) {
-          link.classList.add("active_nav_link");
-        } else {
-          link.classList.remove("active_nav_link");
-        }
-      });
+    // Loop through sections to get current section in view
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (pageYOffset >= sectionTop - sectionHeight / 3) {
+        current = section.getAttribute("id");
+      }
     });
+
+    // Remove 'active' class from all links and add to the one in view
+    navLinks.forEach(link => {
+      link.classList.remove("active_nav_link");
+      if (link.getAttribute("href").includes(current)) {
+        link.classList.add("active_nav_link");
+      } else {
+        link.classList.remove("active_nav_link");
+      }
+    });
+  }
+  useEffect(() => {
+
+    activeNavbar()
+    window.addEventListener("scroll", activeNavbar);
 
   }, [])
 
@@ -137,15 +140,12 @@ export default function Navbar() {
                 <div
                   className="d-xl-flex d-none justify-content-center align-items-center gap-3"
                 >
-                  <a
-                    href="tell:+447738940597"
+                  <Link
+                    href="/login"
                     className="animated-btn"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="bottom"
-                    data-bs-title="Click to call"
                   >
-                    Order Now +
-                  </a>
+                    Login
+                  </Link>
                 </div>
               </div>
             </div>
