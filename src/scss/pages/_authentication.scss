@@ -1,0 +1,216 @@
+@use "../global" as *;
+@use "../partials" as *;
+
+.authentication {
+  height: 100vh;
+
+  .left-part {
+    height: 100vh;
+    width: 100%;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .login-right {
+    position: relative;
+    height: 100vh;
+    .logo-wrapper {
+      padding-top: size(150);
+    }
+    .login-wrapper {
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    figure {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+      }
+    }
+
+    .topicon,
+    .bottomicon {
+      @include flex-center;
+      position: absolute;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .topicon {
+      top: 0;
+      right: size(0);
+
+      @include breakpoint(desktop1400) {
+        right: 0;
+      }
+
+      svg {
+        @include wh100;
+      }
+    }
+
+    .bottomicon {
+      bottom: 0;
+      left: 0;
+
+      @include breakpoint(desktop1400) {
+        left: 0;
+      }
+    }
+
+    .authform {
+      border: 1px solid #e6e8f0;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: size(14);
+      background-color: #fff;
+      margin-top: size(30);
+      @include breakpoint(tab992) {
+        padding: size(80);
+      }
+    }
+  }
+
+  .form-title {
+    color: #090d1d;
+    text-align: center;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-feature-settings: "cpsp" on, "cv06" on, "cv09" on, "cv04" on, "cv03" on,
+      "case" on, "ss03" on;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-family: "Rubik", sans-serif !important;
+  }
+  .form-des {
+    color: #8f95b2;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .forgot {
+    color: #8f95b2;
+    text-align: right;
+    font-variant-numeric: stacked-fractions;
+    font-feature-settings: "cv09" on, "cv04" on, "ss01" on, "cv03" on, "ss03" on,
+      "cv06" on;
+    font-family: Rubik;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: underline;
+    @include transitionsall;
+    @include hover {
+      font-weight: 500;
+      color: #090d1d;
+    }
+  }
+  .dont {
+    color: #090d1d;
+    text-align: center;
+    font-variant-numeric: stacked-fractions;
+    font-feature-settings: "cv09" on, "cv04" on, "ss01" on, "cv03" on, "ss03" on,
+      "cv06" on;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    a {
+      color: #3fe09d;
+      font-variant-numeric: stacked-fractions;
+      font-feature-settings: "cv09" on, "cv04" on, "ss01" on, "cv03" on,
+        "ss03" on, "cv06" on;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-decoration-line: underline;
+    }
+  }
+  .terms {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    input {
+      accent-color: #090d1d;
+      flex-shrink: 0;
+      margin-top: size(4);
+    }
+    label {
+      color: #8f95b2;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 22px;
+      padding-left: 5px;
+
+      a {
+        color: #090d1d;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 22px;
+        text-decoration-line: underline;
+      }
+    }
+  }
+  .backlogin {
+    color: #090D1D;
+    text-align: center;
+    font-variant-numeric: stacked-fractions;
+    font-feature-settings: 'cv09' on, 'cv04' on, 'ss01' on, 'cv03' on, 'ss03' on, 'cv06' on;
+    font-family: Rubik;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: center;
+  }
+}
+
+.input-box {
+  @include flex-column;
+  gap: size(12);
+  position: relative;
+  label {
+    color: #090d1d;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  input {
+    border: 1px solid #e6e8f0;
+    padding: size(10) size(16);
+    @include radius(4);
+    @include transitionsall;
+    &:focus {
+      border-color: #090d1d;
+    }
+    &::placeholder {
+      color: #8f95b2;
+
+      text-overflow: ellipsis;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+  }
+  .eye {
+    position: absolute;
+    right: 10px;
+    top: 53%;
+    cursor: pointer;
+  }
+}
