@@ -33,36 +33,6 @@
       }
     }
 
-    .topicon,
-    .bottomicon {
-      @include flex-center;
-      position: absolute;
-      overflow: hidden;
-      z-index: -1;
-    }
-
-    .topicon {
-      top: 0;
-      right: size(0);
-
-      @include breakpoint(desktop1400) {
-        right: 0;
-      }
-
-      svg {
-        @include wh100;
-      }
-    }
-
-    .bottomicon {
-      bottom: 0;
-      left: 0;
-
-      @include breakpoint(desktop1400) {
-        left: 0;
-      }
-    }
-
     .authform {
       border: 1px solid #e6e8f0;
       width: 80%;
@@ -71,8 +41,98 @@
       padding: size(14);
       background-color: #fff;
       margin-top: size(30);
+      border-radius: 10px;
       @include breakpoint(tab992) {
         padding: size(80);
+      }
+      .animated-btn {
+        border-radius: 10px !important;
+        height: 50px !important;
+      }
+    }
+    .divider {
+      margin: size(30) 0;
+      border: none;
+      width: 100%;
+      height: 1px;
+      background-color: #e6e8f0;
+      position: relative;
+      span {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -15px;
+        border: 2px solid white;
+        display: inline-block;
+        padding: 0 10px;
+        background-color: white;
+        color: $heading-color;
+      }
+    }
+    .third-party-btn-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: size(10);
+      .fb-btn {
+        background-color: transparent;
+        border: 2px solid $heading-color !important ;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 50px;
+        font-size: 16px;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+        text-align: center;
+        position: relative;
+        outline: 0;
+        border: 0;
+        &:hover{
+          background-color: rgb(59, 59, 145, 0.2);
+        }
+        span {
+          display: flex;
+          align-items: center;
+          background-color: transparent;
+          padding: 6px;
+          border-radius: 6px;
+          position: absolute;
+          height: calc(100% - 5px);
+          left: 2px;
+        }
+      }
+      .google-btn {
+        background-color: $primary;
+        color: white;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 50px;
+        font-size: 16px;
+        font-weight: 500;
+        transition: background-color 0.3s ease;
+        text-align: center;
+        position: relative;
+        outline: 0;
+        border: 0;
+        
+        &:hover{
+          background-color: #3b3b91;
+        }
+        span {
+          display: flex;
+          align-items: center;
+          background-color: white;
+          padding: 6px;
+          border-radius: 6px;
+          position: absolute;
+          height: calc(100% - 5px);
+          left: 2px;
+        }
       }
     }
   }
@@ -165,10 +225,11 @@
     }
   }
   .backlogin {
-    color: #090D1D;
+    color: #090d1d;
     text-align: center;
     font-variant-numeric: stacked-fractions;
-    font-feature-settings: 'cv09' on, 'cv04' on, 'ss01' on, 'cv03' on, 'ss03' on, 'cv06' on;
+    font-feature-settings: "cv09" on, "cv04" on, "ss01" on, "cv03" on, "ss03" on,
+      "cv06" on;
     font-family: Rubik;
     font-size: 16px;
     font-style: normal;
@@ -190,22 +251,34 @@
     line-height: normal;
   }
   input {
-    border: 1px solid #e6e8f0;
+    outline: 2px solid #e9e9e9;
     padding: size(10) size(16);
+    padding-left: 40px;
+    border-radius: 10px;
     @include radius(4);
     @include transitionsall;
+    &:hover {
+      outline-color: hsl(120, 15%, calc(91% - 10%));
+    }
     &:focus {
-      border-color: #090d1d;
+      outline-color: #a5a5a5;
+    }
+    &:focus-visible {
+      outline: 3px solid rgba(143, 149, 178, 0.5);
     }
     &::placeholder {
       color: #8f95b2;
-
       text-overflow: ellipsis;
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
     }
+  }
+  .user-icon {
+    position: absolute;
+    left: 10px;
+    top: 53%;
   }
   .eye {
     position: absolute;

@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { FaFacebook, FaUser } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 const Login = () => {
   const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -102,8 +104,11 @@ const Login = () => {
                     type="email"
                     placeholder="Enter email address "
                   />
+                  <span className="user-icon">
+                    <FaUser color="#737588" />
+                  </span>
                 </div>
-                <div className="input-box mt-3">
+                {/* <div className="input-box mt-3">
                   <label htmlFor="password" className="input-label">
                     Password
                   </label>
@@ -159,57 +164,42 @@ const Login = () => {
                       </svg>
                     )}
                   </span>
-                </div>
+                </div> */}
                 <div className="d-flex justify-content-end mt-3 ">
                   <Link href="/forgot-password" className="forgot">
                     Forgot password?
                   </Link>
                 </div>
                 <button
-                  className="btn-signin w-100 mt-3"
+                  className="animated-btn w-100 mt-3"
                   onClick={handleSubmit}
                 >
                   Sign In
                 </button>
-                <p className="dont mt-3">
-                  Don’t have an account? <Link href="/register">Register</Link>
-                </p>
+                <div className="divider">
+                  <span>Or</span>
+                </div>
+
+                {/* third party login */}
+                <div className="third-party-btn-wrapper">
+                  <button className="google-btn">
+                    <span>
+                      <FcGoogle size={20} />
+                    </span>
+                    Continue with Google
+                  </button>
+                  {/* fb login */}
+                  <button className="fb-btn">
+                    <span>
+                      <FaFacebook color="#1877F2"/>
+                    </span>
+                    Continue with Facebook
+                  </button>
+
+                </div>
               </form>
             </div>
-            <figure class="topicon">
-              <svg
-                width="129"
-                height="235"
-                viewBox="0 0 129 235"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M0 -305H400L451 235H51L0 -305Z" fill="#EAECF0" />
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M49.3168 28.8885C49.2576 27.8289 48.3811 27 47.3199 27H25.1133C23.9649 27 23.0524 27.9649 23.1165 29.1115L24.5561 54.8885C24.6202 56.0351 23.7076 57 22.5592 57H3.11335C1.96494 57 1.05242 57.9649 1.11646 59.1115L2.68029 87.1115C2.73947 88.1711 3.61594 89 4.67718 89H26.8837C28.0321 89 28.9446 88.0351 28.8806 86.8885L27.4409 61.1115C27.3769 59.9649 28.2894 59 29.4378 59H48.8837C50.0321 59 50.9446 58.0351 50.8806 56.8885L49.3168 28.8885Z"
-                  fill="#EA7462"
-                />
-              </svg>
-            </figure>
-            <figure class="bottomicon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="125"
-                height="242"
-                viewBox="0 0 125 242"
-                fill="none"
-              >
-                <path d="M-339 17H61L112 557H-288L-339 17Z" fill="#EAECF0" />
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M122.462 3.78076C122.346 1.65999 120.592 0 118.468 0H86.2249C83.9296 0 82.1051 1.9274 82.2309 4.21925L84.2379 40.7808C84.3637 43.0726 82.5392 45 80.2439 45H34.2267C31.9307 45 30.106 46.9285 30.2328 49.2209L33.9392 116.221C34.0565 118.341 35.8098 120 37.9331 120H90.7719C93.0679 120 94.8926 118.072 94.7658 115.779L91.3605 54.2209C91.2336 51.9285 93.0584 50 95.3543 50H120.774C123.069 50 124.893 48.0726 124.768 45.7808L122.462 3.78076Z"
-                  fill="#93DCDA"
-                />
-              </svg>
-            </figure>
+
           </div>
         </div>
       </div>
