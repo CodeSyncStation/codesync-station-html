@@ -21,6 +21,27 @@ header {
       object-fit: contain;
     }
   }
+
+  .profile-dropdown{
+    background-color: $primary;
+    border: 1px solid $primary;
+    border-radius: 50%;
+    width: 50px;
+    aspect-ratio: 1;
+    padding: 1px;
+    &:hover{
+      background-color: rgba($primary, 0.8);
+      border-color: rgba($primary, 0.8);
+    }
+    &::after{
+      margin-left: 10px;
+      border-color: transparent;
+    }
+  }
+  .logout-btn{
+    // background-color: rgba($danger, 0.2);
+    color: $danger;
+  }
   .zp-btn {
     @include breakpoint(phone500) {
       padding: 8px 10px !important;
