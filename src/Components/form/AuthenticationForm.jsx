@@ -1,4 +1,5 @@
 "use client";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -95,34 +96,36 @@ export default function AuthenticationForm() {
     }
 
     try {
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      // const response = await fetch("/api/auth/register", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     email,
+      //     password,
+      //   }),
+      // });
 
-      const data = await response.json();
+      // const data = await response.json();
 
-      if (!response.ok) {
-        // Handle specific errors based on status code
-        toast.dismiss(loadingToastId)
-        if (response.status === 400) {
-          return toast.error(data.message || "Invalid input");
-        } else if (response.status === 500) {
-          return toast.error("Server error, please try again later.");
-        }
-      }
+      // if (!response.ok) {
+      //   // Handle specific errors based on status code
+      //   toast.dismiss(loadingToastId)
+      //   if (response.status === 400) {
+      //     return toast.error(data.message || "Invalid input");
+      //   } else if (response.status === 500) {
+      //     return toast.error("Server error, please try again later.");
+      //   }
+      // }
 
-      localStorage.setItem("userData", JSON.stringify(data)); // Storing only the `data` part
-      toast.dismiss(loadingToastId);
-      toast.success("Registration Successful");
+      // localStorage.setItem("userData", JSON.stringify(data)); // Storing only the `data` part
+      // toast.dismiss(loadingToastId);
+      // toast.success("Registration Successful");
 
-      router.push("/");
+      // router.push("/");
+      const formData = new FormData(e.target)
+      await signIn("credentials",)
     } catch (error) {
       console.error("Registration error:", error);
       toast.dismiss(loadingToastId);
@@ -133,21 +136,13 @@ export default function AuthenticationForm() {
 
   const handleLogin = async e => {
     e.preventDefault();
+    if(!email || !password){
+      return toast.error("Please enter your email and password")
+    }
     const loadingToastId = toast.loading("Checking password...");
     try {
-      const response = await fetch(`/api/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-      const data = await response.json();
-      localStorage.setItem("userData", JSON.stringify(data))
-      router.push("/")
+
+      await signIn("credentials", { email, password , callbackUrl: "/"})
       toast.success("Login Success!")
       toast.dismiss(loadingToastId);
     } catch (error) {
@@ -176,6 +171,15 @@ export default function AuthenticationForm() {
   const togglePasswordVisibility = () => {
     setPasswordVisible((prevState) => !prevState);
   };
+
+  const continueWithGoogle = async (e) => {
+    e.preventDefault()
+    try {
+      await signIn("google", { callbackUrl: "/" })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   return (
     <>
@@ -292,7 +296,7 @@ export default function AuthenticationForm() {
 
         {/* third party login */}
         <div className="third-party-btn-wrapper">
-          <button className="google-btn">
+          <button className="google-btn" onClick={continueWithGoogle}>
             <span>
               <FcGoogle size={20} />
             </span>

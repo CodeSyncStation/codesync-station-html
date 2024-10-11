@@ -1,0 +1,46 @@
+@use "../../global" as *;
+@use "../../partials" as *;
+
+// THESE STYLES FOR MOBILE
+.dd-navbar {
+  @include flex-center-between;
+  padding: 6px 16px;
+  border-bottom: 1px solid #e6e8f0;
+  background: var(--Neutral-N200, #fff);
+  @include breakpoint(tab992) {
+    padding: 10px 62px;
+  }
+  .burger-menu {
+    background-color: #e6e8f0;
+    @include circle;
+    @include flex-center;
+    width: 40px;
+    height: 40px;
+    i {
+      font-size: 20px;
+    }
+    @include breakpoint(tab992) {
+      visibility: hidden;
+    }
+  }
+  .right-content {
+    @include flex-end;
+    align-items: end;
+    gap: 18px;
+    // padding: 6px 34px;
+    .notification-btn {
+      padding: 10px;
+      @include circle;
+      background: #f4f6fa;
+      border: 0;
+      span {
+        padding: 6px;
+        top: 0px;
+        right: -3px;
+      }
+      
+    }
+  }
+}
+
+// THESE STYLES FOR DESKTOP

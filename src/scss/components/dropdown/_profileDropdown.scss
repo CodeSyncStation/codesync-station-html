@@ -1,0 +1,20 @@
+
+@use "../../global" as *;
+@use "../../partials" as *;
+
+.profile-dropdown{
+  background-color: $primary;
+  border: 1px solid $primary;
+  border-radius: 50%;
+  width: 50px;
+  aspect-ratio: 1;
+  padding: 1px;
+  &:hover{
+    background-color: rgba($primary, 0.8);
+    border-color: rgba($primary, 0.8);
+  }
+  &::after{
+    margin-left: 10px;
+    border-color: transparent;
+  }
+}

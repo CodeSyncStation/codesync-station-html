@@ -1,0 +1,133 @@
+@use "../global/index" as *;
+@use "../partials/index" as *;
+.settings {
+    .page-title {
+        color: $primary;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 40px; 
+    }
+}
+.profile {
+    @include flex-column;
+    gap: size(20);
+    .single-line {
+        @include flex;
+        gap: size(50);
+
+        @include breakpoint(mobile576) {
+            gap: size(100);
+            
+        }
+        figure {
+            overflow: hidden;
+            margin-bottom: size(20);
+            @include square(70);
+            
+            @include circle;
+            @include breakpoint(mobile576) {
+                @include square(130);
+                
+            }
+            img {
+                @include wh100;
+
+            }
+        }
+        .left {
+            min-width: size(130);
+            color: #696F8C;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        .right {
+            color:  #090D1D;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+    }
+    .buttons {
+        position: absolute;
+        right: 20px;
+        top: 80px;
+        display: flex;
+        gap: 10px;
+
+    } 
+    .edit {
+        display: flex;
+        width: 106px;
+        height: 32px;
+        padding: 8px 16px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+        border-radius: 4px;
+        background:  #E6E8F0;
+        color:  #090D1D;
+        text-align: center;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        @include transitionsbackground;
+
+        @include hover {
+            background-color: darken(#E6E8F0,5%);
+        }
+        @include breakpoint(mobile576) {
+            width: 136px;
+            height: 52px;
+        }
+    }
+    .logout {
+        display: flex;
+        width: 106px;
+        height: 32px;
+        padding: 8px 16px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+        border-radius: 4px;
+        background:  $primary;
+        color:  $white;
+        text-align: center;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        @include transitionsbackground;
+
+        @include hover {
+            background-color: lighten($primary,5%);
+        }
+        @include breakpoint(mobile576) {
+            width: 136px;
+            height: 52px;
+        }
+    }
+}
+.setting-title {
+    color: #1E293B;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.setting-des {
+    color: #64748B;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 30px;
+}

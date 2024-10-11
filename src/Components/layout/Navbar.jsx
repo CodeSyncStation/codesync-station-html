@@ -1,5 +1,6 @@
 "use client"
 import logo from "@/assets/images/CodeSync_Station.png"
+import { getSession, signOut } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -7,18 +8,15 @@ import { useEffect, useState } from "react"
 import { Dropdown } from "react-bootstrap"
 import { AiOutlineLogout } from "react-icons/ai"
 import { MdOutlineSpaceDashboard } from "react-icons/md"
-const Avatar = ({ url }) =>
-  url ? <Image src={url} alt="profile Image" /> : <svg style={{ width: "100%", height: "100%" }} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
-    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-    <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
-  </svg>
+import Avatar from "../ui/Avater"
+
 
 
 export default function Navbar() {
 
   const router = useRouter()
   const [userData, setUserData] = useState(null)
- 
+
   useEffect(() => {
     getUserData()
     activeNavbar()
@@ -50,20 +48,19 @@ export default function Navbar() {
       }
     });
   }
-
-  function getUserData() {
-    const userDataJson = localStorage.getItem("userData")
-    const data = typeof userDataJson === "string" ? JSON.parse(userDataJson) : null;
-    if (data) {
-      setUserData(data)
-    }else{
+  console.log(userData)
+  async function getUserData() {
+    const session = await getSession()
+    const user = session?.user;
+    if (user) {
+      setUserData(user)
+    } else {
       setUserData(null)
     }
   }
 
-  const handleLogout = () => {
-    localStorage.removeItem("userData");
-    router.push("/")
+  const handleLogout = async () => {
+    await signOut({ redirect: "/" });
     getUserData()
   };
 
@@ -178,7 +175,7 @@ export default function Navbar() {
                           </Dropdown.Toggle>
 
                           <Dropdown.Menu>
-                            <Link className="dropdown-item" href={userData?.role === "user" ? "/dashboard": "/dashboard/admin"}>
+                            <Link className="dropdown-item" href={userData?.role === "user" ? "/dashboard" : "/dashboard/admin"}>
                               <span className="icon me-2">
                                 <MdOutlineSpaceDashboard />
                               </span>

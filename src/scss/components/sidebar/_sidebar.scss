@@ -1,0 +1,69 @@
+@use "../../global" as *;
+@use "../../partials" as *;
+
+// THESE STYLES FOR mobile device
+.sidebar {
+  background-color: #fff;
+  border-right: 1px solid #e6e8f0;
+  // border-radius: 8px;
+  height: 100svh !important;
+  .logo {
+    @include flex-center;
+    // padding: 14px 0px;
+    display: block;
+    height: 60px;
+    border-bottom: 1px solid var(--Neutral-N300, #e6e8f0);
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+  }
+  .nav-wrapper {
+    @include flex-center-between;
+    flex-direction: column;
+    height: calc(100% - 60px);
+    // flex: 1;
+    align-items: start;
+    @include breakpoint(desktop1200) {
+      align-items: center;
+      // height: 90%;
+    }
+    .nav {
+      margin-top: 12px;
+      .nav-link {
+        // background-color: $blue;
+        color: var(--Neutral-N900, #090d1d);
+        @include flex-start;
+        align-items: center;
+        gap: 8px;
+        margin: 4px 12px;
+        border-radius: 6px;
+        transition: 0.3s;
+        &:hover {
+          background-color: #47ffb2;
+        }
+      }
+      .logout-btn{
+        // background-color: rgba($danger, 0.2);
+        color: $danger;
+      }
+      .active {
+        background-color: #47ffb2;
+        position: relative;
+        .label {
+          font-weight: 500 !important;
+        }
+
+        &::after {
+          content: "";
+          display: inline-block;
+          position: absolute;
+          left: 0;
+          width: 4px;
+          height: 16px;
+          border-radius: 3px;
+          background: var(--Neutral-N900, #090d1d);
+        }
+      }
+    }
+  }
+}

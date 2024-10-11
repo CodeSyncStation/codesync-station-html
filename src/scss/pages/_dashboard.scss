@@ -1,0 +1,195 @@
+@use "../global" as *;
+@use "../partials" as *;
+
+
+
+.courses-wrapper {
+  .overview {
+    background-position: right bottom;
+    background-size: contain;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+
+    .bg {
+      position: absolute;
+      bottom: -30px;
+      left: 0;
+      width: 100%;
+      svg {
+        width: 100%;
+      }
+      @include breakpoint(desktop1600) {
+        display: none;
+      }
+    }
+    .overviewcards-wrapper {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      @include breakpoint(desktop1200) {
+        flex-direction: row;
+      }
+      .left {
+        display: flex;
+        gap: size(16);
+        flex-direction: column;
+        width: 100%;
+        @include breakpoint(tab992) {
+          flex-direction: row;
+        }
+      }
+      .right {
+        display: none;
+        @include breakpoint(desktop1600) {
+          display: block;
+        }
+      }
+    }
+  }
+  .bg-img {
+    @include breakpoint(desktop1600) {
+      background-image: url("/images/dashboard/dashboard-01.jpg");
+      background-size: contain;
+      background-position: right;
+      background-repeat: no-repeat;
+    }
+  }
+  section {
+    border-radius: 12px;
+    border: 1px solid var(--Neutral-N300, #e6e8f0);
+    background: var(--Neutral-N50, #fafbff);
+    padding: 8px 16px;
+    .section-top {
+      @include flex-between;
+      margin-bottom: 30px;
+      .section-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--Neutral-N900, #090d1d);
+      }
+    }
+    .section-body {
+      display: grid;
+      gap: 14px;
+      justify-content: center;
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+aside {
+  .aside-wrapper {
+    padding: 22px 23px 22px 24px;
+    background: var(--Neutral-N0, #fff);
+    border: 1px solid var(--Neutral-N300, #e6e8f0);
+    border-radius: 12px;
+    height: 100%;
+    .aside-title {
+      @include flex-between;
+      color: var(--Neutral-N900, #090d1d);
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 18px;
+      span.date {
+        color: var(--Neutral-N900, #090d1d);
+        font-size: 12px;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+@include breakpoint(mobile576) {
+  .courses-wrapper {
+    section {
+      .section-body {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  }
+}
+
+@include breakpoint(desktop1500) {
+  .courses-wrapper {
+    section {
+      .section-body {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+}
+
+// $shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+// Profile container styles
+.profile-container {
+  background-color: $white;
+  border-radius: 10px;
+  // box-shadow: $shadow;
+  padding: 20px;
+  
+  margin-top: 3rem;
+  @include breakpoint(tab992){
+    display: flex;
+  justify-content: space-evenly;
+  }
+
+  .profile-header {
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: auto;
+    }
+
+    .username {
+      font-size: 24px;
+      font-weight: bold;
+      color: $heading-color;
+    }
+
+    .email {
+      color: $para-color;
+      font-size: 14px;
+    }
+  }
+
+  .profile-details {
+    ul {
+      li {
+        margin-bottom: 12px;
+
+        strong {
+          color: $heading-color;
+        }
+      }
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+}
+
+// Responsiveness (optional if Bootstrap is already handling this)
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 15px;
+  }
+
+  .profile-header {
+    .avatar {
+      width: 120px;
+      height: 120px;
+    }
+  }
+
+  .profile-details {
+    h2 {
+      font-size: 18px;
+    }
+  }
+}
