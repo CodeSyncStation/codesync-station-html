@@ -96,36 +96,37 @@ export default function AuthenticationForm() {
     }
 
     try {
-      // const response = await fetch("/api/auth/register", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     email,
-      //     password,
-      //   }),
-      // });
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-      // const data = await response.json();
+      const data = await response.json();
 
-      // if (!response.ok) {
-      //   // Handle specific errors based on status code
-      //   toast.dismiss(loadingToastId)
-      //   if (response.status === 400) {
-      //     return toast.error(data.message || "Invalid input");
-      //   } else if (response.status === 500) {
-      //     return toast.error("Server error, please try again later.");
-      //   }
-      // }
+      if (!response.ok) {
+        // Handle specific errors based on status code
+       
+        if (response.status === 400) {
+          return toast.error(data.message || "Invalid input");
+        } else if (response.status === 500) {
+          return toast.error("Server error, please try again later.");
+        }
+      }
+      signIn("credentials", {
+        email,
+        password,
+        callbackUrl: "/",
+      })
+     
+      toast.success("Registration Successful");
+      toast.dismiss(loadingToastId)
 
-      // localStorage.setItem("userData", JSON.stringify(data)); // Storing only the `data` part
-      // toast.dismiss(loadingToastId);
-      // toast.success("Registration Successful");
-
-      // router.push("/");
-      const formData = new FormData(e.target)
-      await signIn("credentials",)
     } catch (error) {
       console.error("Registration error:", error);
       toast.dismiss(loadingToastId);

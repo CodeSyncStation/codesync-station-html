@@ -1,12 +1,10 @@
-// lib/dbConnect.js
+import mongoose from "mongoose";
 
-import mongoose from 'mongoose';
-
-const MONGODB_URI = process.env.MONGODB_URI; // Add your MongoDB URI in .env.local
+const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
   throw new Error(
-    'Please define the MONGODB_URI environment variable inside .env.local'
+    "Please define the MONGODB_URI environment variable inside .env.local"
   );
 }
 
@@ -28,7 +26,7 @@ async function dbConnect() {
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-      dbName: "codeSyncDB"
+      dbName: "codeSyncDB",
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
