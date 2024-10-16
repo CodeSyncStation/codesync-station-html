@@ -61,8 +61,8 @@ const AdminSidebar = () => {
 
             <li className="nav-item">
               <Link
-                href="/admin/orders"
-                className={`nav-link ${isActive("/admin/orders") ? "active" : ""
+                href="/admin/reviews"
+                className={`nav-link ${isActive("/admin/reviews") ? "active" : ""
                   }`}
               >
                 <span className="icon">
@@ -74,8 +74,8 @@ const AdminSidebar = () => {
 
             <li className="nav-item">
               <Link
-                href="/admin/students"
-                className={`nav-link ${isActive("/admin/students") ? "active" : ""
+                href="/admin/users"
+                className={`nav-link ${isActive("/admin/users") ? "active" : ""
                   }`}
               >
                 <span className="icon">
@@ -100,8 +100,8 @@ const AdminSidebar = () => {
 
             <li className="nav-item">
               <Link
-                href="/admin/my-courses"
-                className={`nav-link ${isActive("/admin/my-courses") ? "active" : ""
+                href="/admin/projects"
+                className={`nav-link ${isActive("/admin/projects") ? "active" : ""
                   }`}
               >
                 <span className="icon">

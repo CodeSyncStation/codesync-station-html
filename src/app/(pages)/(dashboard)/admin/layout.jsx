@@ -84,11 +84,7 @@ const layout = ({ children }) => {
                 <span className="profile-name"> name</span>
                 <span className="admin-label">admin</span>
               </div>
-              <div className="mb-4 mb-sm-0">
-                <Link href="/course/add">
-                  <button className="btn-dashboard">Create New Course</button>
-                </Link>
-              </div>
+             
             </div>
           </div>
 
