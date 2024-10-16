@@ -54,3 +54,73 @@
     }
   }
 }
+
+.btn-addmoderator {
+  @include flex;
+  align-items: center;
+  justify-content: center;
+  gap: size(10);
+  @include border(solid, 1, #e2e8f0);
+  padding: 10px 14px;
+  color: #1e293b;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  @include radius(100);
+  background-color: $white;
+  @include transitionsall;
+  @include hover {
+    background: darken(white, 5%);
+  }
+  &.fxwidth {
+    padding: 0;
+    width: size(160);
+    height: size(35);
+  }
+}
+
+.btn-remove {
+  border-radius: 6px;
+  color: $white;
+  text-align: center;
+  background: #ff4141;
+
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 12px;
+  padding: 12px 27px;
+  @include transitionsall;
+  @include hover {
+    background: darken(#ff4141, 5%);
+  }
+  &.fxwidth {
+    padding: 0;
+    width: size(100);
+    height: size(35);
+  }
+}
+
+.btn-cancel {
+  @include border(solid, 1, #e2e8f0);
+  padding: 10px 14px;
+  color: #667085;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border-radius: 6px;
+  background-color: $white;
+  @include transitionsall;
+  @include hover {
+    background: darken(white, 5%);
+  }
+  &.fxwidth {
+    padding: 0;
+    width: size(100);
+    height: size(35);
+  }
+}

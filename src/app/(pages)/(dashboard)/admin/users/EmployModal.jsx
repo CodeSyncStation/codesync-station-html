@@ -1,8 +1,8 @@
 "use client"
 
-import axiosInstance from "@/lib/axios";
-import { useGetSingleUserQuery, usePostUserMutation, useUpdateUserMutation } from "@/redux/api/user/userSlice";
-import { useEffect, useState } from "react";
+// import axiosInstance from "@/lib/axios";
+// import { useGetSingleUserQuery, usePostUserMutation, useUpdateUserMutation } from "@/redux/api/user/userSlice";
+import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import toast from "react-hot-toast";
 
@@ -26,27 +26,6 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri }) {
     }
   }
 
-  const [createUser] = usePostUserMutation()
-  const [updateUserInfo] = useUpdateUserMutation()
-  const { isLoading, data: user } = useGetSingleUserQuery({ iri }, {
-    skip: !isEdit
-  })
-
-  useEffect(() => {
-    if (!isLoading && user) {
-      setFullName(user?.fullName)
-      setEmail(user?.email)
-      setPassword(user?.password)
-      setProfileImage(user?.profileImage)
-      setPhoneNumber(user?.phone)
-      if (user?.roles) {
-        setPermission(user?.roles)
-      }
-      if (user?.profileImage) {
-        setEncodedUrl(baseUrl + user?.profileImage)
-      }
-    }
-  }, [user])
 
   const handleFile = (e) => {
     setProfileImage(e.target.files[0])
