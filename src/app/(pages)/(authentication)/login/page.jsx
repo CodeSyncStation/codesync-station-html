@@ -1,4 +1,5 @@
 import image from "@/assets/images/authentications/jose-vazquez-Q5RBHz9cu1A-unsplash.jpg";
+import logo from "@/assets/images/logo.png";
 import AuthenticationForm from "@/Components/form/AuthenticationForm";
 import Image from "next/image";
 
@@ -22,7 +23,7 @@ export default function LoginPage() {
           <div className="login-wrapper">
             <figure className="logo-wrapper">
               <Image
-                src="/images/logo/logo.png"
+                src={logo}
                 alt="logo"
                 height={52}
                 width={146}
