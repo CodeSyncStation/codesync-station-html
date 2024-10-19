@@ -2,7 +2,9 @@ import User from "@/model/UserModel";
 import bcrypt from "bcryptjs";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import Facebook from "next-auth/providers/facebook";
 import Google from "next-auth/providers/google";
+import dbConnect from "./lib/mongoose/dbConnect";
 
 async function saltAndHashPassword(password) {
   const salt = await bcrypt.genSalt(10);
@@ -18,10 +20,37 @@ async function getUserFromDb(email, pwHash) {
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
   providers: [
+    Facebook({
+      async profile(profile) {
+        await dbConnect();
+        // logic to query the database
+        let existingUser = await User.findOne({ email: profile?.email });
+        // console.log(existingUser, "existing");
+        if (!existingUser) {
+          // Create a new user if they don't exist
+          existingUser = await User.create({
+            name: profile.name,
+            email: profile.email,
+            image: profile.picture?.data?.url,
+          });
+        }
+        console.log(profile);
+
+        return {
+          id: existingUser?._id,
+          name: existingUser?.name,
+          image: existingUser?.image,
+          email: existingUser?.email,
+          role: existingUser.role ?? "user",
+        };
+      },
+    }),
     Google({
       async profile(profile) {
-        // check using email exist or not
-        let existingUser = await User.findOne({ email: profile.email });
+        await dbConnect();
+        // logic to query the database
+        let existingUser = await User.findOne({ email: profile?.email });
+        // console.log(existingUser, "existing");
         if (!existingUser) {
           // Create a new user if they don't exist
           existingUser = await User.create({
@@ -30,7 +59,14 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
             image: profile.picture,
           });
         }
-        return { role: existingUser?.role ?? "user", ...existingUser };
+
+        return {
+          id: existingUser?._id,
+          name: existingUser?.name,
+          image: existingUser?.image,
+          email: existingUser?.email,
+          role: existingUser.role ?? "user",
+        };
       },
     }),
     Credentials({
@@ -53,8 +89,14 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
           throw new Error("User not found.");
         }
         // return user object with their profile data
-
-        return { ...user, role: user?.role ?? "user" };
+        console.log(user);
+        return {
+          id: user?._id,
+          email: user?.email,
+          name: user?.name,
+          image: user?.image ?? undefined,
+          role: user?.role ?? "user",
+        };
       },
     }),
   ],

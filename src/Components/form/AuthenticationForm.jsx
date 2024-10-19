@@ -83,6 +83,12 @@ export default function AuthenticationForm() {
     e.preventDefault();
     const loadingToastId = toast.loading("Registering...");
 
+    if(password !== confirmPassword){
+      toast.error("Passwords do not match");
+      toast.dismiss(loadingToastId);
+      return;
+    }
+
     if (!validateEmail(email)) {
       toast.error("Invalid email address");
       toast.dismiss(loadingToastId);
@@ -177,6 +183,14 @@ export default function AuthenticationForm() {
     e.preventDefault()
     try {
       await signIn("google", { callbackUrl: "/" })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  const continueWithFacebook = async (e) => {
+    e.preventDefault()
+    try {
+      await signIn("facebook", { callbackUrl: "/" })
     } catch (error) {
       console.error(error)
     }
@@ -304,7 +318,7 @@ export default function AuthenticationForm() {
             Continue with Google
           </button>
           {/* fb login */}
-          <button className="fb-btn">
+          <button onClick={continueWithFacebook} className="fb-btn">
             <span>
               <FaFacebook color="#1877F2" />
             </span>
