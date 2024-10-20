@@ -1,6 +1,4 @@
 When developing
-TODO: need to fix check user api in authorization
-TODO: fix login system also in authorization
 
 When deploying
 TODO:  aos animation settings change once : true

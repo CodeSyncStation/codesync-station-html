@@ -1,0 +1,98 @@
+@use "../global" as *;
+@use "../partials" as *;
+
+// THESE STYLES FOR MOBILE DEVICE
+.main-container {
+  height: 100vh;
+  font-family: $primaryFont;
+  .sidebar {
+    width: 100%;
+    height: 100% !important;
+  }
+
+  main {
+    background-color: #fafbff;
+    @include breakpoint(tab992) {
+      height: 100svh;
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    .dd-navbar {
+      height: 60px;
+    }
+    .main-aside-wrapper {
+      margin: 16px 16px;
+      height: calc(100svh - 90px);
+      .allcontent-wrapper {
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+      aside {
+        height: 100%;
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        .aside-wrapper {
+          position: sticky;
+          top: 0px;
+        }
+      }
+    }
+  }
+}
+
+// THESE STYLES FOR TAB 992 DEVICE
+@include breakpoint(tab992) {
+  .main-container {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    position: relative;
+    .sidebar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      height: 100svh;
+      // @include flex-center;
+      .label {
+        display: none;
+      }
+    }
+    main {
+      nav {
+        position: sticky;
+        top: 0;
+      }
+      .main-aside-wrapper {
+        // margin: 23px 28px;
+        display: grid;
+        grid-template-columns: 1fr 328px;
+        gap: 18px;
+      }
+    }
+  }
+}
+
+// THESE STYLES FOR DESKTOP 1200 DEVICE
+@include breakpoint(desktop1400) {
+  .main-container {
+    grid-template-columns: 240px 1fr;
+    .sidebar {
+      .label {
+        display: block;
+      }
+    }
+  }
+}
+
+// THESE STYLES FOR DESKTOP 1600 DEVICE
+@include breakpoint(desktop1600) {
+  // aside some expand after 1600 px
+  .main-aside-wrapper {
+    grid-template-columns: 1fr 372px;
+  }
+}

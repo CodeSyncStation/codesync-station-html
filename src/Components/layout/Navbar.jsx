@@ -175,7 +175,7 @@ export default function Navbar() {
                           </Dropdown.Toggle>
 
                           <Dropdown.Menu>
-                            <Link className="dropdown-item" href={userData?.role === "user" ? "/dashboard" : "/dashboard/admin"}>
+                            <Link className="dropdown-item" href={userData?.role === "admin" ? "/admin" : "/user"}>
                               <span className="icon me-2">
                                 <MdOutlineSpaceDashboard />
                               </span>

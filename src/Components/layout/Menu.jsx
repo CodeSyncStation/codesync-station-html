@@ -80,12 +80,14 @@ const Menu = () => {
           </Link>
         </li>
 
-        <li onClick={async()=> await signOut()} className="nav-item">
+        <li onClick={async () => await signOut()} className="nav-item">
           <Link href="#" className="logout-btn nav-link">
             <span className="icon me-2">
               <AiOutlineLogout />
             </span>
-            Logout
+            <span className="label">
+              Logout
+            </span>
           </Link>
 
         </li>
