@@ -51,7 +51,7 @@ const Menu = () => {
           </Link>
         </li>
 
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <Link className={`nav-link ${isActive("/settings") ? "active" : ""}`} href="/settings" >
             <span className="icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -62,7 +62,7 @@ const Menu = () => {
             </span>
             <span className="label">Settings</span>
           </Link>
-        </li>
+        </li> */}
 
 
       </ul>

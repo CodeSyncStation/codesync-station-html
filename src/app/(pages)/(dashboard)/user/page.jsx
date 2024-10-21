@@ -1,11 +1,12 @@
 import Avatar from "@/Components/ui/Avater";
 
 import { auth } from "@/auth";
+import { FaPencil } from "react-icons/fa6";
 
 const page = async () => {
 
   const session = await auth();
-  console.log(session)
+  // console.log(session)
 
   return (
 
@@ -29,7 +30,11 @@ const page = async () => {
               {/* <li><strong>Location:</strong> New York, USA</li>
               <li><strong>Joined:</strong> January 1, 2023</li> */}
             </ul>
+            <div className="text-end mt-5">
+              <button className="btn btn-secondary"><span className="icon me-2"><FaPencil /></span>Edit Profile</button>
+            </div>
           </div>
+           
         </div>
       </div>
     </div>

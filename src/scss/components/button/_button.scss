@@ -124,3 +124,41 @@
     height: size(35);
   }
 }
+
+.btn-dashboard {
+  display: inline-flex;
+  padding: 11px 17px 12px 17px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background: $primary;
+  color: $white;
+  @include transitionsall;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border: 0;
+  outline: 0;
+  @include hover {
+    background-color: (darken($primary, 5%));
+  }
+}
+
+.add-employee {
+  color: #475569;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  padding: 10px;
+
+  /* Button/Base */
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 12px; /* 100% */
+}
