@@ -3,6 +3,7 @@ import heroBg from "@/assets/images/hero/8.png";
 import videoIcon from "@/assets/images/icons/video.svg";
 import WebLottie from "@/Components/lottie/WebLottie";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -28,7 +29,9 @@ export default function Hero() {
                 presence.
               </p>
               <div className="btn-wrapper">
-                <button className="animated-btn">Order Now</button>
+                <Link href="/order" className="animated-btn">
+                  Order Now
+                </Link>
                 <div className="our-services">
                   <Image src={videoIcon} alt="video icon" />
                   Our services

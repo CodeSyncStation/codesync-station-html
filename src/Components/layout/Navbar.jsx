@@ -78,8 +78,8 @@ export default function Navbar() {
           <div
             className="d-flex d-xl-none justify-content-center align-items-center gap-3"
           >
-            <button
-              href="#"
+            <Link
+              href="/order"
               className="animated-btn"
               data-bs-toggle="tooltip"
               data-bs-placement="bottom"
@@ -87,7 +87,7 @@ export default function Navbar() {
             >
               <i className="fa-solid fa-phone"></i>
               Order Now
-            </button>
+            </Link>
           </div>
 
           <button
