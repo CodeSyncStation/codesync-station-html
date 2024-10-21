@@ -1,6 +1,6 @@
 "use client"
 
-import Spinner from "@/Components/ui/Spinner";
+import Spinner from "@/Components/ui/MySpinner";
 import { useGetAllNotificationsQuery, useMarkAsReadMutation } from "@/redux/api/notifications/notificationsSlice";
 import getUser from "@/utils/getUser";
 import isEditor from "@/utils/isEditor";

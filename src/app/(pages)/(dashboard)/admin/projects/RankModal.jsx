@@ -1,4 +1,4 @@
-import Spinner from "@/Components/ui/Spinner";
+import Spinner from "@/Components/ui/MySpinner";
 import axiosInstance from "@/lib/axios";
 import { useGetAllRanksQuery } from "@/redux/api/ranks/rankSlice";
 import getId from "@/utils/getId";

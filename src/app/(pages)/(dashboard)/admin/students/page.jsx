@@ -1,6 +1,6 @@
 "use client"
+import Spinner from "@/Components/ui/MySpinner";
 import Pagination from "@/Components/ui/Pagination";
-import Spinner from "@/Components/ui/Spinner";
 import axiosInstance from "@/lib/axios";
 import { usePostChatBoxMutation } from "@/redux/api/chat/chatSlice";
 import { useGetAllUsersQuery, useGetInactiveStudentsQuery } from "@/redux/api/user/userSlice";

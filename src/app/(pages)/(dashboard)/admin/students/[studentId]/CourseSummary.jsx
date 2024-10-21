@@ -1,6 +1,6 @@
 "use client"
 import Avatar from "@/Components/ui/Avatar";
-import Spinner from "@/Components/ui/Spinner";
+import Spinner from "@/Components/ui/MySpinner";
 import { useGetMyCoursesQuery } from "@/redux/api/courses/coursesSlice";
 import { usePostFlagUserMutation } from "@/redux/api/flaggedUser/flaggedSlice";
 import { useGetMoreQnaQuery } from "@/redux/api/qna/qnaSlice";
