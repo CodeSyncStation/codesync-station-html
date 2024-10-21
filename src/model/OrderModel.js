@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const OrderRequestSchema = new mongoose.Schema({
+const OrderSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -55,8 +55,7 @@ const OrderRequestSchema = new mongoose.Schema({
 });
 
 // Check if model already exists to avoid overwriting it during hot reloads in dev mode
-const OrderRequest =
-  mongoose.models.OrderRequest ||
-  mongoose.model("OrderRequest", OrderRequestSchema);
+const OrderModel =
+  mongoose.models.Order || mongoose.model("Order", OrderSchema);
 
-export default OrderRequest;
+export default OrderModel;

@@ -1,4 +1,5 @@
 import dbConnect from "@/lib/mongoose/dbConnect";
+import OrderModel from "@/model/OrderModel";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
@@ -47,7 +48,7 @@ export async function POST(request) {
   try {
     // Save user
     await dbConnect();
-    const insertedData = await OrderRequestModel.create({
+    const insertedData = await OrderModel.create({
       name,
       email,
       phone,
