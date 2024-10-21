@@ -1,5 +1,6 @@
 "use client"
 
+import Avatar from "@/Components/ui/Avater";
 import { useState } from "react";
 import EmployModal from "./EmployModal";
 const baseUrl = process.env.NEXT_PUBLIC_APIHOST
@@ -53,10 +54,7 @@ const UsersPage = ({ users }) => {
                     <td>
                       <div className="course-image-container">
                         <figure className="author-img">
-                          {/* <img
-                src={baseUrl + profileImage}
-                alt=""
-              /> */}
+                          <Avatar url={user?.image}/>
                         </figure>
                         <div>
                           <h3 className="course-name w-auto">
@@ -67,7 +65,7 @@ const UsersPage = ({ users }) => {
                       </div>
                     </td>
                     <td>
-                    <span className="muted">{user?.email ?? "----"}</span>
+                      <span className="muted">{user?.email ?? "----"}</span>
                     </td>
                     <td>
                       <span className="muted">{user?.role}</span>
