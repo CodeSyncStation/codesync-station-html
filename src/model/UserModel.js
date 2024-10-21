@@ -3,9 +3,10 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
+  name: { type: String },
   password: { type: String },
   image: { type: String },
-  role: { type: String, default: "user" },
+  role: { type: String, default: "user", enum: ["user", "admin"] },
 });
 
 userSchema.pre("save", async function hashPassword(next) {
