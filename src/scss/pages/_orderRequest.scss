@@ -1,0 +1,39 @@
+@use "../global" as *;
+@use "../partials" as *;
+
+.form-container {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  .title {
+    font-size: 40px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: $heading-color;
+    text-align: center;
+    @include breakpoint(tab992) {
+      font-size: 50px;
+    }
+  }
+  .description {
+    color: $para-color;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .form-group {
+    margin-bottom: 15px;
+    label[for] {
+      color: #1e293b;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      margin-bottom: 8px;
+    }
+  }
+}
