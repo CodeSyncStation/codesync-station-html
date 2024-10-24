@@ -1,15 +1,22 @@
-"use client"
+import { getOrders } from '@/lib/fetch/orders';
 import OrderTable from './OrderTable';
 
-const page = () => {
+export const metadata = {
+  title: "Order History || CodeSync station",
+  description: "Organize your orders here.",
+  keywords: ["users", "management", "dashboard"],
+}
 
+const page = async () => {
+
+  const orders = await getOrders()
 
   return (
-    <div>
-      <div className="adminchat-wrapper">
-        <OrderTable />
-      </div>
+
+    <div className="adminchat-wrapper">
+      <OrderTable  orders={orders}/>
     </div>
+
   );
 }
 

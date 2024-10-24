@@ -1,52 +1,47 @@
 "use client";
 import Pagination from "@/Components/ui/Pagination";
+import { putOrder } from "@/lib/fetch/orders";
+import statusColors from "@/utilities/func/statusColors";
 import { useState } from "react";
-
-const orders = [
-  {
-    orderId: "123456",
-    user: "John Doe",
-    email: "johndoe@example.com",
-    phone: "+123456789",
-    amount: "$100",
-    status: "Completed"
-  },
-  {
-    orderId: "123457",
-    user: "Jane Smith",
-    email: "janesmith@example.com",
-    phone: "+987654321",
-    amount: "$150",
-    status: "Pending"
-  },
-  {
-    orderId: "123458",
-    user: "Alice Brown",
-    email: "alicebrown@example.com",
-    phone: "+456789123",
-    amount: "$200",
-    status: "Shipped"
-  }
-];
+import { Dropdown } from "react-bootstrap";
+import toast, { Toaster } from "react-hot-toast";
 
 
 
-const OrderTable = () => {
+const OrderTable = ({ orders }) => {
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
   const [totalItemCount, setTotalItems] = useState(0)
   const [page, setPage] = useState(1)
 
- const handleStatusChange =() => {
+  const handleStatusChange = async (status, orderId) => {
+    console.log(status, orderId);
+    // Handle status change logic here
+    setLoading(true);
+    const toastId = toast.loading("Updating status...");
 
- }
+    try {
+      const data = await putOrder(orderId, status);
+      if (data?._id) {
+        toast.success("Status updated successfully!");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("An unexpected error occurred. Please try again later.");
+    }
+    finally{
+      toast.dismiss(toastId);
+      setLoading(false);  // Set loading to false after the API call completes
+    }
+  }
 
   const handleSortChange = (e) => {
     setSortOrder(e.target.value);
   };
   return (
     <div className="wrapper w-100">
+      <Toaster />
       <section className="best-selling-courses">
         <div className="table-wrapper">
           <div className="section-top">
@@ -59,7 +54,7 @@ const OrderTable = () => {
                 </p>
               </div>
               <div>
-                
+
               </div>
             </div>
 
@@ -88,141 +83,165 @@ const OrderTable = () => {
               </div>
             </form>
           </div>
-          {loading ? (
-            <div className="text-center">
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          ) :
-            <table className="admin-table  w-100 d-table">
-              {/* <!-- head --> */}
-              <thead className="w-100">
-                <tr>
-                  <th>Order ID</th>
-                  <th>User</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Budget</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody className="w-100">
-                {/* <!-- row 1 --> */}
-                {
-                  orders?.length ? orders.map((order, index) => (
-                    <tr key={index}>
-                      <td>
-                        <span className="muted">{order?.orderId}</span>
-                      </td>
-                      <td>
-                        <span className="muted">{order?.user?.name}</span>
-                      </td>
-                      <td>
-                        <span className="muted">{order?.user?.email}</span>
-                      </td>
-                      {/* <td>
-                          <span className="muted">{order?.customer?.phone}</span>
-                        </td> */}
+          <table className="admin-table  w-100 d-table overflow-auto">
+            {/* <!-- head --> */}
+            <thead className="w-100">
+              <tr>
+                <th>Order ID</th>
+                <th>User</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Budget</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody className="w-100">
+              {/* <!-- row 1 --> */}
+              {
+                orders?.length ? orders.map((order, index) => (
+                  <tr key={index}>
+                    <td>
+                      <span className="muted">{order?._id}</span>
+                    </td>
+                    <td>
+                      <span className="muted">{order?.name}</span>
+                    </td>
+                    <td>
+                      <span className="muted">{order?.email}</span>
+                    </td>
+                    <td>
+                      <span className="muted">{order?.phone}</span>
+                    </td>
 
-                      <td>
-                        <span className="muted">{order?.price}</span>
-                      </td>
-                      <td>
-                        <span className="muted">
-                        
-                        </span>
-                      </td>
-                      <td>
-                        <div className="btn-group">
-                          <button
-                            className={`dropdown-toggle pill ${order.status === "Completed"
-                              ? "bg-success"
-                              : order.status === "pending"
-                                ? "bg-warning"
-                                : "bg-danger"
-                              }`}
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            {order?.status}
-                          </button>
-                          <ul className="dropdown-menu">
-                            <li>
-                              <button
-                                className="dropdown-item text-warning status-failed"
-                                onClick={() =>
-                                  handleStatusChange("pending", order.id)
-                                }
-                                disabled={
-                                  loading || order.status === "pending"
-                                }
-                              >
-                                Pending
-                              </button>
-                            </li>
-                            <li>
-                              <button
-                                className="dropdown-item text-success"
-                                onClick={() =>
-                                  handleStatusChange("paid", order.id)
-                                }
-                                disabled={loading || order.status === "paid"}
-                              >
-                                Paid
-                              </button>
-                            </li>
-                            <li>
-                              <button
-                                className="dropdown-item text-success"
-                                onClick={() =>
-                                  handleStatusChange("enrolled", order.id)
-                                }
-                                disabled={
-                                  loading || order.status === "enrolled"
-                                }
-                              >
-                                Enrolled
-                              </button>
-                            </li>
-                            <li>
-                              <button
-                                className="dropdown-item text-danger"
-                                onClick={() =>
-                                  handleStatusChange("canceled", order.id)
-                                }
-                                disabled={
-                                  loading || order.status === "canceled"
-                                }
-                              >
-                                Canceled
-                              </button>
-                            </li>
-                          </ul>
-                        </div>
-                      </td>
-                    </tr>
-                  )) : <tr>
-                    <td colSpan="5" className="text-center fw-bold">No orders found.</td>
+                    <td>
+                      <span className="muted">{order?.budget}</span>
+                    </td>
+
+                    <td>
+                      {/* <div className="btn-group dropdown">
+                        <button
+                          className={`dropdown-toggle pill ${order.status === "Completed"
+                            ? "bg-success"
+                            : order.status === "pending"
+                              ? "bg-warning"
+                              : "bg-danger"
+                            }`}
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          {order?.status}
+                        </button>
+                        <ul className="dropdown-menu">
+                          <li>
+                            <button
+                              className="dropdown-item text-warning status-failed"
+                              onClick={() =>
+                                handleStatusChange("pending", order.id)
+                              }
+                              disabled={
+                                loading || order.status === "pending"
+                              }
+                            >
+                              Pending
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="dropdown-item text-warning status-failed"
+                              onClick={() =>
+                                handleStatusChange("pending", order.id)
+                              }
+                              disabled={
+                                loading || order.status === "accepted"
+                              }
+                            >
+                              Accepted
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="dropdown-item text-success"
+                              onClick={() =>
+                                handleStatusChange("paid", order.id)
+                              }
+                              disabled={loading || order.status === "paid"}
+                            >
+                              Paid
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="dropdown-item text-success"
+                              onClick={() =>
+                                handleStatusChange("enrolled", order.id)
+                              }
+                              disabled={
+                                loading || order.status === "enrolled"
+                              }
+                            >
+                              Enrolled
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="dropdown-item text-danger"
+                              onClick={() =>
+                                handleStatusChange("canceled", order.id)
+                              }
+                              disabled={
+                                loading || order.status === "canceled"
+                              }
+                            >
+                              Canceled
+                            </button>
+                          </li>
+                        </ul>
+                      </div> */}
+                      <Dropdown>
+                        <Dropdown.Toggle
+                          as="button"
+                          className="pill gap-0"
+                          style={{ textTransform: "capitalize", backgroundColor: statusColors[order?.status] }}
+                        >
+                          {
+                            order?.status?.split("_").join(" ")
+                          }
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+
+                          {Object.keys(statusColors).map((status, index) => (
+                            <Dropdown.Item
+                              key={index}
+                              onClick={() => handleStatusChange(status, order._id)}
+                              style={{ textTransform: "capitalize", color: statusColors[status], fontWeight: "normal", margin: "4px 0px" }}
+                            >
+                              {status.replace(/_/g, ' ')}
+                            </Dropdown.Item>
+                          ))}
+                        </Dropdown.Menu>
+                      </Dropdown>
+
+                    </td>
                   </tr>
-                }
-
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="5">
-                    <Pagination
-                      page={page}
-                      setPage={setPage}
-                      totalItemCount={totalItemCount}
-                    />
-                  </td>
+                )) : <tr>
+                  <td colSpan="5" className="text-center fw-bold">No orders found.</td>
                 </tr>
-              </tfoot>
-            </table>
+              }
 
-
-          }
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5">
+                  <Pagination
+                    page={page}
+                    setPage={setPage}
+                    totalItemCount={totalItemCount}
+                  />
+                </td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
       </section>
     </div>

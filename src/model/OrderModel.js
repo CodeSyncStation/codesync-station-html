@@ -46,7 +46,21 @@ const OrderSchema = new mongoose.Schema({
   status: {
     type: String,
     default: "pending",
-    enum: ["pending", "in-progress", "completed", "cancelled"],
+    enum: [
+      "pending", // Replaced 'placed'
+      "accepted",
+      "payment_confirmed",
+      "analyzing",
+      "req_confirmed",
+      "designing",
+      "implementing",
+      "testing",
+      "test_done",
+      "review_done",
+      "final_payment_pending",
+      "delivered",
+      "cancelled",
+    ],
   },
   createdAt: {
     type: Date,
@@ -54,7 +68,6 @@ const OrderSchema = new mongoose.Schema({
   },
 });
 
-// Check if model already exists to avoid overwriting it during hot reloads in dev mode
 const OrderModel =
   mongoose.models.Order || mongoose.model("Order", OrderSchema);
 

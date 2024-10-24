@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/mongoose/dbConnect";
 import OrderModel from "@/model/OrderModel";
+import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
@@ -7,7 +8,9 @@ export async function GET(request) {
   const status = nextUrl.searchParams.get("status");
 
   try {
-    return NextResponse.json({ status: 200, message: "ok" });
+    await dbConnect();
+    const orders = await OrderModel.find({});
+    return NextResponse.json(orders, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { status: 500, message: "Internal Server Error" },
@@ -59,6 +62,35 @@ export async function POST(request) {
       communication,
     });
     return NextResponse.json(insertedData, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { status: 500, message: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(request) {
+  const { id, status } = await request.json();
+
+  // validate input
+  if (!id || !status) {
+    return NextResponse.json(
+      { status: 400, message: "All fields are required" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    await dbConnect();
+    const updatedOrder = await OrderModel.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+    revalidateTag("orders");
+    return NextResponse.json(updatedOrder, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(
