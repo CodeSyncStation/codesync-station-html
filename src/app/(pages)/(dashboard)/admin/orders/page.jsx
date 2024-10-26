@@ -1,4 +1,3 @@
-import { getOrders } from '@/lib/fetch/orders';
 import OrderTable from './OrderTable';
 
 export const metadata = {
@@ -7,14 +6,11 @@ export const metadata = {
   keywords: ["users", "management", "dashboard"],
 }
 
-const page = async () => {
-
-  const orders = await getOrders()
-
+const page = () => {
   return (
 
     <div className="adminchat-wrapper">
-      <OrderTable  orders={orders}/>
+      <OrderTable />
     </div>
 
   );

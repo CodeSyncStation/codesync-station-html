@@ -4,12 +4,20 @@ import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
-  const { query, method, nextUrl } = request;
+  const { nextUrl } = request;
   const status = nextUrl.searchParams.get("status");
+  const dateRange = nextUrl.searchParams.get("dateRange");
+  const search = nextUrl.searchParams.get("search");
+  const page = nextUrl.searchParams.get("page");
+
+  let query = {};
+  if (status) {
+    query.status = status;
+  }
 
   try {
     await dbConnect();
-    const orders = await OrderModel.find({});
+    const orders = await OrderModel.find(query);
     return NextResponse.json(orders, { status: 200 });
   } catch (error) {
     return NextResponse.json(

@@ -1,44 +1,115 @@
 "use client";
 import Pagination from "@/Components/ui/Pagination";
-import { putOrder } from "@/lib/fetch/orders";
+import { getOrders, putOrder } from "@/lib/fetch/orders";
 import statusColors from "@/utilities/func/statusColors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 
 
 
-const OrderTable = ({ orders }) => {
-  const [loading, setLoading] = useState(false);
+const OrderTable = () => {
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
   const [totalItemCount, setTotalItems] = useState(0)
   const [page, setPage] = useState(1)
+  const [orders, setOrders] = useState([])
+
+  useEffect(() => {
+    (async function () {
+      setLoading(true)
+      const orders = await getOrders()
+      setOrders(orders)
+      setLoading(false)
+    })()
+  }, [])
 
   const handleStatusChange = async (status, orderId) => {
     console.log(status, orderId);
     // Handle status change logic here
-    setLoading(true);
     const toastId = toast.loading("Updating status...");
 
     try {
       const data = await putOrder(orderId, status);
-      if (data?._id) {
-        toast.success("Status updated successfully!");
-      }
+      const orders = await getOrders()
+      setOrders(orders)
+      toast.success("Status updated successfully!");
     } catch (error) {
       console.log(error);
       toast.error("An unexpected error occurred. Please try again later.");
     }
-    finally{
+    finally {
       toast.dismiss(toastId);
-      setLoading(false);  // Set loading to false after the API call completes
     }
   }
 
   const handleSortChange = (e) => {
     setSortOrder(e.target.value);
   };
+
+  let content = null;
+  if (loading && orders.length === 0) {
+    content = <tr>
+    <td colSpan="6" className="text-center fw-bold">Loading...</td>
+  </tr>
+  }
+  if (!loading && orders.length === 0) {
+    content = <tr>
+      <td colSpan="6" className="text-center fw-bold">No orders found.</td>
+    </tr>
+  }
+  if (!loading && orders.length > 0) {
+    content = orders.map((order, index) => (
+      <tr key={index}>
+        <td>
+          <span className="muted">{order?._id}</span>
+        </td>
+        <td>
+          <span className="muted">{order?.name}</span>
+        </td>
+        <td>
+          <span className="muted">{order?.email}</span>
+        </td>
+        <td>
+          <span className="muted">{order?.phone}</span>
+        </td>
+
+        <td>
+          <span className="muted">{order?.budget}</span>
+        </td>
+
+        <td>
+
+          <Dropdown>
+            <Dropdown.Toggle
+              as="button"
+              className="pill gap-0"
+              style={{ textTransform: "capitalize", backgroundColor: statusColors[order?.status] }}
+            >
+              {
+                order?.status?.split("_").join(" ")
+              }
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+
+              {Object.keys(statusColors).map((status, index) => (
+                <Dropdown.Item
+                  key={index}
+                  onClick={() => handleStatusChange(status, order._id)}
+                  style={{ textTransform: "capitalize", color: statusColors[status], fontWeight: "normal", margin: "4px 0px" }}
+                >
+                  {status.replace(/_/g, ' ')}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+
+        </td>
+      </tr>
+    ))
+  }
   return (
     <div className="wrapper w-100">
       <Toaster />
@@ -59,7 +130,7 @@ const OrderTable = ({ orders }) => {
             </div>
 
             {/* <!-- search  --> */}
-            <form className="flex-between gap-2 pb-3">
+            <form className="d-flex justify-content-between gap-2 pb-3">
               <div className="input-box mt-3 flex-1">
                 <input
                   id="email"
@@ -68,6 +139,25 @@ const OrderTable = ({ orders }) => {
                   className="form-control shadow-none w-100 shadow-none"
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
+              </div>
+              <div className="d-flex justify-content-between gap-2">
+              <div className="input-box mt-3">
+                <select
+                  name="date"
+                  id=""
+                  className="form-select shadow-none fz-14"
+                  style={{ height: "2.9rem" }}
+                  onChange={handleSortChange}
+                >
+                  <option value="all">All</option>
+                  {
+                    Object.keys(statusColors).map((status, index) => <option 
+                    key={index} 
+                    value={status}
+                    style={{color: statusColors[status], textTransform: "capitalize"}}>{status.replace(/_/g, ' ')}
+                    </option>)
+                  }
+                </select>
               </div>
               <div className="input-box mt-3">
                 <select
@@ -80,6 +170,7 @@ const OrderTable = ({ orders }) => {
                   <option value="asc">Amount low to high</option>
                   <option value="desc">Amount high to low</option>
                 </select>
+              </div>
               </div>
             </form>
           </div>
@@ -98,135 +189,7 @@ const OrderTable = ({ orders }) => {
             <tbody className="w-100">
               {/* <!-- row 1 --> */}
               {
-                orders?.length ? orders.map((order, index) => (
-                  <tr key={index}>
-                    <td>
-                      <span className="muted">{order?._id}</span>
-                    </td>
-                    <td>
-                      <span className="muted">{order?.name}</span>
-                    </td>
-                    <td>
-                      <span className="muted">{order?.email}</span>
-                    </td>
-                    <td>
-                      <span className="muted">{order?.phone}</span>
-                    </td>
-
-                    <td>
-                      <span className="muted">{order?.budget}</span>
-                    </td>
-
-                    <td>
-                      {/* <div className="btn-group dropdown">
-                        <button
-                          className={`dropdown-toggle pill ${order.status === "Completed"
-                            ? "bg-success"
-                            : order.status === "pending"
-                              ? "bg-warning"
-                              : "bg-danger"
-                            }`}
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          {order?.status}
-                        </button>
-                        <ul className="dropdown-menu">
-                          <li>
-                            <button
-                              className="dropdown-item text-warning status-failed"
-                              onClick={() =>
-                                handleStatusChange("pending", order.id)
-                              }
-                              disabled={
-                                loading || order.status === "pending"
-                              }
-                            >
-                              Pending
-                            </button>
-                          </li>
-                          <li>
-                            <button
-                              className="dropdown-item text-warning status-failed"
-                              onClick={() =>
-                                handleStatusChange("pending", order.id)
-                              }
-                              disabled={
-                                loading || order.status === "accepted"
-                              }
-                            >
-                              Accepted
-                            </button>
-                          </li>
-                          <li>
-                            <button
-                              className="dropdown-item text-success"
-                              onClick={() =>
-                                handleStatusChange("paid", order.id)
-                              }
-                              disabled={loading || order.status === "paid"}
-                            >
-                              Paid
-                            </button>
-                          </li>
-                          <li>
-                            <button
-                              className="dropdown-item text-success"
-                              onClick={() =>
-                                handleStatusChange("enrolled", order.id)
-                              }
-                              disabled={
-                                loading || order.status === "enrolled"
-                              }
-                            >
-                              Enrolled
-                            </button>
-                          </li>
-                          <li>
-                            <button
-                              className="dropdown-item text-danger"
-                              onClick={() =>
-                                handleStatusChange("canceled", order.id)
-                              }
-                              disabled={
-                                loading || order.status === "canceled"
-                              }
-                            >
-                              Canceled
-                            </button>
-                          </li>
-                        </ul>
-                      </div> */}
-                      <Dropdown>
-                        <Dropdown.Toggle
-                          as="button"
-                          className="pill gap-0"
-                          style={{ textTransform: "capitalize", backgroundColor: statusColors[order?.status] }}
-                        >
-                          {
-                            order?.status?.split("_").join(" ")
-                          }
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-
-                          {Object.keys(statusColors).map((status, index) => (
-                            <Dropdown.Item
-                              key={index}
-                              onClick={() => handleStatusChange(status, order._id)}
-                              style={{ textTransform: "capitalize", color: statusColors[status], fontWeight: "normal", margin: "4px 0px" }}
-                            >
-                              {status.replace(/_/g, ' ')}
-                            </Dropdown.Item>
-                          ))}
-                        </Dropdown.Menu>
-                      </Dropdown>
-
-                    </td>
-                  </tr>
-                )) : <tr>
-                  <td colSpan="5" className="text-center fw-bold">No orders found.</td>
-                </tr>
+                content
               }
 
             </tbody>
