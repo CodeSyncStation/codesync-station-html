@@ -6,13 +6,20 @@ import { NextResponse } from "next/server";
 export async function GET(request) {
   const { nextUrl } = request;
   const status = nextUrl.searchParams.get("status");
-  const dateRange = nextUrl.searchParams.get("dateRange");
+  const date = nextUrl.searchParams.get("date");
   const search = nextUrl.searchParams.get("search");
   const page = nextUrl.searchParams.get("page");
 
   let query = {};
   if (status) {
     query.status = status;
+  }
+  if (search) {
+    query._id = ObjectId;
+  }
+
+  if (date) {
+    query.createdAt = { $gte: date[0], $lte: date[1] };
   }
 
   try {
