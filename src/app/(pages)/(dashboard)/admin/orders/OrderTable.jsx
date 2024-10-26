@@ -15,15 +15,19 @@ const OrderTable = () => {
   const [totalItemCount, setTotalItems] = useState(0)
   const [page, setPage] = useState(1)
   const [orders, setOrders] = useState([])
+  const [query, setQuery] = useState({
+    status: "",
+    page: 1,
+  })
 
   useEffect(() => {
     (async function () {
       setLoading(true)
-      const orders = await getOrders()
+      const orders = await getOrders(query)
       setOrders(orders)
       setLoading(false)
     })()
-  }, [])
+  }, [query])
 
   const handleStatusChange = async (status, orderId) => {
     console.log(status, orderId);
@@ -42,6 +46,9 @@ const OrderTable = () => {
     finally {
       toast.dismiss(toastId);
     }
+  }
+  const handleFilter= (key, value)=> {
+    setQuery((prev) => ({ ...prev, [key]: value }))
   }
 
   const handleSortChange = (e) => {
@@ -147,9 +154,9 @@ const OrderTable = () => {
                   id=""
                   className="form-select shadow-none fz-14"
                   style={{ height: "2.9rem" }}
-                  onChange={handleSortChange}
+                  onChange={(e)=> setQuery((prev) => ({ ...prev, status: e.target.value }))}
                 >
-                  <option value="all">All</option>
+                  <option value="">All</option>
                   {
                     Object.keys(statusColors).map((status, index) => <option 
                     key={index} 

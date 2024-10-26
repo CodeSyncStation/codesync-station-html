@@ -16,9 +16,24 @@ export async function postOrders(data) {
   }
 }
 
-export async function getOrders() {
+export async function getOrders({ status, page, search, dateRange }) {
   try {
-    const response = await fetch(`${API_URL}/api/orders`, {
+    let queryParams = `${API_URL}/api/orders`;
+    if (page) {
+      queryParams = queryParams.concat(`?page=${page}`);
+    } else {
+      queryParams = queryParams.concat(`?page=1`);
+    }
+    if (status) {
+      queryParams = queryParams.concat(`&status=${status}`);
+    }
+    if (search) {
+      queryParams = queryParams.concat(`&search=${search}`);
+    }
+    if (dateRange) {
+      queryParams = queryParams.concat(`&dateRange=${dateRange}`);
+    }
+    const response = await fetch(queryParams, {
       next: {
         tags: ["orders"],
       },
