@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/mongoose/dbConnect";
 import UserModel from "@/model/UserModel";
+import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
@@ -35,7 +36,7 @@ export async function POST(request) {
     await dbConnect();
 
     // Check if a user with the provided email already exists
-    const existingUser = await User.findOne({ email });
+    const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
         { status: 400, message: "User with this email already exists." },
@@ -44,19 +45,29 @@ export async function POST(request) {
     }
 
     // Create a new user with the name field (if provided)
-    const newUser = new User({
+    const userData = {
       email,
-      name: name || "",
       password,
-      image: image || "",
-      role: role || "user",
-    });
+    };
+
+    if (name) {
+      userData.name = name;
+    }
+    if (image) {
+      userData.image = image;
+    }
+    if (role) {
+      userData.role = role;
+    }
+
+    const newUser = new UserModel(userData);
 
     // Save the user to the database
     await newUser.save();
 
     // Return the created user (excluding the password)
     const { password: _, ...userWithoutPassword } = newUser.toObject();
+    revalidateTag("users");
 
     return NextResponse.json(
       {
@@ -72,5 +83,25 @@ export async function POST(request) {
       { status: 500, message: "Internal Server Error" },
       { status: 500 }
     );
+  }
+}
+
+export async function DELETE(request) {
+  const { id } = await request.json();
+  try {
+    const user = await UserModel.findByIdAndDelete(id);
+    if (!user) {
+      return NextResponse.json(
+        { status: 404, message: "User not found" },
+        { status: 404 }
+      );
+    }
+    revalidateTag("users");
+    return NextResponse.json(
+      { status: 200, message: "User deleted" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.log(error);
   }
 }

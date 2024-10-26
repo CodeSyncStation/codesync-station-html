@@ -1,10 +1,11 @@
 "use client"
 
+import { getAllUsers, postUser } from "@/lib/fetch/users";
 // import axiosInstance from "@/lib/axios";
 // import { useGetSingleUserQuery, usePostUserMutation, useUpdateUserMutation } from "@/redux/api/user/userSlice";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const baseUrl = process.env.NEXT_PUBLIC_APIHOST;
 export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri }) {
@@ -45,36 +46,24 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri }) {
     if (!fullName || !email || !password) return toast.error("Please fill all the fields!")
     const toastId = toast.loading("Saving user information...")
     const userInfo = {
-      fullName,
+      name: fullName,
       email,
       phone,
-      isMod: true,
-      roles: permission,
-      plainPassword: password,
-      profileImage,
-
+      password,
     }
 
     try {
-      if (typeof profileImage === "object") {
-        const formData = new FormData()
-        formData.append('file', profileImage)
-        const res = await axiosInstance.post('/media_objects', formData,
-          {
-            headers: {
-              "Content-Type": "multipart/formData"
-            }
-          }
-        )
-        userInfo.profileImage = res.data?.contentUrl;
+      const user = await postUser(userInfo)
+      if (user) {
+        await getAllUsers()
+        setShow(false)
+        reset()
+        toast.success("Added employ successfully!")
+        toast.dismiss(toastId)
       }
-      await createUser({ data: userInfo }).unwrap()
-      setShow(false)
-      reset()
-      toast.dismiss(toastId)
-      toast.success("Added employ successfully!")
+
     } catch (error) {
-      toast.error(error["hydra:title"] || "Un expected error!")
+      toast.error(error?.message || "Un expected error!")
     }
     toast.dismiss(toastId)
 
@@ -131,6 +120,7 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri }) {
       size="lg"
       animation
     >
+      <Toaster />
       <Modal.Header>
         <h1 className="modal-title fs-5" id="addModeratorModalLabel">
           {!isEdit ? " Add Employee" : " Edit Employee"}
@@ -245,7 +235,7 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri }) {
                 <select
                   className="form-control shadow-none shadow-none"
                   value={role}
-                  onChange={()=> setRole(e.target.value)}
+                  onChange={(e) => setRole(e.target.value)}
                 >
                   <option value="" disabled hidden>
                     Select Role
@@ -322,7 +312,7 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri }) {
               {/*confirm password */}
               <div className="mb-3">
                 <label htmlFor="confirmPassword" className="form-label">
-                 Confirm Password
+                  Confirm Password
                 </label>
                 <div className="password-wrapper">
                   <input

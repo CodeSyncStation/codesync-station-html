@@ -1,7 +1,9 @@
 "use client"
 
 import Avatar from "@/Components/ui/Avater";
+import { deleteUser } from "@/lib/fetch/users";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import EmployModal from "./EmployModal";
 const baseUrl = process.env.NEXT_PUBLIC_APIHOST
 
@@ -10,10 +12,26 @@ const UsersPage = ({ users }) => {
   const [isEdit, setIsEdit] = useState(false)
   const [iri, setIri] = useState('')
 
+  const handleDelete = async iri => {
+    const toastId = toast.loading("Deleting user...")
+    try {
+      const response = await deleteUser(iri)
+      if (response) {
+        toast.success("User deleted successfully!")
+        toast.dismiss(toastId)
+      }
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      toast.error("An unexpected error occurred. Please try again later.");
+      toast.dismiss(toastId)
+    }
+    
+  }
+
   return (
     <>
       <EmployModal show={show} setShow={setShow} isEdit={isEdit} setIsEdit={setIsEdit} iri={iri} />
-
+      <Toaster />
       <section className="user-container">
         <div className="section-top d-flex justify-content-between">
           <div>
@@ -54,7 +72,7 @@ const UsersPage = ({ users }) => {
                     <td>
                       <div className="course-image-container">
                         <figure className="author-img">
-                          <Avatar url={user?.image}/>
+                          <Avatar url={user?.image} />
                         </figure>
                         <div>
                           <h3 className="course-name w-auto">
@@ -82,7 +100,7 @@ const UsersPage = ({ users }) => {
                           </span>
                           Edit
                         </button>
-                        <button className="pill bg-danger">
+                        <button className="pill bg-danger" onClick={() => handleDelete(user?._id)}>
                           <span className="icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                               <path d="M1.87814 2.99686C1.70729 2.826 1.70729 2.549 1.87814 2.37814C2.049 2.20729 2.32601 2.20729 2.49686 2.37814L7 6.88128L11.5031 2.37814C11.674 2.20729 11.951 2.20729 12.1219 2.37814C12.2927 2.549 12.2927 2.826 12.1219 2.99686L7.61872 7.5L12.1219 12.0031C12.2927 12.174 12.2927 12.451 12.1219 12.6219C11.951 12.7927 11.674 12.7927 11.5031 12.6219L7 8.11872L2.49686 12.6219C2.32601 12.7927 2.049 12.7927 1.87814 12.6219C1.70729 12.451 1.70729 12.174 1.87814 12.0031L6.38128 7.5L1.87814 2.99686Z" fill="white" />
