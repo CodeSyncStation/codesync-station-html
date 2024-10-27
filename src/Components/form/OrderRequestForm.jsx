@@ -3,7 +3,7 @@
 import Spinner from '@/Components/ui/MySpinner';
 import { postOrders } from '@/lib/fetch/orders';
 import { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 export default function OrderRequestForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -72,7 +72,6 @@ export default function OrderRequestForm() {
 
   return (
     <>
-      <Toaster />
       <form onSubmit={handleSubmit}>
 
         {/* First row with two columns */}
@@ -229,7 +228,12 @@ export default function OrderRequestForm() {
           />
         </div>
 
-        <button disabled={loading} type="submit" className="animated-btn mt-3">{loading ? <Spinner/>  : ""} <span className='ms-3'>Send Order Request</span></button>
+        <button
+          disabled={loading}
+          type="submit"
+          className="animated-btn mt-3">
+          {loading ? <Spinner /> : ""} <span className='ms-3'>Send Order Request</span>
+        </button>
       </form>
     </>
 

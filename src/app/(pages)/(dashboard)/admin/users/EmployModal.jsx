@@ -5,7 +5,7 @@ import { getAllUsers, postUser } from "@/lib/fetch/users";
 // import { useGetSingleUserQuery, usePostUserMutation, useUpdateUserMutation } from "@/redux/api/user/userSlice";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const baseUrl = process.env.NEXT_PUBLIC_APIHOST;
 export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri }) {
@@ -120,7 +120,6 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri }) {
       size="lg"
       animation
     >
-      <Toaster />
       <Modal.Header>
         <h1 className="modal-title fs-5" id="addModeratorModalLabel">
           {!isEdit ? " Add Employee" : " Edit Employee"}

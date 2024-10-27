@@ -3,7 +3,7 @@
 import Avatar from "@/Components/ui/Avater";
 import { deleteUser } from "@/lib/fetch/users";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import EmployModal from "./EmployModal";
 const baseUrl = process.env.NEXT_PUBLIC_APIHOST
 
@@ -31,7 +31,6 @@ const UsersPage = ({ users }) => {
   return (
     <>
       <EmployModal show={show} setShow={setShow} isEdit={isEdit} setIsEdit={setIsEdit} iri={iri} />
-      <Toaster />
       <section className="user-container">
         <div className="section-top d-flex justify-content-between">
           <div>

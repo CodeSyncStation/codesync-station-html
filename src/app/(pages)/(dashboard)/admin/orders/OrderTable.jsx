@@ -4,7 +4,7 @@ import { getOrders, putOrder } from "@/lib/fetch/orders";
 import statusColors from "@/utilities/func/statusColors";
 import { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 
 
@@ -36,12 +36,12 @@ const OrderTable = () => {
 
     try {
       const data = await putOrder(orderId, status);
-      const orders = await getOrders()
+      const orders = await getOrders(query)
       setOrders(orders)
       toast.success("Status updated successfully!");
     } catch (error) {
       console.log(error);
-      toast.error("An unexpected error occurred. Please try again later.");
+      // toast.error("An unexpected error occurred. Please try again later.");
     }
     finally {
       toast.dismiss(toastId);
@@ -119,7 +119,6 @@ const OrderTable = () => {
   }
   return (
     <div className="wrapper w-100">
-      <Toaster />
       <section className="best-selling-courses">
         <div className="table-wrapper">
           <div className="section-top">
