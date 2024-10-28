@@ -104,13 +104,57 @@
   transition: 0.5s;
   overflow: hidden;
   height: 300px;
-  transition: transform .3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,.1);
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   .success-img {
     border-radius: 5px;
   }
   border-top: var(--border-size) solid $primary;
   border-bottom: var(--border-size) solid $primary;
+
+  .action-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+
+    .edit-btn,
+    .delete-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      color: #fff;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    .edit-btn {
+      background-color: rgba(32, 201, 151, 1); // A soft green for "Edit"
+
+      &:hover {
+        background-color: rgba(32, 201, 151, 0.8);
+        box-shadow: 0 0 10px rgba(32, 201, 151, 0.5);
+      }
+    }
+
+    .delete-btn {
+      background-color: rgba(220, 53, 69, 1); // A vibrant red for "Delete"
+
+      &:hover {
+        background-color: rgba(220, 53, 69, 0.8);
+        box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+      }
+    }
+  }
 
   .success-content {
     position: absolute;
@@ -122,7 +166,7 @@
     background: #d6d5d5;
     padding: 15px;
     border-radius: 5px;
-   
+
     span {
       font-weight: 500;
       font-size: 15px;
@@ -175,15 +219,47 @@
           transform: rotate(45deg);
           transition: 0.5s;
           width: 50% !important;
-          height: 50%!important;
+          height: 50% !important;
         }
       }
     }
   }
-  &:hover{
+  &:hover {
     transform: translateY(-5px);
   }
   &:hover .success-content svg {
     transform: rotate(0deg) !important;
+  }
+}
+.add-card {
+  --border-size: 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  height: 300px;
+  background-color: #f8f9fa; // Light background to differentiate it
+  border: var(--border-size) dashed $primary; // Dashed border for "add" indication
+  color: $primary;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    background-color: lighten($primary, 40%); // Lighten background on hover
+  }
+
+  .plus-icon {
+    font-size: 50px; // Size for emphasis
+    color: $primary;
+    transition: transform 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      color: darken($primary, 10%);
+      transform: scale(1.1);
+    }
   }
 }
