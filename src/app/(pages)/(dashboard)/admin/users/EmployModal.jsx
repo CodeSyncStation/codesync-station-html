@@ -8,7 +8,7 @@ import { Modal } from "react-bootstrap";
 import toast from "react-hot-toast";
 
 const baseUrl = process.env.NEXT_PUBLIC_APIHOST;
-export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri }) {
+export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri, setUsers }) {
 
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
@@ -55,7 +55,8 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri }) {
     try {
       const user = await postUser(userInfo)
       if (user) {
-        await getAllUsers()
+       const users =  await getAllUsers()
+        setUsers(users)
         setShow(false)
         reset()
         toast.success("Added employ successfully!")

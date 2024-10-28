@@ -1,4 +1,3 @@
-import { getAllUsers } from "@/lib/fetch/users";
 import UsersPage from "./UsersPage";
   
   
@@ -8,9 +7,8 @@ export const metadata = {
   keywords: ["users", "management", "dashboard"],
 }
 
-export default async function page() {
-  const users = await getAllUsers();
+export default function page() {
   return (
-   <UsersPage  users={users}/>
+   <UsersPage  />
   )
 }

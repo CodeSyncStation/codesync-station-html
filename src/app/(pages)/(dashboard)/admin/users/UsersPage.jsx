@@ -1,22 +1,32 @@
 "use client"
 
 import Avatar from "@/Components/ui/Avater";
-import { deleteUser } from "@/lib/fetch/users";
-import { useState } from "react";
+import { deleteUser, getAllUsers } from "@/lib/fetch/users";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import EmployModal from "./EmployModal";
 const baseUrl = process.env.NEXT_PUBLIC_APIHOST
 
-const UsersPage = ({ users }) => {
+const UsersPage = () => {
   const [show, setShow] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
   const [iri, setIri] = useState('')
+  const [users, setUsers] = useState([])
+
+  useEffect(()=>{
+    (async function(){
+      const users = await getAllUsers()
+      setUsers(users)
+    })()
+  }, [])
 
   const handleDelete = async iri => {
     const toastId = toast.loading("Deleting user...")
     try {
       const response = await deleteUser(iri)
       if (response) {
+        const users = await getAllUsers()
+        setUsers(users)
         toast.success("User deleted successfully!")
         toast.dismiss(toastId)
       }
@@ -30,7 +40,7 @@ const UsersPage = ({ users }) => {
 
   return (
     <>
-      <EmployModal show={show} setShow={setShow} isEdit={isEdit} setIsEdit={setIsEdit} iri={iri} />
+      <EmployModal show={show} setShow={setShow} isEdit={isEdit} setIsEdit={setIsEdit} iri={iri} setUsers={setUsers} />
       <section className="user-container">
         <div className="section-top d-flex justify-content-between">
           <div>
