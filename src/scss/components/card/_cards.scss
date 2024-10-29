@@ -239,8 +239,8 @@
   justify-content: center;
   border-radius: 5px;
   height: 300px;
-  background-color: #f8f9fa; // Light background to differentiate it
-  border: var(--border-size) dashed $primary; // Dashed border for "add" indication
+  background-color: #f8f9fa;
+  border: var(--border-size) dashed $primary;
   color: $primary;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -249,11 +249,11 @@
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    background-color: lighten($primary, 40%); // Lighten background on hover
+    background-color: lighten($primary, 40%);
   }
 
   .plus-icon {
-    font-size: 50px; // Size for emphasis
+    font-size: 50px;
     color: $primary;
     transition: transform 0.3s ease, color 0.3s ease;
 
@@ -263,3 +263,6 @@
     }
   }
 }
+
+
+

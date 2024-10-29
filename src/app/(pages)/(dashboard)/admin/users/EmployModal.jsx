@@ -17,7 +17,6 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri, set
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [phone, setPhoneNumber] = useState("")
   const [encodedUrl, setEncodedUrl] = useState("")
-  const [permission, setPermission] = useState([])
   const [role, setRole] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
 
@@ -35,10 +34,13 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri, set
   const reset = () => {
     setFullName("")
     setEmail("")
-    setProfileImage("")
     setPassword("")
-    setPhoneNumber("")
+    setProfileImage("")
     setEncodedUrl("")
+    setPhoneNumber("")
+    setRole("")
+    setConfirmPassword("")
+    setPasswordVisible(false)
   }
 
   const handleSubmit = async e => {
@@ -55,7 +57,7 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri, set
     try {
       const user = await postUser(userInfo)
       if (user) {
-       const users =  await getAllUsers()
+        const users = await getAllUsers()
         setUsers(users)
         setShow(false)
         reset()
@@ -75,13 +77,10 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri, set
     if (!fullName || !email) return toast.error("Please fill all the fields!")
     const toastId = toast.loading("Updating user info...")
     const userInfo = {
-      fullName,
+      name: fullName,
       email,
       phone,
-      isMod: true,
-      roles: permission,
-      plainPassword: password,
-      profileImage,
+      password,
     }
 
     try {
