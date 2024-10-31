@@ -30,3 +30,35 @@ export async function getProjects() {
     console.log(error);
   }
 }
+
+export async function updateProject(data) {
+  try {
+    const response = await fetch(`${API_URL}/api/projects`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
+
+export async function deleteProject(id) {
+  try {
+    const response = await fetch(`${API_URL}/api/projects`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+    return response.json();
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}

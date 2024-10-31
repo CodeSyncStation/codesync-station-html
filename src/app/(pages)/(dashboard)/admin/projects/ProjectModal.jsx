@@ -1,18 +1,29 @@
 "use client"
 
-import { getProjects, postProject } from "@/lib/fetch/project";
-import { useState } from "react";
+import { getProjects, postProject, updateProject } from "@/lib/fetch/project";
+import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import toast from "react-hot-toast";
 
 const baseUrl = process.env.NEXT_PUBLIC_APIHOST;
-export default function ProjectModal({ show, setShow = true, isEdit, setIsEdit, iri, setProjects }) {
+export default function ProjectModal({ show, setShow , isEdit, setIsEdit, project, setProject, setProjects }) {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [profileImage, setProfileImage] = useState("")
   const [encodedUrl, setEncodedUrl] = useState("")
   const [liveLink, setLiveLink] = useState("")
   const [category, setCategory] = useState("")
+
+  useEffect(()=>{
+    if(project){
+      setTitle(project?.title)
+      setDescription(project?.description)
+      setProfileImage(project?.image)
+      setEncodedUrl(project?.image)
+      setLiveLink(project?.liveLink)
+      setCategory(project?.category)
+    }
+  }, [project])
 
   const handleFile = (e) => {
     setProfileImage(e.target.files[0])
@@ -66,11 +77,38 @@ export default function ProjectModal({ show, setShow = true, isEdit, setIsEdit, 
   const handleUpdate = async e => {
     e.preventDefault()
 
+    if(!title || !description || !liveLink || !category) return toast.error("Please fill all the fields!")
+      const toastId = toast.loading("Updating project information...") // Show loading toast
+      const projectInfo = {
+        id: project?._id,
+        title,
+        description,
+        liveLink,
+        image: "image",
+        category,
+      }
+
+      try {
+        const project = await updateProject(projectInfo)
+        if (project.status === 200) {
+          const projects = await getProjects()
+          setProjects(projects)
+          setShow(false)
+          reset()
+          toast.success("Updated project successfully!")
+          toast.dismiss(toastId)
+        }
+
+      } catch (error) {
+        toast.error(error?.message || "Un expected error!")
+      }
+      toast.dismiss(toastId)
   }
 
   const handleDiscard = () => {
     setShow(false)
     setIsEdit(false)
+    setProject(null)
     reset()
   }
 
