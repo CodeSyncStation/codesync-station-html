@@ -13,6 +13,19 @@ export async function getAllUsers(params) {
     console.log(error);
   }
 }
+export async function getUser(id) {
+  try {
+    const response = await fetch(`${API_URL}/api/users/${id}`, {
+      cache: "no-store",
+      next: {
+        tags: ["users"],
+      },
+    });
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export async function postUser(data) {
   try {

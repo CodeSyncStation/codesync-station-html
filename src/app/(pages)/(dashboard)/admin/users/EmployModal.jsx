@@ -1,9 +1,10 @@
 "use client"
 
-import { getAllUsers, postUser, putUser } from "@/lib/fetch/users";
+import { getAllUsers, getUser, postUser, putUser } from "@/lib/fetch/users";
+import uploadImage from "@/utilities/func/uploadImage";
 // import axiosInstance from "@/lib/axios";
 // import { useGetSingleUserQuery, usePostUserMutation, useUpdateUserMutation } from "@/redux/api/user/userSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import toast from "react-hot-toast";
 
@@ -20,7 +21,25 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, id, setU
   const [role, setRole] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
 
+  useEffect(() => {
+    if (isEdit) {
+      (async function () {
+        const user = await getUser(id)
+        if (user) {
+          setFullName(user.name)
+          setEmail(user.email)
+          setPhoneNumber(user.phone)
+          setRole(user.role)
+          setEncodedUrl(user.image)
+        }
+      })()
 
+    }
+    else {
+      handleDiscard()
+    }
+    setPasswordVisible(false)
+  }, [isEdit])
 
   const handleFile = (e) => {
     setProfileImage(e.target.files[0])
@@ -54,6 +73,18 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, id, setU
       password,
     }
 
+    if (typeof profileImage === "object") {
+      try {
+        const imageUrl = await uploadImage(profileImage)
+        userInfo.image = imageUrl
+      } catch (error) {
+        console.error(error)
+        toast.error("Error uploading image")
+        toast.dismiss(toastId)
+      }
+    }
+
+
     try {
       const user = await postUser(userInfo)
       if (user) {
@@ -83,10 +114,26 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, id, setU
       password,
     }
 
+    if (profileImage && typeof profileImage == "string") {
+      userInfo.image = profileImage
+    }
+
+    if (typeof profileImage === "object") {
+      try {
+        const imageUrl = await uploadImage(profileImage)
+        userInfo.image = imageUrl
+      } catch (error) {
+        toast.error("Error uploading image")
+        toast.dismiss(toastId)
+      }
+    }
+
     try {
 
       const user = await putUser({ ...userInfo, id })
       if (user) {
+        const users = await getAllUsers()
+        setUsers(users)
         setShow(false)
         reset()
         toast.dismiss(toastId)
