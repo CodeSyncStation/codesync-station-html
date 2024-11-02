@@ -108,6 +108,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   .success-img {
     border-radius: 5px;
+    position: relative;
   }
   border-top: var(--border-size) solid $primary;
   border-bottom: var(--border-size) solid $primary;

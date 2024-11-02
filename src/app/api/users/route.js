@@ -86,6 +86,48 @@ export async function POST(request) {
   }
 }
 
+export async function PUT(request) {
+  const { id, name, email, image, role } = await request.json();
+  // Validate input
+  if (!id) {
+    return NextResponse.json(
+      { status: 400, message: "ID is required" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    await dbConnect();
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      id,
+      {
+        name,
+        email,
+        image,
+        role,
+      },
+      { new: true }
+    );
+    if (!updatedUser) {
+      return NextResponse.json(
+        { status: 404, message: "User not found" },
+        { status: 404 }
+      );
+    }
+    revalidateTag("users");
+    return NextResponse.json(
+      { status: 200, message: "User updated successfully", user: updatedUser },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error updating user:", error.message || error);
+    return NextResponse.json(
+      { status: 500, message: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}
+
 export async function DELETE(request) {
   const { id } = await request.json();
   try {

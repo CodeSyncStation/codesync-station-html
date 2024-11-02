@@ -1,5 +1,4 @@
 "use client"
-import { default as portfolio5 } from "@/assets/images/portfolio/Home-Click-Jobs.png";
 import { deleteProject, getProjects } from "@/lib/fetch/project";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -86,13 +85,13 @@ export default function Projects() {
                 </div>
 
                 <div className="success-img">
-                  <div className="magnetic-wrap">
-                    <Image className="img-fluid magnetic-item" src={portfolio5} alt="" style="" />
+                  <div className="magnetic-wrap ">
+                    <Image className="img-fluid magnetic-item" src={project?.image} alt="" fill />
                   </div>
                 </div>
                 <div className="success-content" >
-                  <span>Web development</span>
-                  <h3>Code sync station</h3>
+                  <span>{project?.category}</span>
+                  <h3>{project?.title}</h3>
                   <div className="view-btn">
                     <a href="#">
                       <HiOutlineArrowRight />

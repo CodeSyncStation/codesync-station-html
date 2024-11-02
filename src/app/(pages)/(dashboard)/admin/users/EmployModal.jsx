@@ -1,6 +1,6 @@
 "use client"
 
-import { getAllUsers, postUser } from "@/lib/fetch/users";
+import { getAllUsers, postUser, putUser } from "@/lib/fetch/users";
 // import axiosInstance from "@/lib/axios";
 // import { useGetSingleUserQuery, usePostUserMutation, useUpdateUserMutation } from "@/redux/api/user/userSlice";
 import { useState } from "react";
@@ -8,7 +8,7 @@ import { Modal } from "react-bootstrap";
 import toast from "react-hot-toast";
 
 const baseUrl = process.env.NEXT_PUBLIC_APIHOST;
-export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri, setUsers }) {
+export default function EmployModal({ show, setShow, isEdit, setIsEdit, id, setUsers }) {
 
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
@@ -72,7 +72,7 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri, set
 
   }
 
-  const handleUpdate = async e => {
+  const handleUpdate = async (e) => {
     e.preventDefault()
     if (!fullName || !email) return toast.error("Please fill all the fields!")
     const toastId = toast.loading("Updating user info...")
@@ -84,22 +84,15 @@ export default function EmployModal({ show, setShow, isEdit, setIsEdit, iri, set
     }
 
     try {
-      if (typeof profileImage === "object") {
-        const formData = new FormData()
-        formData.append('file', profileImage)
-        const res = await axiosInstance.post('/media_objects', formData, {
-          headers: {
-            "Content-Type": "multipart/formData"
-          }
-        })
-        userInfo.profileImage = res.data?.contentUrl;
 
+      const user = await putUser({ ...userInfo, id })
+      if (user) {
+        setShow(false)
+        reset()
+        toast.dismiss(toastId)
+        toast.success("Updated user Info successfully!")
       }
-      await updateUserInfo({ iri, data: userInfo }).unwrap()
-      setShow(false)
-      reset()
-      toast.dismiss(toastId)
-      toast.success("Updated user Info successfully!")
+
     } catch (error) {
       toast.error(error["hydra:title"] || "Un expected error!")
     }

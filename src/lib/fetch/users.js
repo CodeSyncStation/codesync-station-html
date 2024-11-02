@@ -29,6 +29,21 @@ export async function postUser(data) {
   }
 }
 
+export async function putUser(data) {
+  try {
+    const response = await fetch(`${API_URL}/api/users`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function deleteUser(id) {
   try {
     const response = await fetch(`${API_URL}/api/users`, {
