@@ -9,7 +9,7 @@ export const metadata = {
 const page = () => {
   return (
 
-    <div className="adminchat-wrapper">
+    <div className="admin-main-conten">
       <OrderTable />
     </div>
 

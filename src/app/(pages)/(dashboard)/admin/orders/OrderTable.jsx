@@ -70,7 +70,7 @@ const OrderTable = () => {
     content = orders.map((order, index) => (
       <tr key={index}>
         <td>
-          <span className="muted">{order?._id}</span>
+          <span className="muted">{order?.orderId}</span>
         </td>
         <td>
           <span className="muted">{order?.name}</span>
@@ -165,7 +165,7 @@ const OrderTable = () => {
                   }
                 </select>
               </div>
-              <div className="input-box mt-3">
+              {/* <div className="input-box mt-3">
                 <select
                   name="date"
                   id=""
@@ -176,7 +176,7 @@ const OrderTable = () => {
                   <option value="asc">Amount low to high</option>
                   <option value="desc">Amount high to low</option>
                 </select>
-              </div>
+              </div> */}
               </div>
             </form>
           </div>
