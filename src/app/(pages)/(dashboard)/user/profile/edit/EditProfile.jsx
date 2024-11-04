@@ -23,7 +23,7 @@ export default function EditProfile({ user }) {
   const [role, setRole] = useState(user?.role)
   const [confirmPassword, setConfirmPassword] = useState(user?.password)
   const router = useRouter()
-  const { update } = useSession()
+  const { data: session, update } = useSession();
 
   // useEffect(() => {
   //   (async function () {
@@ -89,15 +89,19 @@ export default function EditProfile({ user }) {
     try {
 
       const updatedUser = await putUser({ ...userInfo })
-      if (updatedUser) {
-        update({
+      if (updatedUser.status == 200) {
+        const newSession = {
+          ...session,
           user: {
-            name: updatedUser.name,
-            email: updatedUser.email,
-            image: updatedUser.image ?? undefined,
-            role: updatedUser.role ?? "user",
+            ...session?.user,
+            name: updatedUser.user.name,
+            email: updatedUser.user.email,
+            image: updatedUser.user.image ?? undefined,
+            role: updatedUser.user.role ?? "user",
           }
-        })
+        }
+        console.log(newSession)
+        await update(newSession)
         reset()
         toast.dismiss(toastId)
         toast.success("Updated user Info successfully!")
