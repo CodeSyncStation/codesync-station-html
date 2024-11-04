@@ -4,12 +4,13 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AiOutlineLogout } from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
 
 const Menu = () => {
   const pathname = usePathname();
 
   const isActive = (path) => {
-    if (path === "/") {
+    if (path === "/" || path === "/user") {
       return pathname === path;
     }
     return pathname.startsWith(path);
@@ -48,6 +49,14 @@ const Menu = () => {
               </svg>
             </span>
             <span className="label">Order History</span>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className={`nav-link ${isActive("/user/profile") ? "active" : ""}`} href="/user/profile">
+            <span className="icon">
+             <CgProfile/>
+            </span>
+            <span className="label">Profile</span>
           </Link>
         </li>
 

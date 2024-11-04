@@ -48,7 +48,6 @@ export default function Navbar() {
       }
     });
   }
-  console.log(userData)
   async function getUserData() {
     const session = await getSession()
     const user = session?.user;
@@ -58,6 +57,7 @@ export default function Navbar() {
       setUserData(null)
     }
   }
+
 
   const handleLogout = async () => {
     await signOut({ redirect: "/" });
@@ -171,7 +171,7 @@ export default function Navbar() {
                       userData ?
                         <Dropdown align="end">
                           <Dropdown.Toggle id="dropdown-basic" className="profile-dropdown">
-                            <Avatar url={undefined} />
+                            <Avatar url={userData?.image} />
                           </Dropdown.Toggle>
 
                           <Dropdown.Menu>

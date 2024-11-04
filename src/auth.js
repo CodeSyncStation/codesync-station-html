@@ -13,9 +13,12 @@ async function saltAndHashPassword(password) {
 }
 
 async function getUserFromDb(email, pwHash) {
-  // logic to query the database
+  await dbConnect();
   const user = await User.findOne({ email });
-  return user;
+  if (user && (await bcrypt.compare(pwHash, user.password))) {
+    return user;
+  }
+  return null;
 }
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
@@ -23,24 +26,19 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     Facebook({
       async profile(profile) {
         await dbConnect();
-        // logic to query the database
         let existingUser = await User.findOne({ email: profile?.email });
-        // console.log(existingUser, "existing");
         if (!existingUser) {
-          // Create a new user if they don't exist
           existingUser = await User.create({
             name: profile.name,
             email: profile.email,
             image: profile.picture?.data?.url,
           });
         }
-        console.log(profile);
-
         return {
-          id: existingUser?._id,
-          name: existingUser?.name,
-          image: existingUser?.image,
-          email: existingUser?.email,
+          id: existingUser._id.toString(),
+          name: existingUser.name,
+          email: existingUser.email,
+          image: existingUser.image,
           role: existingUser.role ?? "user",
         };
       },
@@ -48,82 +46,63 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     Google({
       async profile(profile) {
         await dbConnect();
-        // logic to query the database
         let existingUser = await User.findOne({ email: profile?.email });
-        // console.log(existingUser, "existing");
         if (!existingUser) {
-          // Create a new user if they don't exist
           existingUser = await User.create({
             name: profile.name,
             email: profile.email,
             image: profile.picture,
           });
         }
-
         return {
-          id: existingUser?._id,
-          name: existingUser?.name,
-          image: existingUser?.image,
-          email: existingUser?.email,
+          id: existingUser._id.toString(),
+          name: existingUser.name,
+          email: existingUser.email,
+          image: existingUser.image,
           role: existingUser.role ?? "user",
         };
       },
     }),
     Credentials({
       credentials: {
-        email: {},
-        password: {},
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        let user = null;
-
-        // logic to salt and hash password
-        const pwHash = saltAndHashPassword(credentials.password);
-
-        // logic to verify if the user exists
-        user = await getUserFromDb(credentials.email, pwHash);
-
-        if (!user) {
-          // No user found, so this is their first attempt to login
-          // meaning this is also the place you could do registration
-          throw new Error("User not found.");
+        await dbConnect();
+        const user = await User.findOne({ email: credentials.email });
+        if (
+          user &&
+          (await bcrypt.compare(credentials.password, user.password))
+        ) {
+          return {
+            id: user._id.toString(),
+            name: user.name,
+            email: user.email,
+            image: user.image ?? undefined,
+            role: user.role ?? "user",
+          };
         }
-        // return user object with their profile data
-        console.log(user);
-        return {
-          id: user?._id,
-          email: user?.email,
-          name: user?.name,
-          image: user?.image ?? undefined,
-          role: user?.role ?? "user",
-        };
+        throw new Error("Invalid credentials");
       },
     }),
   ],
   callbacks: {
-    jwt({ token, user }) {
-      if (user) token.role = user.role;
+    async jwt({ token, user }) {
+      if (user) {
+        console.log(user, "user");
+        token.id = user.id;
+        token.role = user.role;
+        // Add any additional fields you need in the session here
+      }
       return token;
     },
-    session({ session, token }) {
+    async session({ session, token }) {
+      console.log(token, "token");
+      session.user.id = token.id;
       session.user.role = token.role;
+      // Add any additional fields here if needed
       return session;
     },
-    // async signIn({ user, account }) {
-    //   await dbConnect(); // Ensure MongoDB connection
-    //   // Check if the user already exists in the database
-    //   if (account.type === "oauth") {
-    //     const existingUser = await User.findOne({ email: user.email });
-    //     if (!existingUser) {
-    //       // Create a new user if they don't exist
-    //       await User.create({
-    //         name: user.name,
-    //         email: user.email,
-    //         image: user.image,
-    //       });
-    //     }
-    //   }
-    //   return true;
-    // },
   },
 });

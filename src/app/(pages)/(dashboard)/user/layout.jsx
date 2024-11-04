@@ -1,9 +1,11 @@
 
 import logo from "@/assets/images/logo.png";
+import { auth } from "@/auth";
 import Menu from "@/Components/layout/Menu";
 import Avatar from "@/Components/ui/Avater";
 import Image from "next/image";
 import Link from "next/link";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "CodeSync Station",
@@ -11,7 +13,11 @@ export const metadata = {
 }
 
 
-const layout = ({ children }) => {
+const layout = async ({ children }) => {
+
+  const session = await auth()
+
+  console.log("user")
 
   // const getNotification = async (userId) => {
   //   try {
@@ -38,7 +44,7 @@ const layout = ({ children }) => {
 
   return (
     <>
-
+      <Toaster />
       <div className={`main-container`}>
         <div
           id="navbarOffcanvas"
@@ -178,9 +184,9 @@ const layout = ({ children }) => {
               </div>
 
               {/* <!-- profile  --> */}
-              <Link href="/profile" className="profile-dropdown btn btn-primary" style={{width: "38px"}}>
-                <Avatar />
-              </Link>
+              <div className="profile-dropdown btn btn-primary" style={{ width: "38px", position: "relative" }}>
+                <Avatar url={session?.user?.image} />
+              </div>
             </div>
           </nav>
           {/* <!-- main & aside wrapper --> */}
