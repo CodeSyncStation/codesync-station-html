@@ -13,6 +13,16 @@ export async function getAllUsers(params) {
     console.log(error);
   }
 }
+export async function findUser(email) {
+  try {
+    const response = await fetch(`${API_URL}/api/findUser?email=${email}`, {
+      cache: "no-store",
+    });
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
 export async function getUser(id) {
   try {
     const response = await fetch(`${API_URL}/api/users/${id}`, {

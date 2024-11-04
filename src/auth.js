@@ -4,6 +4,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Facebook from "next-auth/providers/facebook";
 import Google from "next-auth/providers/google";
+import { findUser } from "./lib/fetch/users";
 import dbConnect from "./lib/mongoose/dbConnect";
 
 async function saltAndHashPassword(password) {
@@ -12,22 +13,13 @@ async function saltAndHashPassword(password) {
   return hash;
 }
 
-async function getUserFromDb(email, pwHash) {
-  await dbConnect();
-  const user = await User.findOne({ email });
-  if (user && (await bcrypt.compare(pwHash, user.password))) {
-    return user;
-  }
-  return null;
-}
-
 export const { auth, signIn, signOut, handlers } = NextAuth({
   providers: [
     Facebook({
       async profile(profile) {
         await dbConnect();
-        let existingUser = await User.findOne({ email: profile?.email });
-        if (!existingUser) {
+        let existingUser = await findUser(profile?.email);
+        if (existingUser?.status == 404) {
           existingUser = await User.create({
             name: profile.name,
             email: profile.email,
@@ -35,7 +27,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
           });
         }
         return {
-          id: existingUser._id.toString(),
+          _id: existingUser._id,
           name: existingUser.name,
           email: existingUser.email,
           image: existingUser.image,
@@ -46,8 +38,8 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     Google({
       async profile(profile) {
         await dbConnect();
-        let existingUser = await User.findOne({ email: profile?.email });
-        if (!existingUser) {
+        let existingUser = await findUser(profile?.email);
+        if (existingUser?.status == 404) {
           existingUser = await User.create({
             name: profile.name,
             email: profile.email,
@@ -55,7 +47,7 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
           });
         }
         return {
-          id: existingUser._id.toString(),
+          _id: existingUser._id,
           name: existingUser.name,
           email: existingUser.email,
           image: existingUser.image,
@@ -70,13 +62,10 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
       },
       async authorize(credentials) {
         await dbConnect();
-        const user = await User.findOne({ email: credentials.email });
-        if (
-          user &&
-          (await bcrypt.compare(credentials.password, user.password))
-        ) {
+        const user = await findUser(credentials?.email);
+        if (user) {
           return {
-            id: user._id.toString(),
+            _id: user._id,
             name: user.name,
             email: user.email,
             image: user.image ?? undefined,
@@ -91,17 +80,17 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         console.log(user, "user");
-        token.id = user.id;
+        token._id = user._id;
         token.role = user.role;
-        // Add any additional fields you need in the session here
+        token.image = user?.image;
       }
       return token;
     },
     async session({ session, token }) {
       console.log(token, "token");
-      session.user.id = token.id;
+      session.user._id = token._id;
       session.user.role = token.role;
-      // Add any additional fields here if needed
+      session.user.image = token?.image;
       return session;
     },
   },

@@ -65,6 +65,7 @@ export default function EditProfile({ user }) {
     if (!fullName || !email) return toast.error("Please fill all the fields!")
     const toastId = toast.loading("Updating profile info...")
     const userInfo = {
+      id: user?._id,
       name: fullName,
       email,
       phone,
@@ -87,14 +88,21 @@ export default function EditProfile({ user }) {
 
     try {
 
-      const updatedUser = await putUser({ ...userInfo, id: user?._id })
+      const updatedUser = await putUser({ ...userInfo })
       if (updatedUser) {
+        update({
+          user: {
+            name: updatedUser.name,
+            email: updatedUser.email,
+            image: updatedUser.image ?? undefined,
+            role: updatedUser.role ?? "user",
+          }
+        })
         reset()
         toast.dismiss(toastId)
         toast.success("Updated user Info successfully!")
         router.push("/user/profile");
-        
-        update({ user: updatedUser })
+
       }
 
     } catch (error) {

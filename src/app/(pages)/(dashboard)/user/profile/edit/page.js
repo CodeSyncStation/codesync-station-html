@@ -7,7 +7,7 @@ export default async function page() {
   return (
     <SessionProvider>
       <div className="container pt-4">
-        <EditProfile user={session} />
+        <EditProfile user={session?.user} />
       </div>
     </SessionProvider>
   );
