@@ -9,9 +9,7 @@ const page = () => {
     <>
       <div className="main-aside-wrapper">
         <OrderHistory />
-        <aside>
-         {/* <RecommendedCourses /> */}
-        </aside>
+        
       </div>
     </>
   );
