@@ -1,63 +1,85 @@
-.progress-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  overflow: visible;
-  margin-left: 3rem;
-}
+@use "../../global" as *;
+@use "../../partials" as *;
 
-.step-container {
-  display: flex;
-  align-items: center;
-  // flex-direction: row;
-  position: relative;
-  width: 100%;
-}
+.progress-wrapper {
+  padding: 40px 24px;
+  .progress {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    height: 4px;
+    transform: translateX(-50%);
+    width: 95%;
+    // z-index: -1;
+    .progress-bar {
+      background-color: #33be7b;
+    }
+  }
+  .step-wrapper{
+    display: flex;
+  }
+  .progress-step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--Branding-Success, #33be7b);
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px; /* 285.714% */
+    border: 1px dashed #33be7b;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+  
 
-.step {
-  text-align: center;
-}
+    &.completed {
+      background-color: #33be7b;
+      color: white;
+    }
 
-.step-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: gray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  position: relative;
-  z-index: 1;
-}
+    &.active {
+      background-color: #33be7b;
+      color: white;
+    }
 
-.completed .step-icon {
-  background-color: green;
-}
+    i {
+      font-size: 1.5rem;
+    }
+  }
+  .progress-step + p {
+    color: var(--Gray-Scale-Gray-800, #333);
+    text-align: center;
 
-.active .step-icon {
-  background-color: blue;
-}
+    /* Body Small/Body Small, 400 */
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 21px */
+  }
+  .progress-step.completed + p {
+    color: var(--Branding-Success-Dark, #0e884d);
+    text-align: center;
 
-.progress-line {
-  // width: 50px;
-  flex: 1;
-  height: 4px;
-  background-color: gray;
-  // margin: 0 5px;
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  transform: translateY(-272%);
-}
+    /* Body Small/Body Small, 400 */
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 21px */
+  }
+  .progress-step.active + p {
+    color: var(--Branding-Success-Dark, #0e884d);
+    text-align: center;
 
-.line-completed {
-  background-color: green;
-}
-
-.status{
-  position: relative;
-  left: -35%;
-  top: 10px;
+    /* Body Small/Body Small, 500 */
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 21px */
+  }
 }
