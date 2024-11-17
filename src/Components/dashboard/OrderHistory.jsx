@@ -47,9 +47,9 @@ function OrderHistory() {
           <table className="table order-history-table">
             <thead>
               <tr>
-                <th scope="col">TransactionId </th>
-                <th scope="col">Course Name</th>
-                <th scope="col">Date</th>
+                <th scope="col">Order ID </th>
+                <th scope="col">Project Name</th>
+                <th scope="col">Delivery date</th>
                 <th scope="col">Price</th>
                 <th scope="col">Status</th>
                 <th scope="col"></th>
@@ -68,12 +68,12 @@ function OrderHistory() {
                         Pending
                       </span>
                     </td>
-                  
+
                   </tr>
                 ))
-                  : <tr>
-                    <td colSpan={8} className="text-center fw-bold">No orders found.</td>
-                  </tr>
+                  :
+                  <td colSpan={8} className="text-center fw-bold">No orders found.</td>
+
               }
 
             </tbody>

@@ -6,12 +6,9 @@ export const metadata = {
 
 const page = () => {
   return (
-    <>
       <div className="main-aside-wrapper">
         <OrderHistory />
-        
       </div>
-    </>
   );
 };
 

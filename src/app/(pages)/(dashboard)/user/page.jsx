@@ -29,7 +29,7 @@ const page = async () => {
   ];
 
   // Current status from API or backend
-  const currentStatus = "implementing"; // Example of current status
+  const currentStatus = "test_done"; // Example of current status
 
   const currentIndex = statuses.findIndex(status => status === currentStatus);
   return (
