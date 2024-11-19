@@ -33,8 +33,7 @@ const page = async () => {
 
   const currentIndex = statuses.findIndex(status => status === currentStatus);
   return (
-    <div>
-
+    <>
       <div className="m-4 border rounded order-details">
         <div className="header">
           <h1 className="fs-4 dot">Project: <strong>CodeSync</strong></h1>
@@ -66,7 +65,7 @@ const page = async () => {
                     {
                       index <= currentIndex ? <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M16.6673 5.83398L7.50065 15.0007L3.33398 10.834" stroke="white" stroke-width="2"
-                          stroke-linecap="round" stroke-linejoin="round" />
+                          strokeLinecap="round" strokeLinejoin="round" />
                       </svg> : index
                     }
                   </div>
@@ -80,7 +79,7 @@ const page = async () => {
       </div>
 
 
-    </div >
+    </ >
   );
 }
 
