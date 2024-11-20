@@ -1,10 +1,13 @@
 import { postReviews } from "@/lib/fetch/reviews";
 import uploadImage from "@/utilities/func/uploadImage";
-import { useState } from "react";
+import { getSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const ReviewModal = ({ show, setShow }) => {
+  const [session, setSession] = useState("")
+  console.log(session)
   const [formData, setFormData] = useState({
     platform: "",
     stars: "",
@@ -16,34 +19,43 @@ const ReviewModal = ({ show, setShow }) => {
 
   console.log(formData)
 
+  useEffect(() => {
+    (async function () {
+      const session = await getSession()
+      setSession(session)
+    })()
+  }, [])
+
   const handleClose = () => setShow(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(e.target.files[0])
-    if(name === "avatar"){
+    if (name === "avatar") {
       setFormData((prev) => ({ ...prev, [name]: e.target.files[0] }));
       return
     }
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const toastId = toast.loading("Sending your review...");
     try {
       const resImg = await uploadImage(formData.avatar)
-      const reviewInfo =  {...formData}
-      if(resImg){
+      const reviewInfo = { ...formData, email: session?.user?.email }
+      if (resImg) {
         reviewInfo.avatar = resImg.secure_url
       }
       // Save reviewInfo to your server
       const res = await postReviews(reviewInfo)
-      if(res?.status === 200){
+      if (res?.status === 201) {
         handleClose()
-        toast.success()
+        toast.success("Reviews sended successfully!")
+        toast.dismiss(toastId)
       }
     } catch (error) {
-
+      console.log(error)
+      toast.error("Failed to send review!")
     }
     setFormData({
       platform: "",
@@ -53,12 +65,13 @@ const ReviewModal = ({ show, setShow }) => {
       position: "",
       avatar: "",
     });
+    toast.dismiss(toastId)
     handleClose();
   };
 
   return (
     <>
-
+      <Toaster />
       {/* Modal */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

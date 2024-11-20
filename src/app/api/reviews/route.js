@@ -39,11 +39,11 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     // Parse the request body
-    const { platform, stars, text, name, position, avatar } =
+    const { platform, stars, text, name, position, avatar, email } =
       await request.json();
 
     // Validate required fields
-    if (!platform || !stars || !text || !name) {
+    if (!platform || !stars || !text || !name || !email) {
       return NextResponse.json(
         {
           status: 400,
@@ -63,6 +63,7 @@ export async function POST(request) {
       text,
       name,
       position,
+      email,
       avatar,
       date: new Date(), // Automatically set the current date
       time: new Date().toLocaleTimeString(), // Automatically set the current time
