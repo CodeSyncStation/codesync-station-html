@@ -1,3 +1,5 @@
+import ReviewPage from "./ReviewPage";
+
 export default function page() {
-  return <div>page</div>;
+  return <ReviewPage />;
 }

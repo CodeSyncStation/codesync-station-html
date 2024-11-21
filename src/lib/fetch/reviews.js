@@ -44,7 +44,7 @@ export async function getReviews({ status, page, search, dateRange }) {
   }
 }
 
-export async function putOrder(id, status) {
+export async function putReview(id, status) {
   try {
     const response = await fetch(`${API_URL}/api/reviews`, {
       method: "PUT",
@@ -56,5 +56,21 @@ export async function putOrder(id, status) {
     return response.json();
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function deleteReview(id) {
+  try {
+    const response = await fetch(`${API_URL}/api/reviews`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+    return response.json();
+  } catch (error) {
+    console.log(error);
+    return error;
   }
 }

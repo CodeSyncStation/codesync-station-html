@@ -9,8 +9,11 @@ export async function GET(request) {
   const date = nextUrl.searchParams.get("date");
   const search = nextUrl.searchParams.get("search");
   const page = nextUrl.searchParams.get("page");
+  const email = nextUrl.searchParams.get("email");
+  const recent = nextUrl.searchParams.get("recent");
 
   let query = {};
+  let options = {};
   if (status) {
     query.status = status;
   }
@@ -18,13 +21,22 @@ export async function GET(request) {
     query._id = ObjectId;
   }
 
+  if (email) {
+    query.email = email;
+  }
+
   if (date) {
     query.createdAt = { $gte: date[0], $lte: date[1] };
   }
 
+  if (recent) {
+    options.sort = { createdAt: -1 };
+    options.limit = 1;
+  }
+
   try {
     await dbConnect();
-    const orders = await OrderModel.find(query);
+    const orders = await OrderModel.find(query, {}, options);
     return NextResponse.json(orders, { status: 200 });
   } catch (error) {
     return NextResponse.json(

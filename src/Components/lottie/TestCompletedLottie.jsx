@@ -6,7 +6,7 @@ import Lottie from "react-lottie-player";
 import ReviewModal from "../modals/ReviewModal";
 
 export default function TestCompletedLottie() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
   return (

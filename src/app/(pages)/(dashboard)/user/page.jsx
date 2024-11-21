@@ -9,11 +9,14 @@ import DevelopingLottie from "@/Components/lottie/DevelopingLottie";
 import LoveLottie from "@/Components/lottie/LoveLottie";
 import TestCompletedLottie from "@/Components/lottie/TestCompletedLottie";
 import TestingLottie from "@/Components/lottie/TestingLottie";
+import { getOrders } from "@/lib/fetch/orders";
 
 const page = async () => {
 
   const session = await auth();
+  const orders = await getOrders({ email: session?.user?.email, recent: true })
   // console.log(session)
+
   const statuses = [
     // "pending",
     "accepted",
@@ -28,19 +31,20 @@ const page = async () => {
     "delivered",
   ];
 
-  // Current status from API or backend
-  const currentStatus = "test_done"; // Example of current status
+  const currentStatus = orders[0]?.status;
 
   const currentIndex = statuses.findIndex(status => status === currentStatus);
-  return (
-    <>
-      <div className="m-4 border rounded order-details">
+
+  let content = null;
+  if (orders && orders.length > 0 && orders[0]?.status !== "pending") {
+    content = (
+      <>
         <div className="header">
           <h1 className="fs-4 dot">Project: <strong>CodeSync</strong></h1>
           <span className="date dot">Estimated delivery date : <strong>April 24, 2021</strong></span>
           <span className="product-count">3 Products</span>
-          
         </div>
+
         <div className="pt-4">
           {currentStatus === "accepted" && <AcceptedLottie />}
           {currentStatus === "analyzing" && <AnalyzingLottie />}
@@ -76,10 +80,22 @@ const page = async () => {
 
           </div>
         </div>
+      </>
+    )
+  }
+
+  if ((orders && orders.length < 0) || orders[0]?.status === "pending") {
+    content = (
+      <div style={{height: "80vh"}} className="p-4">
+        <h1>No recent orders</h1>
       </div>
+    )
+  }
 
-
-    </ >
+  return (
+    <div className="m-4 border rounded order-details">
+      {content}
+    </div>
   );
 }
 

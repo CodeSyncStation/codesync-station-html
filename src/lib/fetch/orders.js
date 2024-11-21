@@ -16,7 +16,14 @@ export async function postOrders(data) {
   }
 }
 
-export async function getOrders({ status, page, search, dateRange }) {
+export async function getOrders({
+  status,
+  page,
+  search,
+  dateRange,
+  email,
+  recent,
+}) {
   try {
     let queryParams = `${API_URL}/api/orders`;
     if (page) {
@@ -32,6 +39,12 @@ export async function getOrders({ status, page, search, dateRange }) {
     }
     if (dateRange) {
       queryParams = queryParams.concat(`&dateRange=${dateRange}`);
+    }
+    if (email) {
+      queryParams = queryParams.concat(`&email=${email}`);
+    }
+    if (recent) {
+      queryParams = queryParams.concat(`&recent=${recent}`);
     }
     const response = await fetch(queryParams, {
       next: {

@@ -94,7 +94,7 @@ export async function POST(request) {
 
 // Update a review
 export async function PUT(request) {
-  const { id, platform, stars, text, name, position, avatar } =
+  const { id, platform, stars, text, name, position, avatar, status } =
     await request.json();
 
   if (!id) {
@@ -109,7 +109,7 @@ export async function PUT(request) {
 
     const updatedReview = await Review.findByIdAndUpdate(
       id,
-      { platform, stars, text, name, position, avatar },
+      { platform, stars, text, name, position, avatar, status },
       { new: true, runValidators: true }
     );
 
