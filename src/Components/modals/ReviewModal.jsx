@@ -1,11 +1,11 @@
-import { postReviews } from "@/lib/fetch/reviews";
+import { getReviews, postReviews } from "@/lib/fetch/reviews";
 import uploadImage from "@/utilities/func/uploadImage";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 
-const ReviewModal = ({ show, setShow }) => {
+const ReviewModal = ({ show, setShow, setReviews }) => {
   const [session, setSession] = useState("")
   console.log(session)
   const [formData, setFormData] = useState({
@@ -16,8 +16,6 @@ const ReviewModal = ({ show, setShow }) => {
     position: "",
     avatar: "",
   });
-
-  console.log(formData)
 
   useEffect(() => {
     (async function () {
@@ -52,6 +50,10 @@ const ReviewModal = ({ show, setShow }) => {
         handleClose()
         toast.success("Reviews sended successfully!")
         toast.dismiss(toastId)
+        const response = await getReviews({})
+        if(setReviews){
+          setReviews(response)
+        }
       }
     } catch (error) {
       console.log(error)

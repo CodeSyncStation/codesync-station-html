@@ -16,17 +16,21 @@ const ReviewPage = () => {
   const [iri, setIri] = useState('')
   const [reviews, setReviews] = useState(null)
   const [loading, setLoading] = useState(false)
-
+  const [status, setStatus] = useState("all")
   useEffect(() => {
     (async function () {
       setLoading(true)
-      const reviews = await getReviews({})
+      const filter = {};
+      if (status!== "all") {
+        filter.status = status;
+      }
+      const reviews = await getReviews(filter);
       setReviews(reviews)
       setLoading(false)
     })()
-  }, [])
+  }, [status])
 
-  const handleAccept = async (id)=> {
+  const handleAccept = async (id) => {
     const toastId = toast.loading("Loading..")
     try {
       const response = await putReview(id, "approved")
@@ -36,7 +40,7 @@ const ReviewPage = () => {
         setIsEdit(false)
         toast.success("Review status updated successfully!")
         toast.dismiss(toastId)
-      }else{
+      } else {
         toast.error("Failed to update review status!")
       }
     } catch (error) {
@@ -66,7 +70,7 @@ const ReviewPage = () => {
             setReviews(reviews)
             toast.success("User deleted successfully!")
             toast.dismiss(toastId)
-          }else{
+          } else {
             toast.error("Failed to delete review!")
           }
         } catch (error) {
@@ -142,8 +146,6 @@ const ReviewPage = () => {
 
               </button>
             }
-
-
             <button className="pill text-black" style={{ "background-color": "#E2E8F0" }} onClick={() => handleEdit(user?._id)}>
               <span className="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
@@ -169,7 +171,7 @@ const ReviewPage = () => {
 
   return (
     <>
-      <ReviewModal show={show} setShow={setShow} />
+      <ReviewModal show={show} setShow={setShow} setReviews={setReviews}/>
       <section className="user-container">
         <div className="section-top d-flex justify-content-between">
           <div>
@@ -185,7 +187,7 @@ const ReviewPage = () => {
                   id="email"
                   type="search"
                   placeholder="Search by Email"
-                  className="form-control shadow-none w-100 shadow-none"
+                  className="form-control shadow-none w-100 shadow-none px-3"
                 // onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
@@ -196,7 +198,7 @@ const ReviewPage = () => {
                     id=""
                     className="form-select shadow-none fz-14"
                     style={{ height: "2.9rem" }}
-                  // onChange={(e)=> setQuery((prev) => ({ ...prev, status: e.target.value }))}
+                    onChange={(e) => setStatus(e.target.value)}
                   >
                     <option value="all">All</option>
                     <option value="pending">Pending</option>

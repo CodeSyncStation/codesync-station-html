@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   // const id = searchParams.get("id");
+  const status = searchParams.get("status");
 
   try {
     await dbConnect();
@@ -18,7 +19,14 @@ export async function GET(request) {
     //   );
     // }
 
-    const review = await Review.find({});
+    const query = {};
+    const options = {};
+
+    if (status) {
+      query.status = status;
+    }
+
+    const review = await Review.find(query, options);
     if (!review) {
       return NextResponse.json(
         { status: 404, message: "Review not found" },
