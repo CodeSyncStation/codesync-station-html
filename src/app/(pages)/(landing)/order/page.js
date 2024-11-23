@@ -1,4 +1,5 @@
 import OrderRequestForm from "@/Components/form/OrderRequestForm";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata = {
   title: "Order Request Form || CodeSync Station",
@@ -15,7 +16,9 @@ export default function page() {
       <p className="description">
         Please fill out the form below to request a quote for our services.
       </p>
-      <OrderRequestForm />
+      <SessionProvider>
+        <OrderRequestForm />
+      </SessionProvider>
     </div>
   );
 }

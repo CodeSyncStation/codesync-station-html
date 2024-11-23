@@ -2,9 +2,11 @@
 
 import Spinner from '@/Components/ui/MySpinner';
 import { postOrders } from '@/lib/fetch/orders';
-import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 export default function OrderRequestForm() {
+  const session = useSession()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,6 +19,11 @@ export default function OrderRequestForm() {
     notes: ''
   });
   const [loading, setLoading] = useState(false);
+  useEffect(()=>{
+    if(session.data?.user){
+      setFormData({...formData, email: session.data.user.email })
+    }
+  }, [session])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -73,7 +80,6 @@ export default function OrderRequestForm() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-
         {/* First row with two columns */}
         <div className="row">
           <div className="col-md-6">
@@ -103,6 +109,7 @@ export default function OrderRequestForm() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder='Write your email here...'
+                disabled={session?.data ? true : false}
                 required
               />
             </div>

@@ -1,6 +1,7 @@
 import Footer from "@/Components/layout/Footer";
 import NavbarComponent from "@/Components/layout/Navbar";
 import Script from "next/script";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "CodeSync Station",
@@ -9,6 +10,7 @@ export const metadata = {
 export default function LandingLayout({ children }) {
   return (
     <>
+      <Toaster />
       <NavbarComponent />
       {children}
       <Footer />

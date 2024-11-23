@@ -71,9 +71,9 @@ function OrderHistory() {
 
                   </tr>
                 ))
-                  :
-                  <td colSpan={8} className="text-center fw-bold">No orders found.</td>
-
+                  : <tr>
+                    <td colSpan={8} className="text-center fw-bold">No orders found.</td>
+                  </tr>
               }
 
             </tbody>
