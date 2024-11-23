@@ -5,3 +5,4 @@ TODO:  aos animation settings change once : true
 TODO:  need to fixed all svg related warnings
 TODO:  need to responsive progress order
 TODO:  add lottie to no recent order found
+TODO:  edit review modal

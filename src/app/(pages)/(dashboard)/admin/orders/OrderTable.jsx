@@ -120,7 +120,7 @@ const OrderTable = () => {
   return (
     <div className="wrapper w-100">
       <section className="best-selling-courses">
-        <div className="table-wrapper">
+        <div className="table-wrapper" style={{overflow: "auto" , height: "100%"}}>
           <div className="section-top">
             <div className="flex-between">
               <div>

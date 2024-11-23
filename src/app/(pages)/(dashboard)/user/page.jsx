@@ -7,6 +7,7 @@ import DeliveredLottie from "@/Components/lottie/DeliveredLottie";
 import DesigningLottie from "@/Components/lottie/DesingingLottie";
 import DevelopingLottie from "@/Components/lottie/DevelopingLottie";
 import LoveLottie from "@/Components/lottie/LoveLottie";
+import NofoundLottie from "@/Components/lottie/NofoundLoggie";
 import TestCompletedLottie from "@/Components/lottie/TestCompletedLottie";
 import TestingLottie from "@/Components/lottie/TestingLottie";
 import { getOrders } from "@/lib/fetch/orders";
@@ -36,6 +37,9 @@ const page = async () => {
   const currentIndex = statuses.findIndex(status => status === currentStatus);
 
   let content = null;
+  // if(orders && orders.length === 0){
+  //   content = <p>No recent orders found.</p>
+  // }
   if (orders && orders.length > 0 && orders[0]?.status !== "pending") {
     content = (
       <>
@@ -84,10 +88,10 @@ const page = async () => {
     )
   }
 
-  if ((orders && orders.length < 0) || orders[0]?.status === "pending") {
+  if ((orders && orders.length === 0) || orders[0]?.status === "pending") {
     content = (
-      <div style={{height: "80vh"}} className="p-4">
-        <h1>No recent orders</h1>
+      <div style={{ height: "90vh" }} className="p-4">
+        <NofoundLottie />
       </div>
     )
   }
