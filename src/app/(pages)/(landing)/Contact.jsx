@@ -1,4 +1,5 @@
-import { FaEnvelope, FaPaperPlane, FaPhone } from "react-icons/fa";
+import ContactForm from "@/Components/form/ContactForm";
+import { FaEnvelope, FaPhone } from "react-icons/fa";
 import { PiBuildingOffice } from "react-icons/pi";
 export default function Contact() {
 
@@ -46,50 +47,15 @@ export default function Contact() {
                   <div className="icon">
                     <FaEnvelope />
                   </div>
-                  <a href="mailto:Info@zarasproperties.co.uk"
-                  ><span> Email : Info@zarasproperties.co.uk </span></a
+                  <a href="mailto:Info@codesync.co.uk"
+                  ><span> Email : Info@codesync.co.uk </span></a
                   >
                 </li>
               </ul>
             </div>
           </div>
           <div className="col-lg-8" data-aos="fade-left">
-            <div className="contact-form">
-              <h3 className="form-title">GET IN TOUCH WITH US</h3>
-              <div className="row g-4">
-                <div className="col-lg-6">
-                  <input type="text" placeholder="Name *" />
-                </div>
-                <div className="col-lg-6">
-                  <input type="email" placeholder="E-mail*" />
-                </div>
-                <div className="col-lg-6">
-                  <input type="email" placeholder="Phone Number" />
-                </div>
-                <div className="col-lg-6">
-                  <input type="email" placeholder="Subject *" />
-                </div>
-                <div className="col-12">
-                  <textarea
-                    name=""
-                    id=""
-                    cols="30"
-                    rows="5"
-                    placeholder="Message"
-                  ></textarea>
-                </div>
-                <div className="col-12">
-                  <div className="d-flex justify-content-end w-100">
-                    <button
-                      className="animated-btn  d-flex justify-content-between align-items-center gap-3"
-                    >
-                      SEND
-                      <FaPaperPlane />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ContactForm/>
           </div>
         </div>
       </div>

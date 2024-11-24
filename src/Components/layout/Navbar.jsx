@@ -149,14 +149,12 @@ export default function Navbar() {
                     <Link className="nav-link" href="/#portfolio">Portfolio </Link>
                   </li>
 
-
-
                   <li className="nav-item">
-                    <Link className="nav-link" href="/#inverstor">Career</Link>
+                    <Link className="nav-link" href="/#faq">FAQ</Link>
                   </li>
 
                   <li className="nav-item">
-                    <Link className="nav-link" href="/#testimonials">FAQ</Link>
+                    <Link className="nav-link" href="/#testimonials">Testimonials</Link>
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link" href="/#contact">Contact</Link>
@@ -175,7 +173,7 @@ export default function Navbar() {
                           </Dropdown.Toggle>
 
                           <Dropdown.Menu>
-                            <Link className="dropdown-item" href={userData?.role === "admin" ? "/admin" : "/user"}>
+                            <Link className="dropdown-item" href={userData?.role === "admin" ? "/admin" : "/user/profile"}>
                               <span className="icon me-2">
                                 <MdOutlineSpaceDashboard />
                               </span>

@@ -19,6 +19,16 @@ const Menu = () => {
   return (
     <div className="nav-wrapper">
       <ul className="nav flex-column">
+
+      <li className="nav-item">
+          <Link className={`nav-link ${isActive("/user/profile") ? "active" : ""}`} href="/user/profile">
+            <span className="icon">
+             <CgProfile/>
+            </span>
+            <span className="label">Profile</span>
+          </Link>
+        </li>
+
         <li className="nav-item">
           <Link
             className={`nav-link ${isActive("/user") ? "active" : ""}`}
@@ -33,7 +43,7 @@ const Menu = () => {
                 <path d="M19.875 11.25H4.125C3.71079 11.25 3.375 11.5858 3.375 12C3.375 12.4142 3.71079 12.75 4.125 12.75H19.875C20.2892 12.75 20.625 12.4142 20.625 12C20.625 11.5858 20.2892 11.25 19.875 11.25Z" fill="#090D1D" />
               </svg>
             </span>
-            <span className="label">Dashboard</span>
+            <span className="label">Progress</span>
           </Link>
         </li>
 
@@ -51,14 +61,7 @@ const Menu = () => {
             <span className="label">Order History</span>
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className={`nav-link ${isActive("/user/profile") ? "active" : ""}`} href="/user/profile">
-            <span className="icon">
-             <CgProfile/>
-            </span>
-            <span className="label">Profile</span>
-          </Link>
-        </li>
+        
 
         {/* <li className="nav-item">
           <Link className={`nav-link ${isActive("/settings") ? "active" : ""}`} href="/settings" >
