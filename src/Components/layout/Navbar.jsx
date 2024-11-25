@@ -1,5 +1,5 @@
 "use client"
-import logo from "@/assets/images/CodeSync_Station.png"
+import logo from "@/assets/images/logo.png"
 import { getSession, signOut } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"

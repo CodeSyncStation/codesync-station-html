@@ -53,7 +53,7 @@ const layout = async ({ children }) => {
           <div className="offcanvas-header d-lg-none d-flex justify-content-between">
             <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">
               <figure className="logo d-lg-flex position-relative">
-                <Image src={logo} alt="Digital dropout logo" />
+                <Image src={logo} alt="Digital dropout logo" width={70}  />
               </figure>
             </h5>
             <button
@@ -67,9 +67,9 @@ const layout = async ({ children }) => {
             </button>
           </div>
           <nav className="sidebar">
-            <Link href="/">
+            <Link href="/" className="ms-2">
               <figure className="logo d-none d-lg-flex mb-0 position-relative">
-                <Image src={logo} alt="Logo" width={150} />
+                <Image src={logo} alt="Logo" width={60} />
               </figure>
             </Link>
 

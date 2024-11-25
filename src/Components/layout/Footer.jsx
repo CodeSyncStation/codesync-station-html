@@ -1,5 +1,5 @@
 
-import logo from "@/assets/images/CodeSync_Station.png"
+import logo from "@/assets/images/logo.png"
 import Image from "next/image"
 
 export default function Footer() {
@@ -14,6 +14,8 @@ export default function Footer() {
               <Image
                 src={logo}
                 alt="CodeSync station"
+                width={62}
+                height={62}
               />  
 
               <p className="footer-text">

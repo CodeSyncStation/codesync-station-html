@@ -20,8 +20,8 @@ export default function Hero() {
                 Transforming Ideas into Digital Masterpieces
               </h3>
               <h2 className="title">
-                Your Vision, Our Code Creating Future-Ready
-                <span className="text-primary">Websites</span> That Inspire
+                Your Vision, Our Code Creating Future-Ready&nbsp;
+                <span className="text-primary">Solution</span> That Inspire
               </h2>
               <p className="desc">
                 Crafting innovative, brand-aligned websites that drive your
@@ -32,10 +32,10 @@ export default function Hero() {
                 <Link href="/order" className="animated-btn">
                   Order Now
                 </Link>
-                <div className="our-services">
+                <button className="our-services btn outline-0">
                   <Image src={videoIcon} alt="video icon" />
                   Our services
-                </div>
+                </button>
               </div>
             </div>
           </div>
