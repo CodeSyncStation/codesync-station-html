@@ -11,12 +11,13 @@ export default function OrderRequestForm() {
     name: '',
     email: '',
     phone: '',
+    projectTitle: '',
+    projectDescription: '',
     projectType: '',
-    details: '',
     budget: '',
     deadline: '',
     communication: '',
-    notes: ''
+    notes: ""
   });
   const [loading, setLoading] = useState(false);
   useEffect(()=>{
@@ -55,12 +56,13 @@ export default function OrderRequestForm() {
           name: '',
           email: '',
           phone: '',
+          projectTitle: '',
+          projectDescription: '',
           projectType: '',
-          details: '',
           budget: '',
           deadline: '',
           communication: '',
-          notes: ''
+          notes: ""
         });
       } else {
         toast.error("Failed to send order request.");
@@ -156,6 +158,22 @@ export default function OrderRequestForm() {
           </div>
         </div>
 
+        <div className="col-12">
+            <div className="form-group">
+              <label htmlFor="name">Project name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                name="name"
+                value={formData.projectTitle}
+                placeholder='Write your project name here...'
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
         {/* Third row */}
         <div className="form-group">
           <label htmlFor="details">Tell me about your project</label>
@@ -163,7 +181,7 @@ export default function OrderRequestForm() {
             className="form-control"
             id="details"
             name="details"
-            value={formData.details}
+            value={formData.projectDescription}
             onChange={handleChange}
             required
             placeholder='Ex. title, description, deadline, etc.'

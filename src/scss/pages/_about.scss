@@ -1,0 +1,39 @@
+@use "../global" as *;
+@use "../partials" as *;
+
+.about {
+  padding-top: 26px;
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #343a40;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
+  }
+
+  .heading {
+    font-size: 1.8rem;
+    color: $primary;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .image {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .valuesList {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+    }
+  }
+}

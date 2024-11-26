@@ -1,26 +1,19 @@
 "use client";
+import { useSession } from "next-auth/react";
 // import axiosInstance from "@/lib/axios";
+import { getOrders as getAllOrders } from "@/lib/fetch/orders";
 import { useEffect, useState } from "react";
 
 function OrderHistory() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { data } = useSession()
 
-  const getOrders = async () => {
+  const getOrders = async (email) => {
     try {
-      // Retrieve user data from localStorage
-      const userData = JSON.parse(localStorage.getItem("userData"));
-      const userId = userData?.id;
-
-      if (userId) {
-        // Construct the URL with the user ID
-        const url = `/orders?page=1&customer.id=${userId}`;
-        const responseObject = await axiosInstance.get(url);
-        const totalOrders = responseObject.data["hydra:member"];
-        setOrders(totalOrders);
-      } else {
-        console.error("User ID not found in localStorage");
-      }
+      const orders = await getAllOrders({ email });
+      console.log(orders, "orders")
+      setOrders(orders)
       setLoading(false);
     } catch (error) {
       console.error(error);
@@ -29,8 +22,10 @@ function OrderHistory() {
   };
 
   useEffect(() => {
-    getOrders();
-  }, []);
+    if (data) {
+      getOrders(data.user.email);
+    }
+  }, [data]);
 
   return (
     <div className="orderhistory-wrapper allcontent-wrapper">
@@ -59,8 +54,8 @@ function OrderHistory() {
               {
                 orders.length ? orders.sort().map((order, index) => (
                   <tr key={index}>
-                    <td>10</td>
-                    <td >{order?.course?.map(course => course.title).join(",")}</td>
+                    <td>{order?.orderId}</td>
+                    <td >{order?.title}</td>
                     <td >90</td>
                     <td>20</td>
                     <td>

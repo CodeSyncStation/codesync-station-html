@@ -12,6 +12,11 @@ const OrderSchema = new mongoose.Schema({
     trim: true,
     lowercase: true,
   },
+  projectName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
   phone: {
     type: String,
     required: true,
@@ -22,7 +27,7 @@ const OrderSchema = new mongoose.Schema({
     required: true,
     enum: ["web-development", "graphic-design", "mobile-app", "seo", "other"],
   },
-  details: {
+  projectDescription: {
     type: String,
     required: true,
   },

@@ -1,4 +1,5 @@
 import AboutLottie from "@/Components/lottie/AboutLottie";
+import Link from "next/link";
 
 export default function About() {
   return (
@@ -95,7 +96,9 @@ export default function About() {
                 a reputable provider and also to ensure that
               </p>
               <div className="mt-4">
-                <button className="animated-btn">Discover More </button>
+                <Link href="/about">
+                  <button className="animated-btn">Discover More </button>
+                </Link>
               </div>
             </div>
           </div>
