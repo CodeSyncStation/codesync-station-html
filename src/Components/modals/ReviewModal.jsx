@@ -7,7 +7,6 @@ import toast, { Toaster } from "react-hot-toast";
 
 const ReviewModal = ({ show, setShow, setReviews }) => {
   const [session, setSession] = useState("")
-  console.log(session)
   const [formData, setFormData] = useState({
     platform: "",
     stars: "",

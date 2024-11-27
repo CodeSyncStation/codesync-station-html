@@ -99,7 +99,7 @@ const UsersPage = () => {
         </td>
         <td>
           <div className="d-flex gap-2">
-            <button className="pill  text-black" style={{ "background-color": "#E2E8F0" }} onClick={() => handleEdit(user?._id)}>
+            <button className="pill  text-black" style={{ "backgroundColor": "#E2E8F0" }} onClick={() => handleEdit(user?._id)}>
               <span className="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                   <path fillRule="evenodd" clipRule="evenodd" d="M12.5594 4.30936L7.30936 9.55936C7.22731 9.64141 7.11603 9.6875 7 9.6875H5.25C5.00838 9.6875 4.8125 9.49162 4.8125 9.25V7.5C4.8125 7.38397 4.85859 7.27269 4.94064 7.19064L10.1906 1.94064C10.2727 1.85859 10.384 1.8125 10.5 1.8125C10.616 1.8125 10.7273 1.85859 10.8094 1.94064L12.5594 3.69064C12.7302 3.8615 12.7302 4.1385 12.5594 4.30936ZM10.5 2.86872L11.6313 4L6.81878 8.8125H5.6875V7.68122L10.5 2.86872Z" fill="#1E293B" />

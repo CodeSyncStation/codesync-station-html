@@ -36,7 +36,6 @@ const AdminSidebar = () => {
           <ul className="nav flex-column gap-1" style={InterFont.style}>
 
             <li className="nav-item">
-            <li className="nav-item">
               <Link
                 href="/admin"
                 className={`nav-link ${isActive("/admin") ? "active" : ""}`}
@@ -69,7 +68,6 @@ const AdminSidebar = () => {
                 </span>
                 <span > My Dashboard </span>
               </Link>
-            </li>
             </li>
             <li className="nav-item">
               <Link

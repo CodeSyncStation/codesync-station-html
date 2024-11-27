@@ -10,7 +10,6 @@ export const metadata = {
 
 export default async function LoginPage() {
 
-
   return (
     <div className="authentication">
     <div className="row h-100 g-0 m-0  p-0  ">

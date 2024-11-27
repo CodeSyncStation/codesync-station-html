@@ -201,7 +201,7 @@ const OrderTable = () => {
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="5">
+                <td colSpan="5">
                   <Pagination
                     page={page}
                     setPage={setPage}
