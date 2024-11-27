@@ -19,6 +19,7 @@ function OrderHistory() {
       console.error(error);
       setLoading(false);
     }
+    setLoading(false);
   };
 
   useEffect(() => {

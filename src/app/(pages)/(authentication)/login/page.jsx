@@ -8,7 +8,8 @@ export const metadata = {
   description: "",
 }
 
-export default function LoginPage() {
+export default async function LoginPage() {
+
 
   return (
     <div className="authentication">

@@ -2,6 +2,7 @@
 import logo from "@/assets/images/logo.png";
 import { auth } from "@/auth";
 import Menu from "@/Components/layout/Menu";
+import ProtectedRoute from "@/Components/layout/ProtectedRoute";
 import Avatar from "@/Components/ui/Avater";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,7 +42,7 @@ const layout = async ({ children }) => {
 
 
   return (
-    <>
+    <ProtectedRoute>
       <Toaster />
       <div className={`main-container`}>
         <div
@@ -191,7 +192,7 @@ const layout = async ({ children }) => {
           {children}
         </main>
       </div>
-    </>
+    </ProtectedRoute>
   );
 };
 

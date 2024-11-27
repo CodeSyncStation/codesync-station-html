@@ -2,6 +2,7 @@
 import adminBanner from "@/assets/images/banner-image-admin.jpeg";
 import logo from "@/assets/images/logo.png";
 import AdminSidebar from "@/Components/layout/AdminSidebar";
+import ProtectedRoute from "@/Components/layout/ProtectedRoute";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,10 +13,9 @@ export const InterFont = Inter({ subsets: ["latin"] });
 const baseUrl = process.env.NEXT_PUBLIC_APIHOST;
 
 const layout = ({ children }) => {
-
   return (
-    <>
-    <Toaster/>
+    <ProtectedRoute>
+      <Toaster />
       <div className={InterFont.className + " admin-layout"}>
         <nav className={`${InterFont.className} navbar navbar-expand-lg bg-body-tertiary admin-navbar sticky-top`}>
           <div className="container-fluid px-5 flex-between">
@@ -99,7 +99,7 @@ const layout = ({ children }) => {
           </div>
         </div>
       </div>
-    </>
+    </ProtectedRoute>
 
   );
 };
