@@ -19,7 +19,7 @@ const layout = async ({ children }) => {
   return (
     <ProtectAdmin>
       <Toaster />
-      <div className={InterFont.className + " admin-layout"}>
+      <div className={InterFont.className + " admin-layout hide-scrollbar"}>
         <nav className={`${InterFont.className} navbar navbar-expand-lg bg-body-tertiary admin-navbar sticky-top`}>
           <div className="container-fluid px-5 flex-between">
             <button
@@ -62,10 +62,10 @@ const layout = async ({ children }) => {
           </div>
         </nav>
 
-        <div className={`${InterFont.className} admin-main-container container-fluid`}>
-          <div className="admin-main-wrapper">
+        <div className={`${InterFont.className} admin-main-container container-fluid hide-scrollbar`}>
+          <div className="admin-main-wrapper hide-scrollbar">
             {/* <!-- banner container --> */}
-            <div className="admin-banner-container">
+            <div className="admin-banner-container hide-scrollbar">
               <div className="banner-image">
                 <figure>
                   <Image
@@ -74,7 +74,7 @@ const layout = async ({ children }) => {
                   />
                 </figure>
               </div>
-              <div className="flex-between bannar-content">
+              <div className="flex-between bannar-content hide-scrollbar">
                 <div className="admin-info">
                   {/* <!-- profile pic --> */}
                   <figure className="profile-pic author-img">
@@ -95,8 +95,8 @@ const layout = async ({ children }) => {
             <AdminSidebar />
 
             {/* <!-- main content --> */}
-            <div className="admin-main-conten">
-              <div className="wrapper">{children}</div>
+            <div className="admin-main-conten hide-scrollbar">
+              <div className="wrapper hide-scrollbar">{children}</div>
             </div>
           </div>
         </div>

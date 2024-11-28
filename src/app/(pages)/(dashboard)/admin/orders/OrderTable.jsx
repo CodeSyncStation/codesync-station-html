@@ -11,8 +11,6 @@ import toast from "react-hot-toast";
 
 const OrderTable = () => {
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sortOrder, setSortOrder] = useState("asc");
   const [totalItemCount, setTotalItems] = useState(0)
   const [page, setPage] = useState(1)
   const [orders, setOrders] = useState([])
@@ -53,10 +51,6 @@ const OrderTable = () => {
   }
 
   const debouncedHandleQuery = debounce(handleQuery, 500)
-
-  const handleSortChange = (e) => {
-    setSortOrder(e.target.value);
-  };
 
   let content = null;
   if (loading && orders.length === 0) {
@@ -121,9 +115,9 @@ const OrderTable = () => {
     ))
   }
   return (
-    <div className="wrapper w-100">
-      <section className="best-selling-courses">
-        <div className="table-wrapper" style={{ overflow: "auto", height: "100%" }}>
+    <div className="wrapper w-100 hide-scrollbar">
+      <section className="best-selling-courses hide-scrollbar">
+        <div className="table-wrapper hide-scrollbar" style={{ height: "100%" }}>
           <div className="section-top">
             <div className="flex-between">
               <div>

@@ -1,8 +1,6 @@
 
 TODO:  aos animation settings change once : true
 TODO:  need to responsive progress order
-TODO:  edit review modal
-TODO:  search by orderId 
 TODO:  service details page
 TODO:  portfolio details page
 TODO:  Implement edit review.
