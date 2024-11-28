@@ -144,7 +144,6 @@ const TestimonialSlider = () => {
           </h2>
         </div>
         {content}
-
       </div>
     </section>
   );

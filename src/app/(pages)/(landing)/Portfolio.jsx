@@ -23,6 +23,66 @@ export default function Portfolio() {
     })()
   }, [])
 
+  
+  let content = null;
+
+  if (loading && projects.length === 0) {
+    content = <div className="text-center" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+  }
+
+  if (!loading && projects.length === 0) {
+    content = <div className="text-center">
+      <p>Project not found.</p>
+    </div>
+  }
+
+  if (!loading && projects.length > 0) {
+    content =<Swiper
+    modules={[Pagination, Autoplay]}
+    className="project-swiper"
+    pagination={{ clickable: true }}
+    spaceBetween={30}
+    slidesPerView={1}
+    autoplay={true}
+    loop={true}
+    breakpoints={{
+      768: {
+        slidesPerView: 2,
+      },
+      1200: {
+        slidesPerView: 3,
+      },
+    }}
+  >
+
+    {
+      projects.map((project, i) => (
+        <SwiperSlide key={project._id} >
+          <div className="portfolio-card" data-aos={getAnimation(i)}>
+            <div className="success-img ">
+              <div className="magnetic-wrap ">
+                <img className="img-fluid magnetic-item" src={project?.image} alt={project?.title}/>
+              </div>
+            </div>
+            <div className="success-content" >
+              <span>{project.projectType}</span>
+              <h3>{project.title}</h3>
+              <div className="view-btn">
+                <a href="#">
+                  <HiOutlineArrowRight />
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+      ))
+    }
+  </Swiper>
+  }
+
 
   return (
     <section id="portfolio" className="portfolio-section">
@@ -36,48 +96,7 @@ export default function Portfolio() {
         </div>
 
         <div className="section-body">
-          <Swiper
-            modules={[Pagination, Autoplay]}
-            className="project-swiper"
-            pagination={{ clickable: true }}
-            spaceBetween={30}
-            slidesPerView={1}
-            autoplay={true}
-            loop={true}
-            breakpoints={{
-              768: {
-                slidesPerView: 2,
-              },
-              1200: {
-                slidesPerView: 3,
-              },
-            }}
-          >
-
-            {
-              projects.map((project, i) => (
-                <SwiperSlide key={project._id} >
-                  <div className="portfolio-card" data-aos={getAnimation(i)}>
-                    <div className="success-img ">
-                      <div className="magnetic-wrap ">
-                        <img className="img-fluid magnetic-item" src={project?.image} alt={project?.title}/>
-                      </div>
-                    </div>
-                    <div className="success-content" >
-                      <span>{project.projectType}</span>
-                      <h3>{project.title}</h3>
-                      <div className="view-btn">
-                        <a href="#">
-                          <HiOutlineArrowRight />
-                        </a>
-
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))
-            }
-          </Swiper>
+          {content}
 
         </div>
       </div>

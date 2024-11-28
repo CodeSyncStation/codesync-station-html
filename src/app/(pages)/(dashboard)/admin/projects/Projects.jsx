@@ -79,7 +79,7 @@ export default function Projects() {
                   <button className="edit-btn btn" onClick={() => handleEdit(project)}>
                     <MdModeEditOutline />
                   </button>
-                  <button className="delete-btn btn" onClick={()=> handleDelete(project?._id)}>
+                  <button className="delete-btn btn" onClick={() => handleDelete(project?._id)}>
                     <MdDelete />
                   </button>
                 </div>
@@ -105,10 +105,6 @@ export default function Projects() {
         }
 
       </>
-
-
-
-
   }
 
   return (
@@ -118,14 +114,14 @@ export default function Projects() {
         {content}
         {
           !loading && <div className="col-md-6 col-xl-4 mt-3">
-          <div className="portfolio-card add-card" onClick={() => setShow(true)}>
-            <div className="plus-icon">
-              <MdAdd />
+            <div className="portfolio-card add-card" onClick={() => setShow(true)}>
+              <div className="plus-icon">
+                <MdAdd />
+              </div>
             </div>
           </div>
-        </div>
         }
-        
+
       </div>
     </>
 

@@ -12,7 +12,7 @@ const page = () => {
 
   return (
     <section className="best-selling-courses overflow-visible">
-      <div className="table-wrapper" style={{ overflow: "visible" }}>
+      <div className="table-wrapper" style={{ "overflowY": "auto" }}>
         <div className="section-top">
           <h3 className="title-main">Projects</h3>
           <p className="des">
