@@ -1,16 +1,18 @@
 
 
 import { auth } from "@/auth";
-import AcceptedLottie from "@/Components/lottie/AcceptedLottie";
-import AnalyzingLottie from "@/Components/lottie/AnalyzingLottie";
-import DeliveredLottie from "@/Components/lottie/DeliveredLottie";
-import DesigningLottie from "@/Components/lottie/DesingingLottie";
-import DevelopingLottie from "@/Components/lottie/DevelopingLottie";
-import LoveLottie from "@/Components/lottie/LoveLottie";
-import NofoundLottie from "@/Components/lottie/NofoundLoggie";
-import TestCompletedLottie from "@/Components/lottie/TestCompletedLottie";
-import TestingLottie from "@/Components/lottie/TestingLottie";
 import { getOrders } from "@/lib/fetch/orders";
+import dynamic from "next/dynamic";
+
+const AcceptedLottie = dynamic(() => import("@/Components/lottie/AcceptedLottie"), { ssr: false });
+const AnalyzingLottie = dynamic(() => import("@/Components/lottie/AnalyzingLottie"), { ssr: false });
+const DeliveredLottie = dynamic(() => import("@/Components/lottie/DeliveredLottie"), { ssr: false });
+const DesigningLottie = dynamic(() => import("@/Components/lottie/DesingingLottie"), { ssr: false });
+const DevelopingLottie = dynamic(() => import("@/Components/lottie/DevelopingLottie"), { ssr: false });
+const LoveLottie = dynamic(() => import("@/Components/lottie/LoveLottie"), { ssr: false });
+const NofoundLottie = dynamic(() => import("@/Components/lottie/NofoundLoggie"), { ssr: false });
+const TestCompletedLottie = dynamic(() => import("@/Components/lottie/TestCompletedLottie"), { ssr: false });
+const TestingLottie = dynamic(() => import("@/Components/lottie/TestingLottie"), { ssr: false });
 
 const page = async () => {
 

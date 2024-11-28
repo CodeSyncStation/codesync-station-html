@@ -19,7 +19,7 @@ export async function postOrders(data) {
 export async function getOrders({
   status,
   page,
-  search,
+  orderId,
   dateRange,
   email,
   recent,
@@ -34,8 +34,8 @@ export async function getOrders({
     if (status) {
       queryParams = queryParams.concat(`&status=${status}`);
     }
-    if (search) {
-      queryParams = queryParams.concat(`&search=${search}`);
+    if (orderId) {
+      queryParams = queryParams.concat(`&orderId=${orderId}`);
     }
     if (dateRange) {
       queryParams = queryParams.concat(`&dateRange=${dateRange}`);

@@ -1,4 +1,3 @@
-import User from "@/model/UserModel";
 import bcrypt from "bcryptjs";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
@@ -6,6 +5,10 @@ import Facebook from "next-auth/providers/facebook";
 import Google from "next-auth/providers/google";
 import { findUser } from "./lib/fetch/users";
 import dbConnect from "./lib/mongoose/dbConnect";
+
+export const config = {
+  runtime: "nodejs",
+};
 
 async function saltAndHashPassword(password) {
   const salt = await bcrypt.genSalt(10);
@@ -61,7 +64,6 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        await dbConnect();
         const user = await findUser(credentials?.email);
         if (user) {
           return {

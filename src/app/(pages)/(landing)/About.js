@@ -1,5 +1,8 @@
-import AboutLottie from "@/Components/lottie/AboutLottie";
+import dynamic from "next/dynamic";
 import Link from "next/link";
+const AboutLottie = dynamic(() => import("@/Components/lottie/AboutLottie"), {
+  ssr: false,
+});
 
 export default function About() {
   return (

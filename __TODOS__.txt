@@ -1,8 +1,8 @@
-When developing
 
-When deploying
 TODO:  aos animation settings change once : true
-TODO:  need to fixed all svg related warnings
 TODO:  need to responsive progress order
-TODO:  add lottie to no recent order found
 TODO:  edit review modal
+TODO:  search by orderId 
+TODO:  service details page
+TODO:  portfolio details page
+TODO:  Implement edit review.

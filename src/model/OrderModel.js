@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
 
+export const config = {
+  runtime: "nodejs",
+};
+
 const OrderSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -80,9 +84,4 @@ const OrderSchema = new mongoose.Schema({
 const OrderModel =
   mongoose.models.Order || mongoose.model("Order", OrderSchema);
 // Generate unique order ID
-OrderSchema.pre("save", function () {
-  if (!this.orderId) {
-    this.orderId = Math.random().toString(36).substr(2, 9);
-  }
-});
 export default OrderModel;

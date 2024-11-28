@@ -7,18 +7,23 @@ export async function GET(request) {
   const { nextUrl } = request;
   const status = nextUrl.searchParams.get("status");
   const date = nextUrl.searchParams.get("date");
-  const search = nextUrl.searchParams.get("search");
+  const orderId = nextUrl.searchParams.get("orderId");
   const page = nextUrl.searchParams.get("page");
   const email = nextUrl.searchParams.get("email");
   const recent = nextUrl.searchParams.get("recent");
 
   let query = {};
   let options = {};
+  // if (page) {
+  //   const limit = 10;
+  //   options.skip = (parseInt(page) - 1) * limit;
+  //   options.limit = limit;
+  // }
   if (status) {
     query.status = status;
   }
-  if (search) {
-    query._id = ObjectId;
+  if (orderId) {
+    query.orderId = { $regex: `^${orderId}`, $options: "i" };
   }
 
   if (email) {
@@ -33,6 +38,8 @@ export async function GET(request) {
     options.sort = { createdAt: -1 };
     options.limit = 1;
   }
+
+  console.log(query);
 
   try {
     await dbConnect();
@@ -51,11 +58,13 @@ export async function POST(request) {
     name,
     email,
     phone,
+    projectName,
     projectType,
-    details,
+    projectDescription,
     budget,
     deadline,
     communication,
+    notes,
   } = await request.json();
 
   // validate input
@@ -64,7 +73,7 @@ export async function POST(request) {
     !email ||
     !phone ||
     !projectType ||
-    !details ||
+    !projectName ||
     !budget ||
     !deadline ||
     !communication
@@ -79,14 +88,17 @@ export async function POST(request) {
     // Save user
     await dbConnect();
     const insertedData = await OrderModel.create({
+      orderId: "CS" + Math.random().toString(36).substr(2, 9).toUpperCase(),
       name,
       email,
       phone,
       projectType,
-      details,
+      projectName,
+      projectDescription,
       budget,
       deadline,
       communication,
+      notes,
     });
     return NextResponse.json(insertedData, { status: 200 });
   } catch (error) {

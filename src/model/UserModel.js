@@ -1,5 +1,9 @@
-const bcrypt = require("bcryptjs");
-const mongoose = require("mongoose");
+import bcrypt from "bcryptjs";
+import mongoose from "mongoose";
+
+export const config = {
+  runtime: "nodejs",
+};
 
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
@@ -33,4 +37,5 @@ userSchema.pre("findOneAndUpdate", async function hashPassword(next) {
   next();
 });
 
-export default mongoose.models?.User || mongoose.model("User", userSchema);
+const User = mongoose.models?.User || mongoose.model("User", userSchema);
+export default User;

@@ -1,9 +1,12 @@
 import bannerImg3 from "@/assets/images/hero/3.png";
 import heroBg from "@/assets/images/hero/8.png";
 import videoIcon from "@/assets/images/icons/video.svg";
-import WebLottie from "@/Components/lottie/WebLottie";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
+const WebLottie = dynamic(() => import("@/Components/lottie/WebLottie"), {
+  ssr: false,
+});
 
 export default function Hero() {
   return (

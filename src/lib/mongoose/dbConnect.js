@@ -1,7 +1,10 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
+export const config = {
+  runtime: "nodejs",
+};
 
 const MONGODB_URI = process.env.NEXT_PUBLIC_MONGODB_URI;
-console.log(MONGODB_URI);
 
 if (!MONGODB_URI) {
   throw new Error(

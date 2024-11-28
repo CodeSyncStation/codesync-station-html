@@ -1,3 +1,4 @@
+import dbConnect from "../mongoose/dbConnect";
 import { API_URL } from "./config";
 
 export async function getAllUsers(params) {
@@ -14,6 +15,7 @@ export async function getAllUsers(params) {
   }
 }
 export async function findUser(email) {
+  await dbConnect();
   try {
     const response = await fetch(`${API_URL}/api/findUser?email=${email}`, {
       cache: "no-store",

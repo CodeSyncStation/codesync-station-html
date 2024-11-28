@@ -1,8 +1,10 @@
 
 import adminBanner from "@/assets/images/banner-image-admin.jpeg";
 import logo from "@/assets/images/logo.png";
+import { auth } from "@/auth";
 import AdminSidebar from "@/Components/layout/AdminSidebar";
 import ProtectAdmin from "@/Components/layout/ProtectAdmin";
+import Avatar from "@/Components/ui/Avater";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +14,8 @@ export const InterFont = Inter({ subsets: ["latin"] });
 
 const baseUrl = process.env.NEXT_PUBLIC_APIHOST;
 
-const layout = ({ children }) => {
+const layout = async ({ children }) => {
+  const { user: userData } = await auth()
   return (
     <ProtectAdmin>
       <Toaster />
@@ -74,18 +77,17 @@ const layout = ({ children }) => {
               <div className="flex-between bannar-content">
                 <div className="admin-info">
                   {/* <!-- profile pic --> */}
-                  {/* <figure className="profile-pic author-img">
-                  {userData.profileImage &&
-                  userData?.profileImage.includes("/") ? (
-                    <Image src={baseUrl + userData?.profileImage} alt="Profile image" fill />
-                  ) : (
-                    <Avatar />
-                  )}
-                </figure> */}
-                  <span className="profile-name"> name</span>
+                  <figure className="profile-pic author-img">
+                    <Avatar url={userData?.image} />
+                  </figure>
+                  <span className="profile-name"> {userData?.fullName} </span>
                   <span className="admin-label">admin</span>
                 </div>
-
+                <div className="mb-4 mb-sm-0">
+                  {/* <Link href="/course/add">
+                    <button className="btn-dashboard">Create New Course</button>
+                  </Link> */}
+                </div>
               </div>
             </div>
 

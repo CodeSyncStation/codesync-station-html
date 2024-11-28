@@ -18,9 +18,11 @@ export default function Navbar() {
   const [userData, setUserData] = useState(null)
 
   useEffect(() => {
+
     getUserData()
     activeNavbar()
-    window.addEventListener("scroll", activeNavbar);
+
+    document.addEventListener("scroll", activeNavbar);
   }, [])
 
   function activeNavbar() {

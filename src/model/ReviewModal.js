@@ -1,4 +1,8 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+
+export const config = {
+  runtime: "nodejs",
+};
 
 const reviewSchema = new mongoose.Schema({
   platform: {
@@ -49,4 +53,4 @@ const reviewSchema = new mongoose.Schema({
 
 const Review = mongoose.models.Review || mongoose.model("Review", reviewSchema);
 
-module.exports = Review;
+export default Review;

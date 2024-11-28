@@ -1,6 +1,7 @@
 "use client";
 import Pagination from "@/Components/ui/Pagination";
 import { getOrders, putOrder } from "@/lib/fetch/orders";
+import debounce from "@/utilities/func/debaunce";
 import statusColors from "@/utilities/func/statusColors";
 import { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
@@ -18,6 +19,7 @@ const OrderTable = () => {
   const [query, setQuery] = useState({
     status: "",
     page: 1,
+    orderId: ""
   })
 
   useEffect(() => {
@@ -30,7 +32,6 @@ const OrderTable = () => {
   }, [query])
 
   const handleStatusChange = async (status, orderId) => {
-    console.log(status, orderId);
     // Handle status change logic here
     const toastId = toast.loading("Updating status...");
 
@@ -47,9 +48,11 @@ const OrderTable = () => {
       toast.dismiss(toastId);
     }
   }
-  const handleFilter= (key, value)=> {
+  const handleQuery = (key, value) => {
     setQuery((prev) => ({ ...prev, [key]: value }))
   }
+
+  const debouncedHandleQuery = debounce(handleQuery, 500)
 
   const handleSortChange = (e) => {
     setSortOrder(e.target.value);
@@ -58,8 +61,8 @@ const OrderTable = () => {
   let content = null;
   if (loading && orders.length === 0) {
     content = <tr>
-    <td colSpan="6" className="text-center fw-bold">Loading...</td>
-  </tr>
+      <td colSpan="6" className="text-center fw-bold">Loading...</td>
+    </tr>
   }
   if (!loading && orders.length === 0) {
     content = <tr>
@@ -120,7 +123,7 @@ const OrderTable = () => {
   return (
     <div className="wrapper w-100">
       <section className="best-selling-courses">
-        <div className="table-wrapper" style={{overflow: "auto" , height: "100%"}}>
+        <div className="table-wrapper" style={{ overflow: "auto", height: "100%" }}>
           <div className="section-top">
             <div className="flex-between">
               <div>
@@ -139,33 +142,31 @@ const OrderTable = () => {
             <form className="d-flex justify-content-between gap-2 pb-3">
               <div className="input-box mt-3 flex-1">
                 <input
-                  id="email"
                   type="search"
                   placeholder="Search by order ID"
                   className="form-control shadow-none w-100 shadow-none"
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => debouncedHandleQuery("orderId", e.target.value)}
                 />
               </div>
               <div className="d-flex justify-content-between gap-2">
-              <div className="input-box mt-3">
-                <select
-                  name="date"
-                  id=""
-                  className="form-select shadow-none fz-14"
-                  style={{ height: "2.9rem" }}
-                  onChange={(e)=> setQuery((prev) => ({ ...prev, status: e.target.value }))}
-                >
-                  <option value="">All</option>
-                  {
-                    Object.keys(statusColors).map((status, index) => <option 
-                    key={index} 
-                    value={status}
-                    style={{color: statusColors[status], textTransform: "capitalize"}}>{status.replace(/_/g, ' ')}
-                    </option>)
-                  }
-                </select>
-              </div>
-              {/* <div className="input-box mt-3">
+                <div className="input-box mt-3">
+                  <select
+                    name="status"
+                    className="form-select shadow-none fz-14"
+                    style={{ height: "2.9rem" }}
+                    onChange={(e) => setQuery((prev) => ({ ...prev, "status": e.target.value }))}
+                  >
+                    <option value="">All</option>
+                    {
+                      Object.keys(statusColors).map((status, index) => <option
+                        key={index}
+                        value={status}
+                        style={{ color: statusColors[status], textTransform: "capitalize" }}>{status.replace(/_/g, ' ')}
+                      </option>)
+                    }
+                  </select>
+                </div>
+                {/* <div className="input-box mt-3">
                 <select
                   name="date"
                   id=""

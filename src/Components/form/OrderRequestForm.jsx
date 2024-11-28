@@ -11,7 +11,7 @@ export default function OrderRequestForm() {
     name: '',
     email: '',
     phone: '',
-    projectTitle: '',
+    projectName: '',
     projectDescription: '',
     projectType: '',
     budget: '',
@@ -56,7 +56,7 @@ export default function OrderRequestForm() {
           name: '',
           email: '',
           phone: '',
-          projectTitle: '',
+          projectName: '',
           projectDescription: '',
           projectType: '',
           budget: '',
@@ -164,9 +164,9 @@ export default function OrderRequestForm() {
               <input
                 type="text"
                 className="form-control"
-                id="name"
-                name="name"
-                value={formData.projectTitle}
+                id="projectName"
+                name="projectName"
+                value={formData.projectName}
                 placeholder='Write your project name here...'
                 onChange={handleChange}
                 required
@@ -179,8 +179,8 @@ export default function OrderRequestForm() {
           <label htmlFor="details">Tell me about your project</label>
           <textarea
             className="form-control"
-            id="details"
-            name="details"
+            id="projectDescription"
+            name="projectDescription"
             value={formData.projectDescription}
             onChange={handleChange}
             required

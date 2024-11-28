@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
 // Nodemailer er transporter setup
 const transporter = nodemailer.createTransport({
