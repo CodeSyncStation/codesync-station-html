@@ -71,9 +71,6 @@ const layout = async ({ children }) => {
 
             <div className="right-content">
 
-              {/* <!-- notification container --> */}
-              
-
               {/* <!-- profile  --> */}
               <div className="profile-dropdown btn btn-primary" style={{ width: "38px", position: "relative" }}>
                 <Avatar url={session?.user?.image} />
