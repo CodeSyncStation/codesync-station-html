@@ -6,8 +6,8 @@ import { NextResponse } from "next/server";
 // Fetch a review by ID
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
-  // const id = searchParams.get("id");
   const status = searchParams.get("status");
+  const email = searchParams.get("email");
 
   try {
     await dbConnect();
@@ -24,6 +24,10 @@ export async function GET(request) {
 
     if (status) {
       query.status = status;
+    }
+
+    if (email) {
+      query.email = { $regex: email, $options: "i" };
     }
 
     const review = await Review.find(query, options);

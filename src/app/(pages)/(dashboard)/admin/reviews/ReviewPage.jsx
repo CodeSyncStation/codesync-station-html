@@ -3,6 +3,7 @@
 import ReviewModal from "@/Components/modals/ReviewModal";
 import Avatar from "@/Components/ui/Avater";
 import { deleteReview, getReviews, putReview } from "@/lib/fetch/reviews";
+import debounce from "@/utilities/func/debaunce";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { MdDone } from "react-icons/md";
@@ -13,22 +14,27 @@ const baseUrl = process.env.NEXT_PUBLIC_APIHOST;
 const ReviewPage = () => {
   const [show, setShow] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
-  const [iri, setIri] = useState('')
   const [reviews, setReviews] = useState(null)
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState("all")
+  const [review, setReview] = useState(null)
+  const [email, setEmail] = useState("");
+
   useEffect(() => {
     (async function () {
       setLoading(true)
       const filter = {};
-      if (status!== "all") {
+      if (status !== "all") {
         filter.status = status;
+      }
+      if(email){
+        filter.email = email;
       }
       const reviews = await getReviews(filter);
       setReviews(reviews)
       setLoading(false)
     })()
-  }, [status])
+  }, [status, email])
 
   const handleAccept = async (id) => {
     const toastId = toast.loading("Loading..")
@@ -85,10 +91,12 @@ const ReviewPage = () => {
 
   }
 
-  const handleEdit = iri => {
+  const handleEmail = debounce((value)=> setEmail(value), 500)
+
+  const handleEdit = review => {
     setShow(true)
     setIsEdit(true)
-    setIri(iri)
+    setReview(review)
   }
 
   let userRow = null;
@@ -110,7 +118,7 @@ const ReviewPage = () => {
         <td>
           <div className="course-image-container">
             <figure className="author-img">
-              <Avatar url={user?.image} />
+              <Avatar url={user?.avatar} />
             </figure>
             <div>
               <h3 className="course-name w-auto">
@@ -146,7 +154,7 @@ const ReviewPage = () => {
 
               </button>
             }
-            <button className="pill text-black" style={{ "backgroundColor": "#E2E8F0" }} onClick={() => handleEdit(user?._id)}>
+            <button className="pill text-black" style={{ "backgroundColor": "#E2E8F0" }} onClick={() => handleEdit(user)}>
               <span className="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                   <path fillRule="evenodd" clipRule="evenodd" d="M12.5594 4.30936L7.30936 9.55936C7.22731 9.64141 7.11603 9.6875 7 9.6875H5.25C5.00838 9.6875 4.8125 9.49162 4.8125 9.25V7.5C4.8125 7.38397 4.85859 7.27269 4.94064 7.19064L10.1906 1.94064C10.2727 1.85859 10.384 1.8125 10.5 1.8125C10.616 1.8125 10.7273 1.85859 10.8094 1.94064L12.5594 3.69064C12.7302 3.8615 12.7302 4.1385 12.5594 4.30936ZM10.5 2.86872L11.6313 4L6.81878 8.8125H5.6875V7.68122L10.5 2.86872Z" fill="#1E293B" />
@@ -171,7 +179,7 @@ const ReviewPage = () => {
 
   return (
     <>
-      <ReviewModal show={show} setShow={setShow} setReviews={setReviews}/>
+      <ReviewModal show={show} setShow={setShow} setReviews={setReviews} isEdit={isEdit} setIsEdit={setIsEdit} review={review} />
       <section className="user-container">
         <div className="section-top d-flex justify-content-between">
           <div>
@@ -188,7 +196,7 @@ const ReviewPage = () => {
                   type="search"
                   placeholder="Search by Email"
                   className="form-control shadow-none w-100 shadow-none px-3"
-                // onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => handleEmail(e.target.value)}
                 />
               </div>
               <div className="d-flex justify-content-between gap-2">
@@ -206,18 +214,7 @@ const ReviewPage = () => {
 
                   </select>
                 </div>
-                {/* <div className="input-box mt-3">
-                <select
-                  name="date"
-                  id=""
-                  className="form-select shadow-none fz-14"
-                  style={{ height: "2.9rem" }}
-                  onChange={handleSortChange}
-                >
-                  <option value="asc">Amount low to high</option>
-                  <option value="desc">Amount high to low</option>
-                </select>
-              </div> */}
+
               </div>
             </form>
           </div>
@@ -235,7 +232,7 @@ const ReviewPage = () => {
 
 
         <div className="section-body">
-          <table className="admin-table d-table overflow-x-auto">
+          <table className="admin-table d-xxl-table overflow-x-auto">
             {/* <!-- head --> */}
             <thead>
               <tr>

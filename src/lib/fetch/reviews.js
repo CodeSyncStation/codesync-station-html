@@ -16,7 +16,7 @@ export async function postReviews(data) {
   }
 }
 
-export async function getReviews({ status, page, search, dateRange }) {
+export async function getReviews({ status, page, search, dateRange, email }) {
   try {
     let queryParams = `${API_URL}/api/reviews`;
     if (page) {
@@ -33,6 +33,9 @@ export async function getReviews({ status, page, search, dateRange }) {
     if (dateRange) {
       queryParams = queryParams.concat(`&dateRange=${dateRange}`);
     }
+    if (email) {
+      queryParams = queryParams.concat(`&email=${email}`);
+    }
     const response = await fetch(queryParams, {
       next: {
         tags: ["reviews"],
@@ -44,14 +47,14 @@ export async function getReviews({ status, page, search, dateRange }) {
   }
 }
 
-export async function putReview(id, status) {
+export async function putReview(id, data) {
   try {
     const response = await fetch(`${API_URL}/api/reviews`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id, status }),
+      body: JSON.stringify({ id, ...data }),
     });
     return response.json();
   } catch (error) {

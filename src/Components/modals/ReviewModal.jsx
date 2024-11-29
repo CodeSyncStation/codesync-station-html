@@ -1,11 +1,11 @@
-import { getReviews, postReviews } from "@/lib/fetch/reviews";
+import { getReviews, postReviews, putReview } from "@/lib/fetch/reviews";
 import uploadImage from "@/utilities/func/uploadImage";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import toast, { Toaster } from "react-hot-toast";
 
-const ReviewModal = ({ show, setShow, setReviews }) => {
+const ReviewModal = ({ show, setShow, setReviews, isEdit, review, setIsEdit }) => {
   const [session, setSession] = useState("")
   const [formData, setFormData] = useState({
     platform: "",
@@ -23,7 +23,15 @@ const ReviewModal = ({ show, setShow, setReviews }) => {
     })()
   }, [])
 
-  const handleClose = () => setShow(false);
+  useEffect(() => {
+    if (isEdit && review) {
+      setFormData(review)
+    }
+  }, [isEdit, review])
+
+  const handleClose = () => {setShow(false)
+    setIsEdit(false)
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,11 +46,15 @@ const ReviewModal = ({ show, setShow, setReviews }) => {
     e.preventDefault();
     const toastId = toast.loading("Sending your review...");
     try {
-      const resImg = await uploadImage(formData.avatar)
       const reviewInfo = { ...formData, email: session?.user?.email }
-      if (resImg) {
-        reviewInfo.avatar = resImg.secure_url
+      if (formData.avatar && typeof formData.avatar === "object") {
+        const resImg = await uploadImage(formData.avatar)
+        if (resImg) {
+          reviewInfo.avatar = resImg
+        }
       }
+    
+  
       // Save reviewInfo to your server
       const res = await postReviews(reviewInfo)
       if (res?.status === 201) {
@@ -50,7 +62,7 @@ const ReviewModal = ({ show, setShow, setReviews }) => {
         toast.success("Reviews sended successfully!")
         toast.dismiss(toastId)
         const response = await getReviews({})
-        if(setReviews){
+        if (setReviews) {
           setReviews(response)
         }
       }
@@ -70,16 +82,60 @@ const ReviewModal = ({ show, setShow, setReviews }) => {
     handleClose();
   };
 
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    const toastId = toast.loading("Updating review...");
+    try {
+      const reviewInfo = { ...formData, email: session?.user?.email }
+      if (formData.avatar && typeof formData.avatar === "object") {
+        const resImg = await uploadImage(formData.avatar)
+
+        if (resImg) {
+          reviewInfo.avatar = resImg
+        }
+      }
+     
+      // Save reviewInfo to your server
+      const res = await putReview(review._id, reviewInfo)
+      if (res?.status === 200) {
+        handleClose()
+        toast.success("Reviews Edited successfully!")
+        toast.dismiss(toastId)
+        const response = await getReviews({})
+        if (setReviews) {
+          setReviews(response)
+        }
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error("Failed to send review!")
+    }
+    setFormData({
+      platform: "",
+      stars: "",
+      text: "",
+      name: "",
+      position: "",
+      avatar: "",
+    });
+    toast.dismiss(toastId)
+    handleClose();
+  }
+
   return (
     <>
       <Toaster />
       {/* Modal */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add a Review</Modal.Title>
+          {
+            isEdit
+              ? <Modal.Title>Edit Review</Modal.Title>
+              : <Modal.Title>Add a Review</Modal.Title>
+          }
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={isEdit ? handleEdit : handleSubmit}>
             <Form.Group className="mb-3" controlId="platform">
               <Form.Label>Platform</Form.Label>
               <Form.Select
@@ -156,9 +212,15 @@ const ReviewModal = ({ show, setShow, setReviews }) => {
               <Button variant="secondary" onClick={handleClose} className="me-2">
                 Close
               </Button>
-              <button className="btn-dashboard" type="submit">
-                Submit Review
-              </button>
+              {
+                isEdit
+                  ? <Button variant="primary" type="submit">
+                    Update Review
+                  </Button>
+                  : <Button variant="primary" type="submit">
+                    Add Review
+                  </Button>
+              }
             </div>
           </Form>
         </Modal.Body>

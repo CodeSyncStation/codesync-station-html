@@ -94,4 +94,5 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
       return session;
     },
   },
+  trustHost: true,
 });
