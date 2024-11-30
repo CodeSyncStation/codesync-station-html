@@ -214,10 +214,10 @@ const ReviewModal = ({ show, setShow, setReviews, isEdit, review, setIsEdit }) =
               </Button>
               {
                 isEdit
-                  ? <Button variant="primary" type="submit">
+                  ? <Button variant="success" type="submit">
                     Update Review
                   </Button>
-                  : <Button variant="primary" type="submit">
+                  : <Button variant="success" type="submit">
                     Add Review
                   </Button>
               }

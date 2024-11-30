@@ -63,7 +63,7 @@ const page = async () => {
         </div>
 
         <div className="progress-wrapper">
-          <div className="d-flex justify-content-between align-items-center position-relative ">
+          <div className="d-flex justify-content-between align-items-center position-relative " style={{minWidth: "700px"}}>
             <div className="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0"
               aria-valuemax="100">
               <div className="progress-bar" style={{ width: `${100 / statuses.length * (currentIndex + 1)}%` }}></div>

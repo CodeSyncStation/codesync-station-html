@@ -1,6 +1,2 @@
 
-TODO:  aos animation settings change once : true
-TODO:  need to responsive progress order
-TODO:  service details page
 TODO:  portfolio details page
-TODO:  Implement edit review.

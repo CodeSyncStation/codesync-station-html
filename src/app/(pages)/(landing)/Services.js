@@ -3,10 +3,12 @@ import mobileAppDev from "@/assets/images/icons/mobile-app-dev-icon.svg";
 import penIcon from "@/assets/images/icons/pen-tool-icon.svg";
 import apiDesign from "@/assets/images/icons/rest-api-icon.svg";
 import getAnimation from "@/utilities/func/getAnimation";
+import Link from "next/link";
 
 function Service(props) {
   const { service } = props || {};
   const { title, description, icon } = service || {};
+  console.log(title);
   return (
     <div className="service-item">
       <div className="service-icon m-auto">
@@ -16,7 +18,12 @@ function Service(props) {
       <div className="service-body">
         <h2 className="my-3 text-capitalize">{title}</h2>
         <p>{description}</p>
-        <button className="animated-btn m-auto">Touch more</button>
+        <Link
+          href={`/service/${title?.replace(/[\s/]+/g, "-")}`}
+          className="animated-btn m-auto"
+        >
+          Touch more
+        </Link>
       </div>
     </div>
   );
