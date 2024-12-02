@@ -1,12 +1,15 @@
-"use client"
 
 import Avatar from "@/Components/ui/Avater";
-import { useSession } from "next-auth/react";
+import { getUser } from "@/lib/fetch/users";
 import Link from "next/link";
 import { FaPencil } from "react-icons/fa6";
-export default function Profile() {
+export default async function Profile({ session }) {
 
-  const { data: session } = useSession()
+  if (!session) {
+    return <div>Loading...</div>
+  }
+
+  const user = await getUser(session?.user?._id)
 
   return (
     <div className="row justify-content-center">
@@ -14,23 +17,26 @@ export default function Profile() {
         <div className="profile-container shadow-lg p-3 mb-5 bg-white rounded">
           <div className="profile-header text-center mb-4">
             <div className="avatar img-fluid rounded-circle mb-3">
-              <Avatar url={session?.user?.image} />
+              <Avatar url={user?.image} />
             </div>
-            <h1 className="username">{session?.user?.name ?? "----"}</h1>
-            <p className="email">{session?.user?.email ?? "----"}</p>
+            <h1 className="username">{user?.name ?? "----"}</h1>
+            <p className="email">{user?.email ?? "----"}</p>
           </div>
 
           <div className="profile-details">
             <h2 className="text-center mb-4">Profile Details</h2>
             <ul className="list-unstyled">
               <li>
-                <strong>Full Name:</strong> {session?.user?.name ?? "----"}
+                <strong>Full Name:</strong> {user?.name ?? "----"}
               </li>
               <li>
-                <strong>Email:</strong> {session?.user?.email ?? "----"}{" "}
+                <strong>Email:</strong> {user?.email ?? "----"}{" "}
               </li>
               <li>
-                <strong>Role:</strong> {session?.user?.role ?? "user"}
+                <strong>Phone:</strong> {user?.phone ?? "----"}{" "}
+              </li>
+              <li>
+                <strong>Role:</strong> {user?.role ?? "user"}
               </li>
               {/* <li><strong>Location:</strong> New York, USA</li>
             <li><strong>Joined:</strong> January 1, 2023</li> */}

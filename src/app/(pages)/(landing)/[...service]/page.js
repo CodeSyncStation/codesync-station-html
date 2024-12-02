@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function page({ params }) {
   const services = {
-    "web Apps Development": {
+    "Web Apps Development": {
       name: "Web Development",
       subServices: [
         {
@@ -350,7 +350,7 @@ export default function page({ params }) {
         <div className="row">
           <div className="col-xl-9">
             <div className="unique-services-section">
-              <h3>Unique Car Engine Service</h3>
+              <h3>{services[activeService]?.name}</h3>
               <p>
                 There are many variations of passages of Lorem Ipsum available,
                 but the majority have suffered alteration in some form, by
@@ -385,7 +385,9 @@ export default function page({ params }) {
                 injected humour, or randomised words which don't look even
                 slightly believable.
               </p>
-              <h3>3 Simple Steps to Process</h3>
+              <h3>
+                {services[activeService]?.steps.length} Simple Steps to Process
+              </h3>
               <p>
                 There are many variations of passages of Lorem Ipsum available,
                 but the majority have suffered alteration in some form, by

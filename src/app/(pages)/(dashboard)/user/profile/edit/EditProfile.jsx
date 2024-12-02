@@ -2,7 +2,6 @@
 
 import { putUser } from "@/lib/fetch/users";
 import uploadImage from "@/utilities/func/uploadImage";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 // import axiosInstance from "@/lib/axios";
 // import { useGetSingleUserQuery, usePostUserMutation, useUpdateUserMutation } from "@/redux/api/user/userSlice";
@@ -11,7 +10,6 @@ import toast from "react-hot-toast";
 
 const baseUrl = process.env.NEXT_PUBLIC_APIHOST;
 export default function EditProfile({ user }) {
-  console.log(user)
 
   const [fullName, setFullName] = useState(user?.name)
   const [email, setEmail] = useState(user?.email)
@@ -23,21 +21,6 @@ export default function EditProfile({ user }) {
   const [role, setRole] = useState(user?.role)
   const [confirmPassword, setConfirmPassword] = useState(user?.password)
   const router = useRouter()
-  const { data: session, update } = useSession();
-
-  // useEffect(() => {
-  //   (async function () {
-  //     const user = await getUser(id)
-  //     if (user) {
-  //       setFullName(user.name)
-  //       setEmail(user.email)
-  //       setPhoneNumber(user.phone)
-  //       setRole(user.role)
-  //       setEncodedUrl(user.image)
-  //     }
-  //   })()
-
-  // }, [])
 
   const handleFile = (e) => {
     setProfileImage(e.target.files[0])
@@ -87,21 +70,9 @@ export default function EditProfile({ user }) {
     }
 
     try {
-
-      const updatedUser = await putUser({ ...userInfo })
+      const updatedUser = await putUser(userInfo)
       if (updatedUser.status == 200) {
-        const newSession = {
-          ...session,
-          user: {
-            ...session?.user,
-            name: updatedUser.user.name,
-            email: updatedUser.user.email,
-            image: updatedUser.user.image ?? undefined,
-            role: updatedUser.user.role ?? "user",
-          }
-        }
-        console.log(newSession)
-        await update(newSession)
+     
         reset()
         toast.dismiss(toastId)
         toast.success("Updated user Info successfully!")

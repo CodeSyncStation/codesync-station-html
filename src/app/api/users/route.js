@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
   const { query, method, nextUrl } = request;
-  // console.log(nextUrl.searchParams.get("email"));
 
   try {
     await dbConnect();
@@ -87,7 +86,7 @@ export async function POST(request) {
 }
 
 export async function PUT(request) {
-  const { id, name, email, image, role } = await request.json();
+  const { id, name, email, phone, image, role } = await request.json();
   // Validate input
   if (!id) {
     return NextResponse.json(
@@ -105,6 +104,7 @@ export async function PUT(request) {
         email,
         image,
         role,
+        phone,
       },
       { new: true }
     );

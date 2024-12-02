@@ -6,19 +6,24 @@ export async function GET(request, { params }) {
   const { id } = params;
   try {
     await dbConnect();
+
+    // Find the user by ID
     const user = await UserModel.findById(id);
     if (!user) {
       return NextResponse.json(
         {
           status: 404,
-          body: JSON.stringify({ status: 404, message: "User not found" }),
+          message: "User not found",
         },
-        {
-          status: 404,
-        }
+        { status: 404 }
       );
     }
-    return NextResponse.json(user, {
+
+    // Remove password before sending the response
+    const userWithoutPassword = user.toObject();
+    delete userWithoutPassword.password;
+
+    return NextResponse.json(userWithoutPassword, {
       status: 200,
     });
   } catch (error) {
@@ -26,11 +31,9 @@ export async function GET(request, { params }) {
     return NextResponse.json(
       {
         status: 500,
-        body: JSON.stringify({ status: 500, message: "Internal Server Error" }),
+        message: "Internal Server Error",
       },
-      {
-        status: 500,
-      }
+      { status: 500 }
     );
   }
 }

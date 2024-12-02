@@ -1,14 +1,13 @@
 import { auth } from "@/auth";
-import { SessionProvider } from "next-auth/react";
+import { getUser } from "@/lib/fetch/users";
 import EditProfile from "./EditProfile";
 
 export default async function page() {
   const session = await auth();
+  const user = await getUser(session?.user?._id);
   return (
-    <SessionProvider>
-      <div className="container pt-4">
-        <EditProfile user={session?.user} />
-      </div>
-    </SessionProvider>
+    <div className="container pt-4">
+      <EditProfile user={user} />
+    </div>
   );
 }
