@@ -55,7 +55,7 @@ export default function EditProfile({ user }) {
       password,
     }
 
-    if (profileImage && typeof profileImage == "string") {
+    if (profileImage && typeof profileImage == "object") {
       userInfo.image = profileImage
     }
 
