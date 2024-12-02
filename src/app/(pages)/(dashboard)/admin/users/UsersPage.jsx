@@ -85,14 +85,16 @@ const UsersPage = () => {
             </figure>
             <div>
               <h3 className="course-name w-auto">
-                {user?.name ?? "----"}
+                {user?.name ?? "N/A"}
               </h3>
-
             </div>
           </div>
         </td>
         <td>
-          <span className="muted">{user?.email ?? "----"}</span>
+          <span className="muted">{user?.email ?? "N/A"}</span>
+        </td>
+        <td>
+          <span className="muted">{user?.phone ?? "N/A"}</span>
         </td>
         <td>
           <span className="muted">{user?.role}</span>
@@ -154,6 +156,7 @@ const UsersPage = () => {
               <tr>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Phone</th>
                 <th>Role</th>
                 <th>Actions</th>
               </tr>

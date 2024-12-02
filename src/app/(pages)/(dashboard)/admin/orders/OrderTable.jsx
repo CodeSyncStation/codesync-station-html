@@ -138,7 +138,7 @@ const OrderTable = () => {
                 <input
                   type="search"
                   placeholder="Search by order ID"
-                  className="form-control shadow-none w-100 shadow-none"
+                  className="form-control shadow-none w-100 shadow-none px-3"
                   onChange={(e) => debouncedHandleQuery("orderId", e.target.value)}
                 />
               </div>

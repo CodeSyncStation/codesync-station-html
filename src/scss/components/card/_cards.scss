@@ -246,6 +246,7 @@
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  // margin: 0 22px;
 
   &:hover {
     transform: translateY(-5px);

@@ -28,7 +28,7 @@ const layout = async ({ children }) => {
         <div className={`${InterFont.className} admin-main-container container-fluid hide-scrollbar`}>
           <div className="admin-main-wrapper hide-scrollbar">
             {/* <!-- banner container --> */}
-            <div className="admin-banner-container hide-scrollbar">
+            <div className="admin-banner-container">
               <div className="banner-image">
                 <figure>
                   <Image
@@ -37,7 +37,7 @@ const layout = async ({ children }) => {
                   />
                 </figure>
               </div>
-              <div className="flex-between bannar-content hide-scrollbar">
+              <div className="flex-between bannar-content ">
                 <div className="admin-info">
                   {/* <!-- profile pic --> */}
                   <figure className="profile-pic author-img">

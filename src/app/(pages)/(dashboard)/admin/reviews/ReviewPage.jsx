@@ -181,7 +181,7 @@ const ReviewPage = () => {
     <>
       <ReviewModal show={show} setShow={setShow} setReviews={setReviews} isEdit={isEdit} setIsEdit={setIsEdit} review={review} />
       <section className="user-container">
-        <div className="section-top d-flex justify-content-between">
+        <div className="section-top d-flex justify-content-between align-items-center flex-wrap">
           <div>
             <h3 className="title">Reviews</h3>
             <p className="des">
@@ -189,7 +189,7 @@ const ReviewPage = () => {
             </p>
           </div>
           <div>
-            <form className="d-flex justify-content-between gap-2 px-4 mb-3">
+            <form className="d-flex justify-content-between  gap-2 mb-3">
               <div className="input-box mt-3 flex-1">
                 <input
                   id="email"
