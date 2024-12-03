@@ -354,10 +354,10 @@ export default function page({ params }) {
               <p>
                 There are many variations of passages of Lorem Ipsum available,
                 but the majority have suffered alteration in some form, by
-                injected humour, or randomised words which don't look even
+                injected humour, or randomised words which dont look even
                 slightly believable. If you are going to use a passage of Lorem
-                Ipsum, you need to be sure there isn't anything embarrassing
-                hidden in the middle of text.
+                Ipsum, you need to be sure there anything embarrassing hidden in
+                the middle of text.
               </p>
               <div className="services-container">
                 {service?.subServices?.map((service, index) => (
@@ -372,17 +372,17 @@ export default function page({ params }) {
               <p>
                 There are many variations of passages of Lorem Ipsum available,
                 but the majority have suffered alteration in some form, by
-                injected humour, or randomised words which don't look even
+                injected humour, or randomised words which dont look even
                 slightly believable. If you are going to use a passage of Lorem
-                Ipsum, you need to be sure there isn't anything embarrassing
-                hidden in the middle of text.
+                Ipsum, you need to be sure there anything embarrassing hidden in
+                the middle of text.
               </p>
             </div>
             <div className="steps-section" style={{ flex: "1" }}>
               <p>
                 There are many variations of passages of Lorem Ipsum available,
                 but the majority have suffered alteration in some form, by
-                injected humour, or randomised words which don't look even
+                injected humour, or randomised words which dont look even
                 slightly believable.
               </p>
               <h3>
@@ -391,7 +391,7 @@ export default function page({ params }) {
               <p>
                 There are many variations of passages of Lorem Ipsum available,
                 but the majority have suffered alteration in some form, by
-                injected humour, or randomised words which don't look even
+                injected humour, or randomised words which dont look even
                 slightly believable.
               </p>
               <div className="steps-container">
