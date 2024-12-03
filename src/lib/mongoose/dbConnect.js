@@ -7,7 +7,7 @@ export const config = {
 const MONGODB_URI = process.env.NEXT_PUBLIC_MONGODB_URI;
 
 if (!MONGODB_URI) {
-  throw new Error(
+  console.log(
     "Please define the MONGODB_URI environment variable inside .env.local"
   );
 }
