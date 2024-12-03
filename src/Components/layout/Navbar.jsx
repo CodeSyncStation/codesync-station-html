@@ -1,5 +1,5 @@
 "use client"
-import logo from "@/assets/images/logo.png"
+import logo from "@/assets/images/CS LOGO 1-05.png"
 import { getSession, signOut } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"

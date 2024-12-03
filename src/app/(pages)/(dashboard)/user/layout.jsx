@@ -1,5 +1,5 @@
 
-import logo from "@/assets/images/logo.png";
+import logo from "@/assets/images/CS LOGO 1-05.png";
 import { auth } from "@/auth";
 import Menu from "@/Components/layout/Menu";
 import ProtectedRoute from "@/Components/layout/ProtectedRoute";

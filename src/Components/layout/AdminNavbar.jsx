@@ -1,6 +1,6 @@
 "use client"
 
-import logo from "@/assets/images/logo.png";
+import logo from "@/assets/images/CS LOGO 1-05.png";
 import Avatar from "@/Components/ui/Avater";
 import { signOut, useSession } from "next-auth/react";
 import { Inter } from "next/font/google";

@@ -1,6 +1,6 @@
 "use client";
 import bgImage from "@/assets/images/authentications/jose-vazquez-Q5RBHz9cu1A-unsplash.jpg";
-import logo from "@/assets/images/logo.png";
+import logo from "@/assets/images/CS LOGO 1-05.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";

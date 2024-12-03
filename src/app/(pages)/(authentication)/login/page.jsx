@@ -1,5 +1,5 @@
 import image from "@/assets/images/authentications/jose-vazquez-Q5RBHz9cu1A-unsplash.jpg";
-import logo from "@/assets/images/logo.png";
+import logo from "@/assets/images/CS LOGO 1-05.png";
 import { auth } from "@/auth";
 import AuthenticationForm from "@/Components/form/AuthenticationForm";
 import Image from "next/image";
