@@ -30,7 +30,7 @@
       color: $heading-color;
     }
     .title {
-      font-size: 40px;
+      font-size: 35px;
       margin-bottom: 20px;
       font-weight: 700;
       color: $heading-color;
@@ -54,10 +54,13 @@
       }
       .our-services {
         @include flex-center;
-        font-size: 16px;
         line-height: 1.2380952381;
         color: $heading-color;
         font-weight: 600;
+        font-size: 14px;
+        img{
+          width: 70px !important;
+        }
       }
     }
   }
@@ -73,8 +76,10 @@
     }
     .main-img-wrap {
       z-index: 1;
-      margin-left: 160px;
       position: relative;
+      @include breakpoint(desktop1024){
+        margin-left: 160px;
+      }
     }
     .banner-animate-img-1 {
       left: -140px;

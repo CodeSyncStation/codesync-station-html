@@ -36,7 +36,13 @@ export default function Hero() {
                   Order Now
                 </Link>
                 <button className="our-services btn outline-0">
-                  <Image src={videoIcon} alt="video icon" />
+                  <span>
+                    <Image
+                      src={videoIcon}
+                      alt="video icon"
+                      layout="responsive"
+                    />
+                  </span>
                   Our services
                 </button>
               </div>

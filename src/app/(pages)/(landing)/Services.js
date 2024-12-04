@@ -8,7 +8,6 @@ import Link from "next/link";
 function Service(props) {
   const { service } = props || {};
   const { title, description, icon } = service || {};
-  console.log(title);
   return (
     <div className="service-item">
       <div className="service-icon m-auto">

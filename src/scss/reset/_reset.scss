@@ -1,7 +1,7 @@
 @use "../global" as *;
 @use "../partials" as *;
 
-html {
+html, body {
   box-sizing: border-box;
   font-size: 100%;
   overflow-x: hidden;

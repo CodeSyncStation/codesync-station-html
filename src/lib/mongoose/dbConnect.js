@@ -32,11 +32,13 @@ async function dbConnect() {
       bufferCommands: false,
       dbName: "codeSyncDB",
     };
-
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log("Connected database");
-      return mongoose;
-    });
+    cached.promise = mongoose
+      .connect(MONGODB_URI, opts)
+      .then((mongoose) => {
+        console.log("Connected database");
+        return mongoose;
+      })
+      .catch((err) => console.error(err));
   }
 
   cached.conn = await cached.promise;
