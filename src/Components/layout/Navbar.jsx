@@ -77,7 +77,7 @@ export default function Navbar() {
             />
           </a>
 
-          <div
+          {/* <div
             className="d-flex d-xl-none justify-content-center align-items-center gap-3"
           >
             <Link
@@ -90,7 +90,7 @@ export default function Navbar() {
               <i className="fa-solid fa-phone"></i>
               Order Now
             </Link>
-          </div>
+          </div> */}
 
           <button
             className="navbar-toggler"
