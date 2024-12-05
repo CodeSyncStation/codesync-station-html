@@ -57,10 +57,16 @@
         line-height: 1.2380952381;
         color: $heading-color;
         font-weight: 600;
-        font-size: 14px;
-        img{
+        img {
           width: 70px !important;
         }
+        @include breakpoint(desktop1024) {
+          font-size: 16px;
+          img {
+            width: auto !important;
+          }
+        }
+       
       }
     }
   }
@@ -77,7 +83,7 @@
     .main-img-wrap {
       z-index: 1;
       position: relative;
-      @include breakpoint(desktop1024){
+      @include breakpoint(desktop1024) {
         margin-left: 160px;
       }
     }
@@ -130,7 +136,10 @@
 
 // about section
 .about-area {
-  padding: 120px 0px;
+  padding: 60px 0px;
+  @include breakpoint(desktop1024){
+    padding:  120px 0px;
+  }
   .section-title {
     position: relative;
     .sub-title {
@@ -269,13 +278,6 @@
       margin-bottom: 20px;
     }
   }
-
-  h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #0f223d;
-  }
-
   .text-muted {
     font-size: 1rem;
     color: #66a1e1;
@@ -465,8 +467,10 @@
 
 // contact section
 .contactus {
-  padding-top: 10rem;
-  padding-bottom: 6rem;
+  padding: 60px 0px;
+  @include breakpoint(desktop1024){
+    padding:  120px 0px;
+  }
   .section-title {
     text-align: center;
     margin-bottom: 50px;
@@ -539,7 +543,6 @@
   }
 }
 
-
 .faq-section {
   padding: 50px 0;
   background-color: $bg-light-gray;
@@ -563,13 +566,17 @@
       width: 46%;
       margin-bottom: 30px;
       position: relative;
+      left: 24px;
       .focus {
         position: absolute;
         top: 20px;
-        left: -45px;
         height: 100%;
         border-radius: 50%;
         font-size: 12px;
+        left: -25px;
+        @include breakpoint(desktop1024){
+          left: -45px;
+        }
       }
       .header {
         display: flex;

@@ -1,12 +1,13 @@
 @use "../global" as *;
 @use "../partials" as *;
 
-html, body {
+html,
+body {
   box-sizing: border-box;
   font-size: 100%;
   overflow-x: hidden;
   scroll-behavior: smooth;
-
+  width: 100vw;
   &:focus-within {
     scroll-behavior: inherit;
   }
