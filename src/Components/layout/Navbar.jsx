@@ -70,50 +70,67 @@ export default function Navbar() {
     <header id="header">
       <nav id="navbar" className="navbar navbar-expand-xl p-0 py-lg-1">
         <div className="container">
-          <a className="logo" href="#hero">
+          <Link className="logo" href="/#hero">
             <Image
               src={logo}
               alt="Codesync station"
             />
-          </a>
+          </Link>
 
-          {/* <div
-            className="d-flex d-xl-none justify-content-center align-items-center gap-3"
-          >
-            <Link
-              href="/order"
-              className="animated-btn"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              data-bs-title="Click to call"
+          <div className="d-flex d-xl-none">
+            <div
+              className="me-3"
             >
-              <i className="fa-solid fa-phone"></i>
-              Order Now
-            </Link>
-          </div> */}
+              {
+                userData ?
+                  <Dropdown align="end">
+                    <Dropdown.Toggle id="dropdown-basic" className="profile-dropdown">
+                      <Avatar url={userData?.image} />
+                    </Dropdown.Toggle>
 
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-            aria-label="Toggle navigation"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              className="bi bi-list"
-              viewBox="0 0 16 16"
+                    <Dropdown.Menu>
+                      <Link className="dropdown-item" href={userData?.role === "admin" ? "/admin" : "/user/profile"}>
+                        <span className="icon me-2">
+                          <MdOutlineSpaceDashboard />
+                        </span>
+                        Dashboard
+                      </Link>
+                      <Dropdown.Divider />
+                      <Dropdown.Item as="button" onClick={handleLogout} className="logout-btn">
+                        <span className="icon me-2">
+                          <AiOutlineLogout />
+                        </span>
+                        Logout
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                  : null
+              }
+            </div>
+
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar"
+              aria-label="Toggle navigation"
             >
-              <path
-                fillRule="evenodd"
-                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-              />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                className="bi bi-list"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+                />
+              </svg>
+            </button>
+          </div>
 
           <div
             className="offcanvas flex-1 offcanvas-end"
@@ -121,6 +138,7 @@ export default function Navbar() {
             id="offcanvasNavbar"
           >
             <div className="offcanvas-header">
+              <h5 className="offcanvas-title">Menu</h5>
               <button
                 type="button"
                 className="btn-close me-4"
@@ -200,10 +218,16 @@ export default function Navbar() {
                     }
                   </div>
 
-
                 </div>
               </div>
+              <Link
+                href="/login"
+                className="animated-btn d-flex d-xl-none w-100"
+              >
+                Login
+              </Link>
             </div>
+
           </div>
         </div>
       </nav>
