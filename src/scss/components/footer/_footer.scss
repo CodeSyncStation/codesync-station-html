@@ -221,8 +221,12 @@ footer {
     align-items: center;
     flex-direction: column;
     gap: size(20);
+    text-align: center;
     @include breakpoint(mobile576) {
       flex-direction: row;
+    }
+    @include breakpoint(tab992){
+      text-align: left;
     }
     p {
       color: #979797;
