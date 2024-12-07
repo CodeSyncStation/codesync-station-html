@@ -16,7 +16,7 @@ export default function Footer() {
                 alt="CodeSync station"
                 width={62}
                 height={62}
-              />  
+              />
 
               <p className="footer-text">
                 CodySync Station is prominent to provide On Demand Home Cook Food
@@ -183,10 +183,14 @@ export default function Footer() {
               <h3 className="section-title">CONTACT INFO</h3>
               <ul className="footer-address">
                 <li className="phone">
-                  <span className="hl">Phone:</span>
-                  <a href="#"> <span className="text">+44xxxxxx</span></a>
+                  <span className="hl">Address:</span>
+                  <span className="text text-start">House No.38, Road No. 3, Block-D/2, Section-10, Mirpur, Dhaka</span>
+                </li>
+                <li className="phone">
+                  <span className="hl">Phone & Whatsapp:</span>
+                  <a href="#"> <span className="text">+44 7388 620365</span></a>
                   <a href="#">
-                    <span className="text"> +44xxxxxxxx</span>
+                    <span className="text">+8801753674485 </span>
                   </a>
                 </li>
                 <li className="email">
@@ -195,6 +199,7 @@ export default function Footer() {
                   ><span className="text">codesyncstation@gmail.com </span></a
                   >
                 </li>
+
               </ul>
               <div className="socials">
                 <a
@@ -253,7 +258,7 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="container">
           <div className="bottom-wrapper">
-            <p>&copy; Copy write all write reserved by CodeSync Station</p>
+            <p>&copy; All rights reserved by CodeSync Station 2024 </p>
             <p></p>
             <ul className="footer-link">
               <li><a href="#">HISTORY</a></li>
