@@ -35,9 +35,6 @@ export default async function Profile({ session }) {
               <li>
                 <strong>Phone:</strong> {user?.phone ?? "----"}{" "}
               </li>
-              <li>
-                <strong>Role:</strong> {user?.role ?? "user"}
-              </li>
               {/* <li><strong>Location:</strong> New York, USA</li>
             <li><strong>Joined:</strong> January 1, 2023</li> */}
             </ul>

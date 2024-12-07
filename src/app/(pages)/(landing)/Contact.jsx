@@ -30,8 +30,7 @@ export default function Contact() {
                     <PiBuildingOffice />
                   </div>
                   <span>
-                    Address: Hatch Gate Inn,The Hatch, Burghfield, Reading,
-                    Berkshire, RG30 3TH.
+                    Address:  House No. 38, Road No. 3, Block-D/2, Section-10, Mirpur, Dhaka
                   </span>
                 </li>
                 <li>

@@ -1,7 +1,7 @@
 import OrderHistory from "@/Components/dashboard/OrderHistory";
 import { SessionProvider } from "next-auth/react";
 export const metadata = {
-  title: "Order History || Digital Dropouts",
+  title: "Order History || codesync stations",
   description: "",
 };
 

@@ -18,7 +18,6 @@ export default function EditProfile({ user }) {
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [phone, setPhoneNumber] = useState(user?.phone)
   const [encodedUrl, setEncodedUrl] = useState(user?.image)
-  const [role, setRole] = useState(user?.role)
   const [confirmPassword, setConfirmPassword] = useState(user?.password)
   const router = useRouter()
 
@@ -38,7 +37,6 @@ export default function EditProfile({ user }) {
     setProfileImage("")
     setEncodedUrl("")
     setPhoneNumber("")
-    setRole("")
     setConfirmPassword("")
     setPasswordVisible(false)
   }
@@ -150,7 +148,7 @@ export default function EditProfile({ user }) {
       </div>
       <div className="section-body">
         <div className="add-employee-form">
-          <div className="mb-3">
+          <div className="mb-3 " style={{gridColumn: "1/3"}}>
             <label htmlFor="fullName" className="form-label">
               Full name
             </label>
@@ -188,24 +186,7 @@ export default function EditProfile({ user }) {
             />
           </div>
 
-          {/* role */}
-          <div className="mb-3">
-            <label htmlFor="number" className="form-label">
-              Role
-            </label>
-            <select
-              className="form-control shadow-none shadow-none"
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              disabled
-            >
-              <option value="" disabled hidden>
-                Select Role
-              </option>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
+      
           {/* password */}
           <div className="mb-3">
             <label htmlhtmlFor="password" className="form-label">

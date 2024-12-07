@@ -6,6 +6,7 @@ import { signOut, useSession } from "next-auth/react";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Dropdown } from "react-bootstrap";
 import { AiOutlineLogout } from "react-icons/ai";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
@@ -13,10 +14,11 @@ export const InterFont = Inter({ subsets: ["latin"] });
 
 export default function AdminNavbar() {
 
-
+const router = useRouter()
   const { data: userData } = useSession()
   const handleLogout = async () => {
     await signOut({ redirect: "/" });
+    router.push("/")
   };
 
   return (
@@ -34,7 +36,7 @@ export default function AdminNavbar() {
         </button>
         <Link href="/admin">
           <figure className="logo d-none d-lg-flex">
-            <Image src={logo} alt="Digital dropout" />
+            <Image src={logo} alt="codesync station" />
           </figure>
         </Link>
 

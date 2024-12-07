@@ -64,6 +64,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     await signOut({ redirect: "/" });
     getUserData()
+    router.push("/")
   };
 
   return (

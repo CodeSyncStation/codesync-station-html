@@ -7,6 +7,7 @@ import Avatar from "@/Components/ui/Avater";
 import Image from "next/image";
 import Link from "next/link";
 import { Toaster } from "react-hot-toast";
+import { FaBurger, FaX } from "react-icons/fa6";
 
 export const metadata = {
   title: "Dashboard || CodeSync Station",
@@ -30,11 +31,11 @@ const layout = async ({ children }) => {
           tabIndex={-1}
         >
           <div className="offcanvas-header d-lg-none d-flex justify-content-between">
-            <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">
+            <Link href="/" className="offcanvas-title" id="offcanvasDarkNavbarLabel">
               <figure className="logo d-lg-flex position-relative">
-                <Image src={logo} alt="Digital dropout logo" width={70}  />
+                <Image src={logo} alt="codesync station logo" width={70} />
               </figure>
-            </h5>
+            </Link>
             <button
               type="button"
               className="btn me-2"
@@ -42,6 +43,7 @@ const layout = async ({ children }) => {
               data-bs-target="#navbarOffcanvas"
               aria-controls="navbarOffcanvas"
             >
+              <FaX />
               <i className="fa-solid fa-x fs-5"></i>
             </button>
           </div>
@@ -61,12 +63,11 @@ const layout = async ({ children }) => {
           <nav className="dd-navbar sticky-top z-3">
             <button
               className="burger-menu"
-              type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#navbarOffcanvas"
               aria-controls="navbarOffcanvas"
             >
-              <i className="fa-solid fa-bars"></i>
+              <FaBurger/>
             </button>
 
             <div className="right-content">

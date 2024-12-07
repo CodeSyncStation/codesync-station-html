@@ -12,8 +12,8 @@ import { MdOutlinePassword } from "react-icons/md";
 export default function AuthenticationForm() {
   const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [email, setEmail] = useState("kawsarbinjahangir@gmail.com");
-  const [password, setPassword] = useState("111111");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isEmailExist, setIsEmailExist] = useState(null);
 
