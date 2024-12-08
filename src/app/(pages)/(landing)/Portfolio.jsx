@@ -6,6 +6,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import { getProjects } from "@/lib/fetch/project";
 import getAnimation from "@/utilities/func/getAnimation";
+import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -63,16 +65,16 @@ export default function Portfolio() {
           <div className="portfolio-card" data-aos={getAnimation(i)}>
             <div className="success-img ">
               <div className="magnetic-wrap ">
-                <img className="img-fluid magnetic-item" src={project?.image} alt={project?.title}/>
+                <Image fill className="img-fluid magnetic-item" src={project?.image} alt={project?.title}/>
               </div>
             </div>
             <div className="success-content" >
               <span>{project.projectType}</span>
               <h3>{project.title}</h3>
               <div className="view-btn">
-                <a href="#">
+                <Link href={project?.liveLink} target="_blank">
                   <HiOutlineArrowRight />
-                </a>
+                </Link>
 
               </div>
             </div>

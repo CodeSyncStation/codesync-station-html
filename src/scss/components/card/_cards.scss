@@ -110,6 +110,9 @@
     border-radius: 5px;
     position: relative;
     height: 100%;
+    img{
+      height: 100% !important;
+    }
   }
   border-top: var(--border-size) solid $primary;
   border-bottom: var(--border-size) solid $primary;
