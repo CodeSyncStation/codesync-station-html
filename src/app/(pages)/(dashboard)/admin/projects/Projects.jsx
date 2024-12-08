@@ -1,6 +1,7 @@
 "use client"
 import { deleteProject, getProjects } from "@/lib/fetch/project";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { HiOutlineArrowRight } from "react-icons/hi";
@@ -85,17 +86,17 @@ export default function Projects() {
                 </div>
 
                 <div className="success-img">
-                  <div className="magnetic-wrap ">
-                    <Image className="img-fluid magnetic-item" src={project?.image} alt="" fill />
+                  <div className="magnetic-wrap">
+                    <Image className="img-fluid magnetic-item" src={project?.image} alt={project?.title} fill />
                   </div>
                 </div>
                 <div className="success-content" >
                   <span>{project?.category}</span>
                   <h3>{project?.title}</h3>
                   <div className="view-btn">
-                    <a href="#">
+                    <Link href={project?.liveLink} target="_blank">
                       <HiOutlineArrowRight />
-                    </a>
+                    </Link>
 
                   </div>
                 </div>
