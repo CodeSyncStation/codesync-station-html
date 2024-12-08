@@ -9,7 +9,7 @@ export default function AdminDashboardPage({ statistics }) {
       <div className="business-overview-container">
         <div className="business-overview-card">
           <h3 className="title">total users</h3>
-          <span className="count">৳ {userCount}</span>
+          <span className="count">{userCount}</span>
           {/* <div className="flex-between">
           <span className="label"> Earning this month </span>
           <span className="monthly-revenue">$203.23</span>

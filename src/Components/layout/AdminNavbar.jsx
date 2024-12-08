@@ -6,7 +6,7 @@ import { signOut, useSession } from "next-auth/react";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Dropdown } from "react-bootstrap";
 import { AiOutlineLogout } from "react-icons/ai";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
